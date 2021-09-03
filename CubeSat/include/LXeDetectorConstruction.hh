@@ -125,6 +125,7 @@ class LXeDetectorConstruction : public G4VUserDetectorConstruction
   G4Material* fEpoxy;
   G4Material* fIronShield;
   G4Material* fFe;
+  G4Material* fEljin_200;
 
   // Geometry
   G4double fScint_x;
@@ -146,6 +147,7 @@ class LXeDetectorConstruction : public G4VUserDetectorConstruction
   LXeMainVolume* fMainVolume;
 
   G4MaterialPropertiesTable* fLXe_mt;
+  G4MaterialPropertiesTable* feljin_mt;
   G4MaterialPropertiesTable* fMPTPStyrene;
 
   // Sensitive Detectors

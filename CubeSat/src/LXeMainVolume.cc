@@ -41,6 +41,7 @@
 #include "G4OpticalSurface.hh"
 #include "G4Sphere.hh"
 #include "G4SystemOfUnits.hh"
+#include "G4PhysicalConstants.hh"
 #include "G4Tubs.hh"
 #include "G4VisAttributes.hh"
 
@@ -134,7 +135,7 @@ LXeMainVolume::LXeMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlate,
 
   fVeto = new G4Box("Veto", fVeto_x/2., fVeto_y/2., fVeto_z/2.);
 
-  fVeto_Log = new G4LogicalVolume(fVeto, G4Material::GetMaterial("LXe"),"veto_log",0,0,0);
+  fVeto_Log = new G4LogicalVolume(fVeto, G4Material::GetMaterial("Eljin"),"veto_log",0,0,0);
 
 
 
@@ -393,11 +394,11 @@ void LXeMainVolume::VisAttributes()
 
 void LXeMainVolume::SurfaceProperties()
 {
-  std::vector<G4double> ephoton = { 7.0 * eV, 7.14 * eV };
-
+  //std::vector<G4double> ephoton = { 7.0 * eV, 7.14 * eV };
+  std::vector<G4double> ephoton ={((c_light*h_Planck)/(350*nm))*eV, ((c_light*h_Planck)/(370*nm))*eV, ((c_light*h_Planck)/(380*nm))*eV, ((c_light*h_Planck)/(390*nm))*eV, ((c_light*h_Planck)/(400*nm))*eV, ((c_light*h_Planck)/(410*nm))*eV, ((c_light*h_Planck)/(420*nm))*eV,((c_light*h_Planck)/(425*nm))*eV, ((c_light*h_Planck)/(430*nm))*eV, ((c_light*h_Planck)/(440*nm))*eV,     ((c_light*h_Planck)/(450*nm))*eV, ((c_light*h_Planck)/(460*nm))*eV,((c_light*h_Planck)/(470*nm))*eV, ((c_light*h_Planck)/(480*nm))*eV, ((c_light*h_Planck)/(490*nm))*eV, ((c_light*h_Planck)/(500*nm))*eV, ((c_light*h_Planck)/(510*nm))*eV,((c_light*h_Planck)/(520*nm))*eV,((c_light*h_Planck)/(530*nm))*eV,((c_light*h_Planck)/(540*nm))*eV,((c_light*h_Planck)/(550*nm))*eV};
   //**Scintillator housing properties
-  std::vector<G4double> reflectivity     = { fRefl, fRefl };
-  std::vector<G4double> efficiency       = { 0.0, 0.0 };
+  std::vector<G4double> reflectivity     = { fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl,fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl};
+  std::vector<G4double> efficiency       = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
   G4MaterialPropertiesTable* scintHsngPT = new G4MaterialPropertiesTable();
   scintHsngPT->AddProperty("REFLECTIVITY", ephoton, reflectivity);
   scintHsngPT->AddProperty("EFFICIENCY", ephoton, efficiency);
@@ -410,9 +411,9 @@ void LXeMainVolume::SurfaceProperties()
   
  
   //**Photocathode surface properties
-  std::vector<G4double> photocath_EFF     = { 1., 1. };
-  std::vector<G4double> photocath_ReR     = { 1.92, 1.92 };
-  std::vector<G4double> photocath_ImR     = { 1.69, 1.69 };
+  std::vector<G4double> photocath_EFF     = { 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,1., 1., 1., 1., 1., 1., 1.};
+  std::vector<G4double> photocath_ReR     = { 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92};
+  std::vector<G4double> photocath_ImR     = { 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69};
   G4MaterialPropertiesTable* photocath_mt = new G4MaterialPropertiesTable();
   photocath_mt->AddProperty("EFFICIENCY", ephoton, photocath_EFF);
   photocath_mt->AddProperty("REALRINDEX", ephoton, photocath_ReR);
