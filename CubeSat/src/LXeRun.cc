@@ -117,10 +117,51 @@ void LXeRun::EndOfRun()
          << G4endl;
 
   //------------------------------------------------------------------
+/*
   G4cout << "Number of hits in PMT 0:\t " << fHitCount_1 << G4endl;
   G4cout << "Number of hits in PMT 1:\t " << fHitCount_2 << G4endl;
   G4cout << "Number of hits in PMT 2:\t " << fHitCount_3 << G4endl;
+*/
+  //Information about PMT_Veto_1
 
+  G4double Veto_1_hits  = G4double(fHitCount_1)/n_evt;
+  G4double Veto_1_hits2 = G4double(fHitCount_12)/n_evt;
+
+  G4double rms_Veto1 = Veto_1_hits2 - Veto_1_hits*Veto_1_hits;
+
+  if(rms_Veto1 >0.)
+     rms_Veto1 = std::sqrt(rms_Veto1/n_evt);
+  else
+    rms_Veto1 = 0.;
+  G4cout << "Number of hits in Veto 1 per event:\t " << Veto_1_hits << " +- " << rms_Veto1
+	 << G4endl;
+
+  //Information about PMT_Veto_2 
+
+  G4double Veto_2_hits  = G4double(fHitCount_2)/n_evt;
+  G4double Veto_2_hits2 = G4double(fHitCount_22)/n_evt;
+
+  G4double rms_Veto2 = Veto_2_hits2 - Veto_2_hits*Veto_2_hits;
+
+  if(rms_Veto2 >0.)
+     rms_Veto2 = std::sqrt(rms_Veto2/n_evt);
+  else
+    rms_Veto2 = 0.;
+  G4cout << "Number of hits in Veto 2 per event:\t " << Veto_2_hits << " +- " << rms_Veto2
+         << G4endl;
+
+  //Information about GAGG PMT
+  G4double GAGG_hits  = G4double(fHitCount_3)/n_evt;
+  G4double GAGG_hits2 = G4double(fHitCount_32)/n_evt;
+
+  G4double rms_GAGG = GAGG_hits2 - GAGG_hits *GAGG_hits;
+
+  if(rms_GAGG >0.)
+     rms_GAGG = std::sqrt(rms_GAGG/n_evt);
+  else
+    rms_GAGG = 0.;
+  G4cout << "Number of hits in the GAGG PMT :\t " << GAGG_hits << " +- " << rms_GAGG
+         << G4endl;
   //------------------------------------------------------------------
 
   G4double hitsAbove     = G4double(fPMTsAboveThreshold) / n_evt;

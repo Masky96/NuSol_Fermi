@@ -55,6 +55,7 @@ int main(int argc, char** argv)
   }
 
   auto runManager = G4RunManagerFactory::CreateRunManager();
+  runManager-> SetNumberOfThreads(2);
 
   LXeDetectorConstruction* det = new LXeDetectorConstruction();
   runManager->SetUserInitialization(det);
@@ -65,7 +66,7 @@ int main(int argc, char** argv)
   G4OpticalPhysics* opticalPhysics = new G4OpticalPhysics();
   auto opticalParams               = G4OpticalParameters::Instance();
 
-  opticalParams->SetWLSTimeProfile("delta");
+  //opticalParams->SetWLSTimeProfile("delta");
 
   opticalParams->SetScintYieldFactor(1.0);
   opticalParams->SetScintExcitationRatio(0.0);
@@ -92,6 +93,9 @@ int main(int argc, char** argv)
   {
     // interactive mode
     UImanager->ApplyCommand("/control/execute vis.mac");
+    //UImanager->ApplyCommand("/vis/ogl/set/displayListLimit 100000000");
+    UImanager->ApplyCommand("/vis/multithreading/actionOnEventQueueFull wait");
+    UImanager->ApplyCommand("/vis/multithreading/maxEventQueueSize 0");
     if(ui->IsGUI())
     {
       UImanager->ApplyCommand("/control/execute gui.mac");
