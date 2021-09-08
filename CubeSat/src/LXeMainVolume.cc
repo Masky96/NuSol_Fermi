@@ -84,10 +84,21 @@ LXeMainVolume::LXeMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlate,
   G4double al_GAGGy = lcrystal_y+1*mm;
   G4double al_GAGGz = lcrystal_z+1.1*mm;
   
+  G4double althinx = air_pocketx + 1*mm;
+  G4double althiny = air_pockety + 1*mm;
+  G4double althinz = air_pocketz + 1*mm;
 
+  G4double fVeto_x = althinx + 2*cm;
+  G4double fVeto_y = althiny + 2*cm;
+  G4double fVeto_z = althinz + 2*cm;
+  
+/*
   G4double fVeto_x = air_pocketx + 2*cm;
   G4double fVeto_y = air_pockety + 2*cm;
   G4double fVeto_z = air_pocketz + 2*cm;
+*/
+
+
 
 /*
   G4double fScint_x = air_pocketx + 2*cm;
@@ -155,12 +166,21 @@ LXeMainVolume::LXeMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlate,
 
 
   //----------------------------------------------------------------------------
+
+  falumthin = new G4Box("alumthin", althinx/2., althiny/2., althinz/2.);
+
+  falumthin_log = new G4LogicalVolume(falumthin, G4Material::GetMaterial("Al"), "alumthin",0,0,0);
+ 
+  new G4PVPlacement(0, G4ThreeVector(), falumthin_log, "alumthin", fVeto_Log, false, 0);
+
+
+//------------------------------------------------------------------------------
   //Small Air Pocket for GAGG and PMT
   fairpocket = new G4Box("airpocket", air_pocketx/2., air_pockety/2., air_pocketz/2.);
 
   fair_log = new G4LogicalVolume(fairpocket, G4Material::GetMaterial("Air"),"air_log", 0, 0, 0);
 
-  new G4PVPlacement(0,G4ThreeVector(),fair_log, "air_pocket", fVeto_Log, false, 0);
+  new G4PVPlacement(0,G4ThreeVector(),fair_log, "air_pocket", falumthin_log, false, 0);
 
 
   
@@ -355,9 +375,12 @@ void LXeMainVolume::PlacePMTs(G4LogicalVolume* pmt_log, G4RotationMatrix* rot,
   G4double air_pockety = lcrystal_y+1*mm;
   //G4double air_pocketz = lcrystal_z + pmt_squarez+1*mm;
 
+  G4double althinx = air_pocketx + 1*mm;
+  G4double althiny = air_pockety + 1*mm;
+  //G4double althinz = air_pocketz + 1*mm;
   
-  G4double fVeto_x = air_pocketx + 2*cm;
-  G4double fVeto_y = air_pockety + 2*cm;
+  G4double fVeto_x = althinx + 2*cm;
+  G4double fVeto_y = althiny + 2*cm;
   //G4double fScint_z = air_pocketz + 2*cm;
   
 
@@ -428,7 +451,8 @@ void LXeMainVolume::SurfaceProperties()
   new G4LogicalSkinSurface("photocath_surf", fPhotocath_log, photocath_opsurf);
   //new G4LogicalSkinSurface("alum_surf", falum_log,OpScintHousingSurface);
 
-  new G4LogicalSkinSurface("photocath_surf", falumGAGG_log,OpScintHousingSurface); 
+  new G4LogicalSkinSurface("photocath_surf", falumGAGG_log,OpScintHousingSurface);
+  new G4LogicalSkinSurface("alumthin_surf", falumthin_log, OpScintHousingSurface); 
 
   
   

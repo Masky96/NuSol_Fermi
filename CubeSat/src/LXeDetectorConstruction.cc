@@ -172,14 +172,16 @@ void LXeDetectorConstruction::DefineMaterials()
 
   //***Material properties tables
 
-  //std::vector<G4double> lxe_Energy = { 7.0 * eV, 7.07 * eV, 7.14 * eV };
-    std::vector<G4double> lxe_Energy ={((c_light*h_Planck)/(350*nm))*eV, ((c_light*h_Planck)/(370*nm))*eV, ((c_light*h_Planck)/(380*nm))*eV, ((c_light*h_Planck)/(390*nm))*eV, ((c_light*h_Planck)/(400*nm))*eV, ((c_light*h_Planck)/(410*nm))*eV, ((c_light*h_Planck)/(420*nm))*eV,((c_light*h_Planck)/(425*nm))*eV, ((c_light*h_Planck)/(430*nm))*eV, ((c_light*h_Planck)/(440*nm))*eV, ((c_light*h_Planck)/(450*nm))*eV, ((c_light*h_Planck)/(460*nm))*eV,((c_light*h_Planck)/(470*nm))*eV, ((c_light*h_Planck)/(480*nm))*eV, ((c_light*h_Planck)/(490*nm))*eV, ((c_light*h_Planck)/(500*nm))*eV, ((c_light*h_Planck)/(510*nm))*eV,((c_light*h_Planck)/(520*nm))*eV,((c_light*h_Planck)/(530*nm))*eV,((c_light*h_Planck)/(540*nm))*eV,((c_light*h_Planck)/(550*nm))*eV};
+	  //std::vector<G4double> lxe_Energy = { 7.0 * eV, 7.07 * eV, 7.14 * eV };
+	    std::vector<G4double> lxe_Energy ={((c_light*h_Planck)/(400*nm))*eV, ((c_light*h_Planck)/(410*nm))*eV,((c_light*h_Planck)/(420*nm))*eV,((c_light*h_Planck)/(430*nm))*eV,((c_light*h_Planck)/(440*nm))*eV,((c_light*h_Planck)/(450*nm))*eV,
+		                               ((c_light*h_Planck)/(460*nm))*eV,((c_light*h_Planck)/(470*nm))*eV,((c_light*h_Planck)/(480*nm))*eV,((c_light*h_Planck)/(490*nm))*eV,((c_light*h_Planck)/(500*nm))*eV, ((c_light*h_Planck)/(510*nm))*eV,
+		                               ((c_light*h_Planck)/(520*nm))*eV,((c_light*h_Planck)/(530*nm))*eV,((c_light*h_Planck)/(540*nm))*eV,((c_light*h_Planck)/(550*nm))*eV,((c_light*h_Planck)/(560*nm))*eV,((c_light*h_Planck)/(570*nm))*eV,
+					       ((c_light*h_Planck)/(580*nm))*eV,((c_light*h_Planck)/(590*nm))*eV,((c_light*h_Planck)/(600*nm))*eV,((c_light*h_Planck)/(610*nm))*eV, ((c_light*h_Planck)/(620*nm))*eV, ((c_light*h_Planck)/(630*nm))*eV,
+		                               ((c_light*h_Planck)/(640*nm))*eV, ((c_light*h_Planck)/(650*nm))*eV};
 
-
-
-  std::vector<G4double> lxe_SCINT = { 0.1, 1.0, 0.1, 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.};
-  std::vector<G4double> lxe_RIND  = { 1.59, 1.57, 1.54, 1.59, 1.57, 1.54, 1.00, 1.59, 1.57, 1.54, 1.59, 1.57, 1.54, 1.00,1.59, 1.57, 1.54, 1.59, 1.57, 1.54, 1.00};
-  std::vector<G4double> lxe_ABSL  = { 35. * cm, 35. * cm, 35. * cm, 35. * cm, 35. * cm, 35. *cm, 35. * cm, 35. * cm, 35. * cm, 35. * cm, 35. * cm, 35. * cm, 35. *cm, 35. * cm, 35. * cm, 35. * cm, 35. * cm, 35. * cm, 35. * cm, 35. *cm, 35. * cm};
+  std::vector<G4double> lxe_SCINT = { 0., 0., 0., 0., 0., 0., 0., 0.02, 0.13, 0.385, 0.766, 0.95, 1.00, 0.96, 0.896, 0.814, 0.716, 0.62, 0.51, 0.42, 0.34, 0.288, 0.242, 0.211, 0.185, 0.162};
+  std::vector<G4double> lxe_RIND  = { 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9};
+  std::vector<G4double> lxe_ABSL  = { 380.* cm, 380.* cm, 380.* cm, 380.* cm, 380.* cm, 380.* cm, 380.* cm, 380.* cm,380.* cm, 380.* cm, 380.* cm, 380.* cm,380.* cm, 380.* cm, 380.* cm, 380.* cm,380.* cm, 380.* cm, 380.* cm, 380.* cm,380.* cm, 380.* cm, 380.* cm, 380.* cm, 380.* cm, 380.* cm};
   fLXe_mt = new G4MaterialPropertiesTable();
   fLXe_mt->AddProperty("SCINTILLATIONCOMPONENT1", lxe_Energy, lxe_SCINT);
   //fLXe_mt->AddProperty("SCINTILLATIONCOMPONENT2", lxe_Energy, lxe_SCINT);
@@ -196,8 +198,8 @@ void LXeDetectorConstruction::DefineMaterials()
   // Set the Birks Constant for the LXe scintillator
   fLXe->GetIonisation()->SetBirksConstant(0.126 * mm / MeV);
 
-  std::vector<G4double> glass_RIND      = { 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49};
-  std::vector<G4double> glass_AbsLength = { 420. * cm, 420. * cm, 420. * cm, 420.*cm, 420.*cm, 420.*cm, 420.*cm, 420. * cm, 420. * cm, 420. * cm, 420.*cm, 420.*cm, 420.*cm, 420.*cm,420. * cm, 420. * cm, 420. * cm, 420.*cm, 420.*cm, 420.*cm, 420.*cm};  
+  std::vector<G4double> glass_RIND      = { 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49};
+  std::vector<G4double> glass_AbsLength = { 420. * cm, 420. * cm, 420. * cm, 420.*cm, 420. * cm, 420. * cm, 420. * cm, 420.*cm, 420. * cm, 420. * cm, 420. * cm, 420.*cm, 420. * cm, 420. * cm, 420. * cm, 420.*cm,420. * cm, 420. * cm, 420. * cm, 420.*cm, 420. * cm, 420. * cm, 420. * cm, 420.*cm, 420. * cm, 420.*cm};  
 
   G4MaterialPropertiesTable* glass_mt   = new G4MaterialPropertiesTable();
   glass_mt->AddProperty("ABSLENGTH", lxe_Energy, glass_AbsLength);
@@ -205,9 +207,13 @@ void LXeDetectorConstruction::DefineMaterials()
   fGlass->SetMaterialPropertiesTable(glass_mt);
 
   //std::vector<G4double> vacuum_Energy  = { 2.0 * eV, 7.0 * eV, 7.14 * eV };
-   std::vector<G4double> vacuum_Energy ={((c_light*h_Planck)/(350*nm))*eV, ((c_light*h_Planck)/(370*nm))*eV, ((c_light*h_Planck)/(380*nm))*eV, ((c_light*h_Planck)/(390*nm))*eV, ((c_light*h_Planck)/(400*nm))*eV, ((c_light*h_Planck)/(410*nm))*eV, ((c_light*h_Planck)/(420*nm))*eV,((c_light*h_Planck)/(425*nm))*eV, ((c_light*h_Planck)/(430*nm))*eV, ((c_light*h_Planck)/(440*nm))*eV, ((c_light*h_Planck)/(450*nm))*eV, ((c_light*h_Planck)/(460*nm))*eV,((c_light*h_Planck)/(470*nm))*eV, ((c_light*h_Planck)/(480*nm))*eV, ((c_light*h_Planck)/(490*nm))*eV, ((c_light*h_Planck)/(500*nm))*eV, ((c_light*h_Planck)/(510*nm))*eV,((c_light*h_Planck)/(520*nm))*eV,((c_light*h_Planck)/(530*nm))*eV,((c_light*h_Planck)/(540*nm))*eV,((c_light*h_Planck)/(550*nm))*eV};
+   std::vector<G4double> vacuum_Energy = {((c_light*h_Planck)/(400*nm))*eV, ((c_light*h_Planck)/(410*nm))*eV,((c_light*h_Planck)/(420*nm))*eV,((c_light*h_Planck)/(430*nm))*eV,((c_light*h_Planck)/(440*nm))*eV,((c_light*h_Planck)/(450*nm))*eV,
+		                          ((c_light*h_Planck)/(460*nm))*eV,((c_light*h_Planck)/(470*nm))*eV,((c_light*h_Planck)/(480*nm))*eV,((c_light*h_Planck)/(490*nm))*eV,((c_light*h_Planck)/(500*nm))*eV, ((c_light*h_Planck)/(510*nm))*eV,
+		                          ((c_light*h_Planck)/(520*nm))*eV,((c_light*h_Planck)/(530*nm))*eV,((c_light*h_Planck)/(540*nm))*eV,((c_light*h_Planck)/(550*nm))*eV,((c_light*h_Planck)/(560*nm))*eV,((c_light*h_Planck)/(570*nm))*eV,
+					  ((c_light*h_Planck)/(580*nm))*eV,((c_light*h_Planck)/(590*nm))*eV,((c_light*h_Planck)/(600*nm))*eV,((c_light*h_Planck)/(610*nm))*eV, ((c_light*h_Planck)/(620*nm))*eV, ((c_light*h_Planck)/(630*nm))*eV,
+		                          ((c_light*h_Planck)/(640*nm))*eV, ((c_light*h_Planck)/(650*nm))*eV};
 
-  std::vector<G4double> vacuum_RIND    = { 1., 1., 1., 1., 1., 1.,1., 1., 1., 1., 1., 1., 1.,1.,1., 1., 1., 1., 1., 1.,1.};
+  std::vector<G4double> vacuum_RIND    = { 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,1.,1.,1.,1.};
 
   G4MaterialPropertiesTable* vacuum_mt = new G4MaterialPropertiesTable();
   vacuum_mt->AddProperty("RINDEX", vacuum_Energy, vacuum_RIND);
@@ -215,13 +221,13 @@ void LXeDetectorConstruction::DefineMaterials()
   fAir->SetMaterialPropertiesTable(vacuum_mt);  // Give air the same rindex
 
 
-   std::vector<G4double> Eljin_Energy ={((c_light*h_Planck)/(350*nm))*eV, ((c_light*h_Planck)/(370*nm))*eV, ((c_light*h_Planck)/(380*nm))*eV, ((c_light*h_Planck)/(390*nm))*eV, ((c_light*h_Planck)/(400*nm))*eV, ((c_light*h_Planck)/(410*nm))*eV, ((c_light*h_Planck)/(420*nm))*eV,((c_light*h_Planck)/(425*nm))*eV, ((c_light*h_Planck)/(430*nm))*eV, ((c_light*h_Planck)/(440*nm))*eV, ((c_light*h_Planck)/(450*nm))*eV, ((c_light*h_Planck)/(460*nm))*eV,((c_light*h_Planck)/(470*nm))*eV, ((c_light*h_Planck)/(480*nm))*eV, ((c_light*h_Planck)/(490*nm))*eV, ((c_light*h_Planck)/(500*nm))*eV, ((c_light*h_Planck)/(510*nm))*eV,((c_light*h_Planck)/(520*nm))*eV,((c_light*h_Planck)/(530*nm))*eV,((c_light*h_Planck)/(540*nm))*eV,((c_light*h_Planck)/(550*nm))*eV};
+   std::vector<G4double> Eljin_Energy ={((c_light*h_Planck)/(400*nm))*eV, ((c_light*h_Planck)/(410*nm))*eV,((c_light*h_Planck)/(420*nm))*eV,((c_light*h_Planck)/(430*nm))*eV,((c_light*h_Planck)/(440*nm))*eV,((c_light*h_Planck)/(450*nm))*eV,
+		                        ((c_light*h_Planck)/(460*nm))*eV,((c_light*h_Planck)/(470*nm))*eV,((c_light*h_Planck)/(480*nm))*eV,((c_light*h_Planck)/(490*nm))*eV,((c_light*h_Planck)/(500*nm))*eV};
 
 
-
-  std::vector<G4double> Eljin_SCINT = {0.0, 0.01, 0.02, 0.03, 0.05, 0.5, 0.81, 1.00, 0.95, 0.72, 0.5, 0.42, 0.3, 0.18, 0.17, 0.13, 0.1, 0.04, 0.02, 0.01 , 0};
-  std::vector<G4double> Eljin_RIND  = {1.58, 1.58, 1.58, 1.58, 1.58,1.58, 1.58, 1.58, 1.58, 1.58, 1.58,1.58, 1.58, 1.58, 1.58, 1.58, 1.58,1.58,1.58,1.58,1.58};
-  std::vector<G4double> Eljin_ABSL  = {380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm,380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380*cm, 380.*cm, 380.*cm};
+  std::vector<G4double> Eljin_SCINT = {0., 0.26, 0.914, 0.98, 0.78, 0.565, 0.445, 0.308, 0.177, 0.097, 0.05};
+  std::vector<G4double> Eljin_RIND  = {1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58};
+  std::vector<G4double> Eljin_ABSL  = {380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm};
   feljin_mt = new G4MaterialPropertiesTable();
 
   feljin_mt->AddProperty("SCINTILLATIONCOMPONENT1", Eljin_Energy, Eljin_SCINT);

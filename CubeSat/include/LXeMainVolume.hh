@@ -88,6 +88,8 @@ class LXeMainVolume : public G4PVPlacement
   G4Box* fAirGap;
   G4Box* falumGAGG;
   
+  G4Box* falumthin;
+  
   G4Box* fPmt;
   G4Box* fPhotocath;
   //G4Tubs* fPmt;
@@ -104,6 +106,7 @@ class LXeMainVolume : public G4PVPlacement
   //G4LogicalVolume* fPhotocath_lognew;
 
   G4LogicalVolume* falum_log;
+  G4LogicalVolume* falumthin_log;
   
   //G4LogicalVolume* fSphere_log;
   G4LogicalVolume* fVeto_Log;
