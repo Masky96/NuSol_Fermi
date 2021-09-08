@@ -39,6 +39,7 @@
 class LXeMainVolume;
 class LXePMTSD;
 class LXeScintSD;
+//class LXeEljinSD;
 
 class G4Box;
 class G4Element;
@@ -122,6 +123,10 @@ class LXeDetectorConstruction : public G4VUserDetectorConstruction
   G4Material* fPMMA;
   G4Material* fPethylene1;
   G4Material* fPethylene2;
+  G4Material* fEpoxy;
+  G4Material* fIronShield;
+  G4Material* fFe;
+  G4Material* fEljin_200;
 
   // Geometry
   G4double fScint_x;
@@ -143,11 +148,13 @@ class LXeDetectorConstruction : public G4VUserDetectorConstruction
   LXeMainVolume* fMainVolume;
 
   G4MaterialPropertiesTable* fLXe_mt;
+  G4MaterialPropertiesTable* feljin_mt;
   G4MaterialPropertiesTable* fMPTPStyrene;
 
   // Sensitive Detectors
   G4Cache<LXeScintSD*> fScint_SD;
   G4Cache<LXePMTSD*> fPmt_SD;
+  //G4Cache<LXeEljinSD*> fEljin_SD;
 };
 
 #endif

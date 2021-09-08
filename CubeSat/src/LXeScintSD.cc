@@ -76,7 +76,7 @@ void LXeScintSD::Initialize(G4HCofThisEvent* hitsCE)
 G4bool LXeScintSD::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 {
   G4double edep = aStep->GetTotalEnergyDeposit();
-  if(edep == 0.)
+  if(edep == 0. || aStep->GetTrack()->GetDefinition()->GetParticleName() == "mu-")
     return false;  // No edep so don't count as hit
 
   G4StepPoint* thePrePoint = aStep->GetPreStepPoint();

@@ -59,6 +59,13 @@ class LXeRun : public G4Run
     fTotE += dep;
     fTotE2 += dep * dep;
   }
+
+  //New
+  void IncEDepE(G4double depE)
+  {
+    fTotEljin += depE;
+    fTotEljin2 += depE * depE;
+  }
   void IncAbsorption(G4int count)
   {
     fAbsorptionCount += count;
@@ -141,6 +148,8 @@ void IncHitCount3(G4int count)
 
   G4double fTotE;
   G4double fTotE2;
+  G4double fTotEljin;
+  G4double fTotEljin2;
 };
 
 #endif  // LXeRun_h

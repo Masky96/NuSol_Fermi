@@ -52,6 +52,8 @@ LXeRun::LXeRun()
   fPMTsAboveThreshold = fPMTsAboveThreshold2 = 0;
 
   fTotE = fTotE2 = 0.0;
+  fTotEljin = fTotEljin2 = 0.0;
+  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -90,6 +92,10 @@ void LXeRun::Merge(const G4Run* run)
   fBoundaryAbsorptionCount2 += localRun->fBoundaryAbsorptionCount2;
   fTotE += localRun->fTotE;
   fTotE2 += localRun->fTotE2;
+
+  //New
+  fTotEljin  += localRun ->fTotEljin;
+  fTotEljin2 += localRun ->fTotEljin2;
 
   G4Run::Merge(run);
 }
@@ -227,9 +233,30 @@ void LXeRun::EndOfRun()
   else
     rms_en = 0.;
 
-  G4cout << "Total energy deposition in scintillator per event:\t " << en / keV
-         << " +- " << rms_en / keV << " keV." << G4endl;
+  G4cout << "Total energy deposition in scintillator per event:\t " << en / MeV
+         << " +- " << rms_en / MeV << " MeV." << G4endl;
 
+  //New --------------------------------------------------------------
+
+  G4double enVeto  = fTotEljin/ n_evt;
+  G4double enVeto2 = fTotEljin2 / n_evt;
+
+  G4double rms_enVeto = enVeto2 - enVeto * enVeto;
+
+  if( rms_enVeto > 0)
+    rms_enVeto = std::sqrt(rms_enVeto/n_evt);
+  else
+    rms_enVeto = 0.;
+
+  G4cout << "Total energy deposition in the Veto per event:\t" << enVeto /MeV
+         << " +- " << rms_enVeto/MeV << " MeV. " << G4endl;
+ 
+
+
+
+
+
+  
   G4cout << G4endl;
   G4cout.precision(prec);
 }

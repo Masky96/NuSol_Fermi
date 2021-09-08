@@ -48,6 +48,7 @@ class LXeMainVolume : public G4PVPlacement
 
   G4LogicalVolume* GetLogPhotoCath() { return fPhotocath_log; }
   G4LogicalVolume* GetLogScint() { return fScint_log; }
+  G4LogicalVolume* GetLogVeto() { return fVeto_Log; } 
 
   std::vector<G4ThreeVector> GetPmtPositions() { return fPmtPositions; }
 

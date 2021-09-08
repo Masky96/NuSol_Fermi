@@ -48,6 +48,7 @@ class LXeMainVolume : public G4PVPlacement
 
   G4LogicalVolume* GetLogPhotoCath() { return fPhotocath_log; }
   G4LogicalVolume* GetLogScint() { return fScint_log; }
+  G4LogicalVolime* GetLogVeto() { return fVeto_Log; } 
 
   std::vector<G4ThreeVector> GetPmtPositions() { return fPmtPositions; }
 
@@ -79,8 +80,8 @@ class LXeMainVolume : public G4PVPlacement
   // Basic Volumes
   //
   G4Box* fScint_box;
-  G4Box* fCrystal;
-  G4Box* fPmt_GAGG;
+  G4Box* fVeto;
+  //G4Box* fPmt_GAGG;
   G4Box* fairpocket;
   G4Box* fHousing_box;
   G4Box* falumoutside;
@@ -88,10 +89,12 @@ class LXeMainVolume : public G4PVPlacement
   G4Box* fAirGap;
   G4Box* falumGAGG;
   
-  G4Box* fPmt_new;
-  G4Box* fPhotocath_new;
-  G4Tubs* fPmt;
-  G4Tubs* fPhotocath;
+  G4Box* falumthin;
+  
+  G4Box* fPmt;
+  G4Box* fPhotocath;
+  //G4Tubs* fPmt;
+  //G4Tubs* fPhotocath;
   //G4Sphere* fSphere;
 
   // Logical volumes
@@ -100,13 +103,14 @@ class LXeMainVolume : public G4PVPlacement
   G4LogicalVolume* fHousing_log;
   G4LogicalVolume* fPmt_log;
   G4LogicalVolume* fPhotocath_log;
-  G4LogicalVolume* fPmt_lognew;
-  G4LogicalVolume* fPhotocath_lognew;
+  //G4LogicalVolume* fPmt_lognew;
+  //G4LogicalVolume* fPhotocath_lognew;
 
   G4LogicalVolume* falum_log;
+  G4LogicalVolume* falumthin_log;
   
   //G4LogicalVolume* fSphere_log;
-  G4LogicalVolume* fCrystal_Log;
+  G4LogicalVolume* fVeto_Log;
   G4LogicalVolume* fPmt_GAGGlog;
   G4LogicalVolume* fair_log;
   G4LogicalVolume* fIron_log;

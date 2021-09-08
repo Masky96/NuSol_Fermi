@@ -24,44 +24,32 @@
 // ********************************************************************
 //
 //
-/// \file optical/LXe/src/LXePrimaryGeneratorAction.cc
-/// \brief Implementation of the LXePrimaryGeneratorAction class
+/// \file optical/LXe/include/LXeScintSD.hh
+/// \brief Definition of the LXeScintSD class
 //
 //
-#include "LXePrimaryGeneratorAction.hh"
+#ifndef LXeEljinSD_h
+#define LXeEljinSD_h 1
 
-#include "globals.hh"
-#include "G4Event.hh"
-#include "G4ParticleDefinition.hh"
-#include "G4ParticleGun.hh"
-#include "G4ParticleTable.hh"
-#include "G4SystemOfUnits.hh"
+#include "LXeEljinHit.hh"
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+#include "G4VSensitiveDetector.hh"
 
-LXePrimaryGeneratorAction::LXePrimaryGeneratorAction()
+class G4Step;
+class G4HCofThisEvent;
+
+class LXeEljinSD : public G4VSensitiveDetector
 {
-  G4int n_particle = 1;
-  fParticleGun     = new G4ParticleGun(n_particle);
+ public:
+  LXeEljinSD(G4String name);
+  ~LXeEljinSD();
 
-  G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+  void Initialize(G4HCofThisEvent*) override;
+  G4bool ProcessHits(G4Step* aStep, G4TouchableHistory*) override;
 
-  G4String particleName;
-  fParticleGun->SetParticleDefinition(
-    particleTable->FindParticle(particleName = "mu-"));
-  // Default energy,position,momentum
-  fParticleGun->SetParticleEnergy(1. * GeV);
-  fParticleGun->SetParticlePosition(G4ThreeVector(0., 0., -20. * cm));
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
-}
+ private:
+  LXeEljinHitsCollection* fEljinCollection;
+  G4int fHitsCID;
+};
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-LXePrimaryGeneratorAction::~LXePrimaryGeneratorAction() { delete fParticleGun; }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-void LXePrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
-{
-  fParticleGun->GeneratePrimaryVertex(anEvent);
-}
+#endif

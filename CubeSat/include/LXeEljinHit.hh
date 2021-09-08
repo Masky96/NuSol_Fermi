@@ -24,44 +24,62 @@
 // ********************************************************************
 //
 //
-/// \file optical/LXe/src/LXePrimaryGeneratorAction.cc
-/// \brief Implementation of the LXePrimaryGeneratorAction class
+/// \file optical/LXe/include/LXeEljinHit.hh
+/// \brief Definition of the LXeEljinHit class
 //
 //
-#include "LXePrimaryGeneratorAction.hh"
+#ifndef LXeEljinHit_h
+#define LXeEljinHit_h 1
 
-#include "globals.hh"
-#include "G4Event.hh"
-#include "G4ParticleDefinition.hh"
-#include "G4ParticleGun.hh"
-#include "G4ParticleTable.hh"
-#include "G4SystemOfUnits.hh"
+#include "G4VHit.hh"
+#include "G4THitsCollection.hh"
+#include "G4Allocator.hh"
+#include "G4ThreeVector.hh"
+#include "G4VPhysicalVolume.hh"
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-LXePrimaryGeneratorAction::LXePrimaryGeneratorAction()
+class LXeEljinHit : public G4VHit
 {
-  G4int n_particle = 1;
-  fParticleGun     = new G4ParticleGun(n_particle);
+ public:
+  LXeEljinHit();
+  LXeEljinHit(G4VPhysicalVolume* pVol1);
+  ~LXeEljinHit();
 
-  G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+  LXeEljinHit(const LXeEljinHit& right);
+  const LXeEljinHit& operator=(const LXeEljinHit& right);
+  G4bool operator==(const LXeEljinHit& right) const;
 
-  G4String particleName;
-  fParticleGun->SetParticleDefinition(
-    particleTable->FindParticle(particleName = "mu-"));
-  // Default energy,position,momentum
-  fParticleGun->SetParticleEnergy(1. * GeV);
-  fParticleGun->SetParticlePosition(G4ThreeVector(0., 0., -20. * cm));
-  fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
+  inline void* operator new(size_t);
+  inline void operator delete(void* aHit);
+
+  inline void SetEdep(G4double deE) { fEdepE = deE; }
+  inline void AddEdep(G4double deE) { fEdepE += deE; }
+  inline G4double GetEdepE() { return fEdepE; }
+
+  // inline void SetPos(G4ThreeVector xyz) { fPos = xyz; }
+  //inline G4ThreeVector GetPos() { return fPos; }
+
+  inline const G4VPhysicalVolume* GetPhysVE() { return fPhysVolE; }
+
+ private:
+  G4double fEdepE;
+  //G4ThreeVector fPos;
+  const G4VPhysicalVolume* fPhysVolE;
+};
+
+typedef G4THitsCollection<LXeEljinHit> LXeEljinHitsCollection;
+
+extern G4ThreadLocal G4Allocator<LXeEljinHit>* LXeEljinHitAllocator;
+
+inline void* LXeEljinHit::operator new(size_t)
+{
+  if(!LXeEljinHitAllocator)
+    LXeEljinHitAllocator = new G4Allocator<LXeEljinHit>;
+  return (void*) LXeEljinHitAllocator->MallocSingle();
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-LXePrimaryGeneratorAction::~LXePrimaryGeneratorAction() { delete fParticleGun; }
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
-void LXePrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
+inline void LXeEljinHit::operator delete(void* aHit)
 {
-  fParticleGun->GeneratePrimaryVertex(anEvent);
+  LXeEljinHitAllocator->FreeSingle((LXeEljinHit*) aHit);
 }
+
+#endif

@@ -34,7 +34,8 @@
 #include "LXeMainVolume.hh"
 #include "LXePMTSD.hh"
 #include "LXeScintSD.hh"
-#include "LXeWLSSlab.hh"
+#include "LXeEljinSD.hh"
+//#include "LXeWLSSlab.hh"
 
 #include "globals.hh"
 #include "G4Box.hh"
@@ -93,6 +94,7 @@ LXeDetectorConstruction::~LXeDetectorConstruction()
     delete fMainVolume;
   }
   delete fLXe_mt;
+  delete feljin_mt;
   delete fDetectorMessenger;
   delete fMPTPStyrene;
 }
@@ -172,7 +174,7 @@ void LXeDetectorConstruction::DefineMaterials()
 
   //***Material properties tables
 
-	  //std::vector<G4double> lxe_Energy = { 7.0 * eV, 7.07 * eV, 7.14 * eV };
+//This portion is acting as the GAGG crystal material properties
 	    std::vector<G4double> lxe_Energy ={((c_light*h_Planck)/(400*nm))*eV, ((c_light*h_Planck)/(410*nm))*eV,((c_light*h_Planck)/(420*nm))*eV,((c_light*h_Planck)/(430*nm))*eV,((c_light*h_Planck)/(440*nm))*eV,((c_light*h_Planck)/(450*nm))*eV,
 		                               ((c_light*h_Planck)/(460*nm))*eV,((c_light*h_Planck)/(470*nm))*eV,((c_light*h_Planck)/(480*nm))*eV,((c_light*h_Planck)/(490*nm))*eV,((c_light*h_Planck)/(500*nm))*eV, ((c_light*h_Planck)/(510*nm))*eV,
 		                               ((c_light*h_Planck)/(520*nm))*eV,((c_light*h_Planck)/(530*nm))*eV,((c_light*h_Planck)/(540*nm))*eV,((c_light*h_Planck)/(550*nm))*eV,((c_light*h_Planck)/(560*nm))*eV,((c_light*h_Planck)/(570*nm))*eV,
@@ -198,6 +200,9 @@ void LXeDetectorConstruction::DefineMaterials()
   // Set the Birks Constant for the LXe scintillator
   fLXe->GetIonisation()->SetBirksConstant(0.126 * mm / MeV);
 
+
+
+  //Glass Material Properties for the PMT portion
   std::vector<G4double> glass_RIND      = { 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49, 1.49};
   std::vector<G4double> glass_AbsLength = { 420. * cm, 420. * cm, 420. * cm, 420.*cm, 420. * cm, 420. * cm, 420. * cm, 420.*cm, 420. * cm, 420. * cm, 420. * cm, 420.*cm, 420. * cm, 420. * cm, 420. * cm, 420.*cm,420. * cm, 420. * cm, 420. * cm, 420.*cm, 420. * cm, 420. * cm, 420. * cm, 420.*cm, 420. * cm, 420.*cm};  
 
@@ -206,6 +211,8 @@ void LXeDetectorConstruction::DefineMaterials()
   glass_mt->AddProperty("RINDEX", lxe_Energy, glass_RIND);
   fGlass->SetMaterialPropertiesTable(glass_mt);
 
+
+//Material needed for when the photons go to Vacuum.
   //std::vector<G4double> vacuum_Energy  = { 2.0 * eV, 7.0 * eV, 7.14 * eV };
    std::vector<G4double> vacuum_Energy = {((c_light*h_Planck)/(400*nm))*eV, ((c_light*h_Planck)/(410*nm))*eV,((c_light*h_Planck)/(420*nm))*eV,((c_light*h_Planck)/(430*nm))*eV,((c_light*h_Planck)/(440*nm))*eV,((c_light*h_Planck)/(450*nm))*eV,
 		                          ((c_light*h_Planck)/(460*nm))*eV,((c_light*h_Planck)/(470*nm))*eV,((c_light*h_Planck)/(480*nm))*eV,((c_light*h_Planck)/(490*nm))*eV,((c_light*h_Planck)/(500*nm))*eV, ((c_light*h_Planck)/(510*nm))*eV,
@@ -221,6 +228,8 @@ void LXeDetectorConstruction::DefineMaterials()
   fAir->SetMaterialPropertiesTable(vacuum_mt);  // Give air the same rindex
 
 
+
+//Eljin Scintillator (Veto) Properties
    std::vector<G4double> Eljin_Energy ={((c_light*h_Planck)/(400*nm))*eV, ((c_light*h_Planck)/(410*nm))*eV,((c_light*h_Planck)/(420*nm))*eV,((c_light*h_Planck)/(430*nm))*eV,((c_light*h_Planck)/(440*nm))*eV,((c_light*h_Planck)/(450*nm))*eV,
 		                        ((c_light*h_Planck)/(460*nm))*eV,((c_light*h_Planck)/(470*nm))*eV,((c_light*h_Planck)/(480*nm))*eV,((c_light*h_Planck)/(490*nm))*eV,((c_light*h_Planck)/(500*nm))*eV};
 
@@ -242,57 +251,14 @@ void LXeDetectorConstruction::DefineMaterials()
   fEljin_200->SetMaterialPropertiesTable(feljin_mt);
 
 
-
-
-
-
-/*
-  std::vector<G4double> wls_Energy = { 2.00 * eV, 2.87 * eV, 2.90 * eV,
-                                       3.47 * eV };
-
-  std::vector<G4double> rIndexPstyrene = { 1.5, 1.5, 1.5, 1.5 };
-  std::vector<G4double> absorption1    = { 2. * cm, 2. * cm, 2. * cm, 2. * cm };
-  std::vector<G4double> scintilFast    = { 0.0, 0.0, 1.0, 1.0 };
-  fMPTPStyrene = new G4MaterialPropertiesTable();
-  fMPTPStyrene->AddProperty("RINDEX", wls_Energy, rIndexPstyrene);
-  fMPTPStyrene->AddProperty("ABSLENGTH", wls_Energy, absorption1);
-  fMPTPStyrene->AddProperty("SCINTILLATIONCOMPONENT1", wls_Energy, scintilFast);
-  fMPTPStyrene->AddConstProperty("SCINTILLATIONYIELD", 10. / keV);
-  fMPTPStyrene->AddConstProperty("RESOLUTIONSCALE", 1.0);
-  fMPTPStyrene->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 10. * ns);
-  fPstyrene->SetMaterialPropertiesTable(fMPTPStyrene);
-
-  // Set the Birks Constant for the Polystyrene scintillator
-  fPstyrene->GetIonisation()->SetBirksConstant(0.126 * mm / MeV);
-
-  std::vector<G4double> RefractiveIndexFiber = { 1.6, 1.6, 1.6, 1.6 };
-  std::vector<G4double> AbsFiber    = { 9.0 * m, 9.0 * m, 0.1 * mm, 0.1 * mm };
-  std::vector<G4double> EmissionFib = { 1.0, 1.0, 0.0, 0.0 };
-  G4MaterialPropertiesTable* fiberProperty = new G4MaterialPropertiesTable();
-  fiberProperty->AddProperty("RINDEX", wls_Energy, RefractiveIndexFiber);
-  fiberProperty->AddProperty("WLSABSLENGTH", wls_Energy, AbsFiber);
-  fiberProperty->AddProperty("WLSCOMPONENT", wls_Energy, EmissionFib);
-  fiberProperty->AddConstProperty("WLSTIMECONSTANT", 0.5 * ns);
-  fPMMA->SetMaterialPropertiesTable(fiberProperty);
-
-  std::vector<G4double> RefractiveIndexClad1 = { 1.49, 1.49, 1.49, 1.49 };
-  G4MaterialPropertiesTable* clad1Property   = new G4MaterialPropertiesTable();
-  clad1Property->AddProperty("RINDEX", wls_Energy, RefractiveIndexClad1);
-  clad1Property->AddProperty("ABSLENGTH", wls_Energy, AbsFiber);
-  fPethylene1->SetMaterialPropertiesTable(clad1Property);
-
-  std::vector<G4double> RefractiveIndexClad2 = { 1.42, 1.42, 1.42, 1.42 };
-  G4MaterialPropertiesTable* clad2Property   = new G4MaterialPropertiesTable();
-  clad2Property->AddProperty("RINDEX", wls_Energy, RefractiveIndexClad2);
-  clad2Property->AddProperty("ABSLENGTH", wls_Energy, AbsFiber);
-  fPethylene2->SetMaterialPropertiesTable(clad2Property);
-*/
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 G4VPhysicalVolume* LXeDetectorConstruction::Construct()
 {
+
+
   // The experimental hall walls are all 1m away from housing walls
   G4double expHall_x = fD_mtl + 2. * m;
   G4double expHall_y = fD_mtl + 2. * m;
@@ -354,8 +320,7 @@ void LXeDetectorConstruction::ConstructSDandField()
 
   SetSensitiveDetector(fMainVolume->GetLogPhotoCath(), fPmt_SD.Get());
 
-  // Scint SD (Anywhere I see Scint, change to Veto)
-
+//This is delacring the GAGG crystal as a sensitive detector
   if(!fScint_SD.Get())
   {
     G4cout << "Construction /LXeDet/scintSD" << G4endl;
@@ -364,8 +329,26 @@ void LXeDetectorConstruction::ConstructSDandField()
   }
   G4SDManager::GetSDMpointer()->AddNewDetector(fScint_SD.Get());
   SetSensitiveDetector(fMainVolume->GetLogScint(), fScint_SD.Get());
+
+//Same usage but this will be for the Veto System.
+
+if(!fEljin_SD.Get())
+  {
+    G4cout << "Construction /LXeDet/eljinSD" << G4endl;
+    LXeEljinSD* eljin_SD = new LXeEljinSD("/LXeDet/eljinSD");
+    fEljin_SD.Put(eljin_SD);
+  }
+  G4SDManager::GetSDMpointer()->AddNewDetector(fEljin_SD.Get());
+  SetSensitiveDetector(fMainVolume->GetLogVeto(), fEljin_SD.Get());
+
+
+
+
+
 }
 
+
+//Don't have to worry too much about the section below, this was from the original example that I did not want to manipulate too much. 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 /*
 void LXeDetectorConstruction::SetDimensions(G4ThreeVector dims)
