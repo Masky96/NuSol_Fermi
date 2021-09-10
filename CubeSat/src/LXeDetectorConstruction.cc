@@ -73,10 +73,10 @@ LXeDetectorConstruction::LXeDetectorConstruction()
   fExperimentalHall_log  = nullptr;
   fExperimentalHall_phys = nullptr;
 
-  fLXe = fAl = fAir = fVacuum = fGlass = fEpoxy = fFe = fEljin_200 = nullptr;
-  fPstyrene = fPMMA = fPethylene1 = fPethylene2 = fIronShield = nullptr;
+  fLXe = fAl = fAir = fVacuum = fGlass = fEpoxy = fFe = fEljin_200 = fH = fO = fGd = fGa = nullptr;
+  fPstyrene = fPMMA = fPethylene1 = fPethylene2 = fIronShield = fC =  nullptr;
 
-  fN = fO = fC = fH  = nullptr;
+  fN = fH = fO = fGd = fGa = nullptr;
 
   fSaveThreshold = 0;
   SetDefaults();
@@ -120,28 +120,35 @@ void LXeDetectorConstruction::DefineMaterials()
   G4int nC_eth  = 2 * polyeth;
   G4int nH_eth  = 4 * polyeth;
 
-  //***Elements
-  fH = new G4Element("H", "H", z = 1., a = 1.01 * g / mole);
-  fC = new G4Element("C", "C", z = 6., a = 12.01 * g / mole);
-  fN = new G4Element("N", "N", z = 7., a = 14.01 * g / mole);
-  fO = new G4Element("O", "O", z = 8., a = 16.00 * g / mole);
- 
 
   //***Materials
   // Liquid Xenon
   fLXe = new G4Material("LXe", z = 54., a = 131.29 * g / mole,
                         density = 3.020 * g / cm3);
   // Aluminum
+  //fAl = nist -> FindOrBuildMaterial("G4_Al");
+  
   fAl = new G4Material("Al", z = 13., a = 26.98 * g / mole,
                        density = 2.7 * g / cm3);
+  
   // Vacuum
   fVacuum = new G4Material("Vacuum", z = 1., a = 1.01 * g / mole,
                            density = universe_mean_density, kStateGas,
                            0.1 * kelvin, 1.e-19 * pascal);
 
   fFe = nist -> FindOrBuildMaterial("G4_Fe");
-  fEpoxy = nist->FindOrBuildMaterial("G4_POLYSTYRENE");
+  fC = nist-> FindOrBuildMaterial("G4_C");
+  fH = nist-> FindOrBuildMaterial("G4_H");
+  fN = nist ->FindOrBuildMaterial("G4_N");
+  fO = nist -> FindOrBuildMaterial("G4_O");
+  fEpoxy = nist-> FindOrBuildMaterial("G4_POLYSTYRENE");
+ 
 
+  //GAGG(Ce) Elements needed
+  fGd = nist -> FindOrBuildMaterial("G4_Gd");
+  fGa = nist -> FindOrBuildMaterial("G4_Ga");
+  fO = nist -> FindOrBuildMaterial("G4_O");
+  fCe = nist ->FindOrBuildMaterial("G4_Ce");
 
   //Getting Fractional Masses of Iron and Epoxy
   densityCombined = 4*g/cm3;
@@ -157,19 +164,28 @@ void LXeDetectorConstruction::DefineMaterials()
   fIronShield->AddMaterial(fEpoxy, epoxy_frac);
 
   fEljin_200 = new G4Material("Eljin", density = 1.02*g/cm3, ncomponents = 2);
-  fEljin_200->AddElement(fC, 91.55* perCent);
-  fEljin_200->AddElement(fH, 8.45* perCent);
+  fEljin_200->AddMaterial(fC, 91.55* perCent);
+  fEljin_200->AddMaterial(fH, 8.45* perCent);
   
+
+  fGAGG = new G4Material("GAGG", density = 6.63*g/cm3, ncomponents = 5);
+  fGAGG->AddMaterial(fGd, 44.2  * perCent);
+  fGAGG->AddMaterial(fAl, 5.06  * perCent);
+  fGAGG->AddMaterial(fGa, 19.6  * perCent);
+  fGAGG->AddMaterial(fO , 18.0  * perCent);
+  fGAGG->AddMaterial(fCe, 13.14 * perCent);
+
+
 
   
   // Air
   fAir = new G4Material("Air", density = 1.29 * mg / cm3, 2);
-  fAir->AddElement(fN, 70 * perCent);
-  fAir->AddElement(fO, 30 * perCent);
+  fAir->AddMaterial(fN, 70 * perCent);
+  fAir->AddMaterial(fO, 30 * perCent);
   // Glass
   fGlass = new G4Material("Glass", density = 1.032 * g / cm3, 2);
-  fGlass->AddElement(fC, 91.533 * perCent);
-  fGlass->AddElement(fH, 8.467 * perCent);
+  fGlass->AddMaterial(fC, 91.533 * perCent);
+  fGlass->AddMaterial(fH, 8.467 * perCent);
 
 
   //***Material properties tables
@@ -195,9 +211,11 @@ void LXeDetectorConstruction::DefineMaterials()
   //fLXe_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT2", 45. * ns);
   fLXe_mt->AddConstProperty("SCINTILLATIONYIELD1", 1.0);
   //fLXe_mt->AddConstProperty("SCINTILLATIONYIELD2", 0.0);
+  fGAGG->SetMaterialPropertiesTable(fLXe_mt);
   fLXe->SetMaterialPropertiesTable(fLXe_mt);
 
   // Set the Birks Constant for the LXe scintillator
+  fGAGG->GetIonisation()->SetBirksConstant(0.126 * mm / MeV);
   fLXe->GetIonisation()->SetBirksConstant(0.126 * mm / MeV);
 
 

@@ -50,8 +50,8 @@ LXePrimaryGeneratorAction::LXePrimaryGeneratorAction()
   fParticleGun->SetParticleDefinition(
     particleTable->FindParticle(particleName = "mu-"));
   // Default energy,position,momentum
-  fParticleGun->SetParticleEnergy(511. * GeV);
-  fParticleGun->SetParticlePosition(G4ThreeVector(0., 0., -20. * cm));
+  fParticleGun->SetParticleEnergy(1. * GeV);
+  fParticleGun->SetParticlePosition(G4ThreeVector(1.5*cm, 0., -20. * cm));
   fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
 }
 

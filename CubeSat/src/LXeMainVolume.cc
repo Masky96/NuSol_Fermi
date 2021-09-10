@@ -201,7 +201,7 @@ LXeMainVolume::LXeMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlate,
   fScint_box =
     new G4Box("scint_box", lcrystal_x/ 2., lcrystal_y / 2., lcrystal_z / 2.);
 
-  fScint_log   = new G4LogicalVolume(fScint_box, G4Material::GetMaterial("LXe"),
+  fScint_log   = new G4LogicalVolume(fScint_box, G4Material::GetMaterial("GAGG"),
                                    "scint_log", 0, 0, 0);
 
   new G4PVPlacement(0, G4ThreeVector(), fScint_log, "scintillator",

@@ -77,7 +77,7 @@ G4bool LXeEljinSD::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 {
   G4double edep = aStep->GetTotalEnergyDeposit();
   
-  if(edep == 0. || aStep->GetTrack()->GetDefinition()->GetParticleName() == "opticalphoton")
+  if(edep == 0.)
     return false;  // No edep so don't count as hit
 
   G4StepPoint* thePrePoint = aStep->GetPreStepPoint();

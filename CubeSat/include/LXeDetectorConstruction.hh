@@ -113,21 +113,30 @@ class LXeDetectorConstruction : public G4VUserDetectorConstruction
   // Materials & Elements
   G4Material* fLXe;
   G4Material* fAl;
-  G4Element* fN;
-  G4Element* fO;
+  G4Material* fN;
+  G4Material* fO;
   G4Material* fAir;
   G4Material* fVacuum;
-  G4Element* fC;
-  G4Element* fH;
+  G4Material* fC;
+  G4Material* fH;
   G4Material* fGlass;
   G4Material* fPstyrene;
   G4Material* fPMMA;
   G4Material* fPethylene1;
   G4Material* fPethylene2;
+
+  //--New-----------------
   G4Material* fEpoxy;
   G4Material* fIronShield;
   G4Material* fFe;
   G4Material* fEljin_200;
+  G4Material* fGd;
+  G4Material* fGa;
+  G4Material* fCe;
+  G4Material* fGAGG;
+  
+
+  
 
   // Geometry
   G4double fScint_x;
