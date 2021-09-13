@@ -2,11 +2,11 @@
 
 /run/initialize
 /gun/particle mu-
-/gun/energy 10 GeV
-#/analysis/setFileName testFile
-#/analysis/h1/set 1 10 0 50000
-#/analysis/h1/set 2 10 0 50000
-#/analysis/h1/set 3 16 2 4.2 eV
+/gun/energy 1 GeV
+/analysis/setFileName testFile
+/analysis/h1/set  1 10 0 40000
+/analysis/h1/set  2 10 0 10 eV
+/analysis/h1/set  3 100 0 100 ns
 #/analysis/h1/set 3 16 300 620 nm
 
 
@@ -14,7 +14,7 @@
 
 /tracking/verbose 0
 /tracking/storeTrajectory 0
-/run/beamOn 2
+/run/beamOn 1
 
 
 

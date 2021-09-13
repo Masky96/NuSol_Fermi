@@ -90,6 +90,9 @@ class LXeEventAction : public G4UserEventAction
   G4int GetPhotonCount_Ceren() const { return fPhotonCount_Ceren; }
   G4int GetHitCount() const { return fHitCount; }
   G4double GetEDep() const { return fTotE; }
+  //New---------------------------------------
+  G4double Getedep() const { return fedep; }
+  
   //G4double GetEDepE() const { return fTotEljin; }
   G4int GetAbsorptionCount() const { return fAbsorptionCount; }
   G4int GetBoundaryAbsorptionCount() const { return fBoundaryAbsorptionCount; }
@@ -135,6 +138,9 @@ class LXeEventAction : public G4UserEventAction
 
   G4double fTotE;
   G4double fTotEljin;
+
+  G4double fedep;
+  G4double ftime;
 
   // These only have meaning if totE > 0
   // If totE = 0 then these won't be set by EndOfEventAction

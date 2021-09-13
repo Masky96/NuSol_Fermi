@@ -112,7 +112,10 @@ G4bool LXePMTSD::ProcessHits_boundary(const G4Step* aStep, G4TouchableHistory*)
   if(aStep->GetTrack()->GetDefinition() !=
      G4OpticalPhoton::OpticalPhotonDefinition())
     return false;
-
+  
+  G4double edep = aStep->GetTotalEnergyDeposit();
+  G4double hittime = aStep->GetPostStepPoint()->GetGlobalTime();
+  
   // User replica number 1 since photocathode is a daughter volume
   // to the pmt which was replicated
   G4int pmtNumber =
@@ -136,6 +139,8 @@ G4bool LXePMTSD::ProcessHits_boundary(const G4Step* aStep, G4TouchableHistory*)
   {                         // this pmt wasn't previously hit in this event
     hit = new LXePMTHit();  // so create new hit
     hit->SetPMTNumber(pmtNumber);
+    hit->Setedep(edep);
+    hit->SetTime(hittime);
     hit->SetPMTPhysVol(physVol);
     fPMTHitCollection->insert(hit);
     hit->SetPMTPos((*fPMTPositionsX)[pmtNumber], (*fPMTPositionsY)[pmtNumber],
@@ -143,20 +148,6 @@ G4bool LXePMTSD::ProcessHits_boundary(const G4Step* aStep, G4TouchableHistory*)
   }
 
   hit->IncPhotonCount();  // increment hit for the selected pmt
-
-  if(!LXeDetectorConstruction::GetSphereOn())
-  {
-    hit->SetDrawit(true);
-    // If the sphere is disabled then this hit is automaticaly drawn
-  }
-  else
-  {  // sphere enabled
-    LXeUserTrackInformation* trackInfo =
-      (LXeUserTrackInformation*) aStep->GetTrack()->GetUserInformation();
-    if(trackInfo->GetTrackStatus() & hitSphere)
-      // only draw this hit if the photon has hit the sphere first
-      hit->SetDrawit(true);
-  }
-
+ 
   return true;
 }

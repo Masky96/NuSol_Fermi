@@ -60,6 +60,9 @@ class LXeEventAction : public G4UserEventAction
   void IncPhotonCount_Scint() { ++fPhotonCount_Scint; }
   void IncPhotonCount_Ceren() { ++fPhotonCount_Ceren; }
   void IncEDep(G4double dep) { fTotE += dep; }
+
+
+  
   //void IncEDepE(G4double depE) {fTotEljin += depE; }
   void IncAbsorption() { ++fAbsorptionCount; }
   void IncBoundaryAbsorption() { ++fBoundaryAbsorptionCount; }
@@ -70,8 +73,8 @@ class LXeEventAction : public G4UserEventAction
   void IncHitCount3(G4int i = 1) { fHitCount_3 += i; }
 
 
-
-
+  void TimeAdd(G4double time) {ftime += time; }
+  
   
   void SetEWeightPos(const G4ThreeVector& p) { fEWeightPos = p; }
   void SetReconPos(const G4ThreeVector& p) { fReconPos = p; }
@@ -90,6 +93,11 @@ class LXeEventAction : public G4UserEventAction
   G4int GetPhotonCount_Ceren() const { return fPhotonCount_Ceren; }
   G4int GetHitCount() const { return fHitCount; }
   G4double GetEDep() const { return fTotE; }
+  //New---------------------------------------
+  G4double Getedep() const { return fedep; }
+
+  G4double GetTime() const { return ftime; } 
+  
   //G4double GetEDepE() const { return fTotEljin; }
   G4int GetAbsorptionCount() const { return fAbsorptionCount; }
   G4int GetBoundaryAbsorptionCount() const { return fBoundaryAbsorptionCount; }
@@ -135,6 +143,9 @@ class LXeEventAction : public G4UserEventAction
 
   G4double fTotE;
   G4double fTotEljin;
+
+  G4double fedep;
+  G4double ftime;
 
   // These only have meaning if totE > 0
   // If totE = 0 then these won't be set by EndOfEventAction

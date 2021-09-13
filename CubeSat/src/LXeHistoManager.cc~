@@ -90,6 +90,17 @@ void LXeHistoManager::Book()
   analysisManager->CreateH1(
     "E dep", "energy deposition in scintillator per event", nbins, vmin, vmax);
 
+  // 8
+  analysisManager->CreateH1("hits per event1", "hits per event1", nbins, vmin,
+                            vmax);
+  // 9
+  analysisManager->CreateH1("hits per event2", "hits per event2", nbins, vmin,
+                            vmax);
+
+  // 10
+  analysisManager->CreateH1("hits per event3", "hits per event3", nbins, vmin,
+                            vmax);
+
   // Create all histograms as inactivated
   for(G4int i = 0; i < analysisManager->GetNofH1s(); ++i)
   {

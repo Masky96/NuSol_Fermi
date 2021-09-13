@@ -47,7 +47,6 @@ LXePMTHit::LXePMTHit()
   , fPhysVol(nullptr)
   , fDrawit(false)
   , fedep(0.)
-  , ftime(0.)
 {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -64,7 +63,6 @@ LXePMTHit::LXePMTHit(const LXePMTHit& right)
   fPhysVol   = right.fPhysVol;
   fDrawit    = right.fDrawit;
   fedep      = right.fedep;
-  ftime      = right.ftime;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -76,7 +74,6 @@ const LXePMTHit& LXePMTHit::operator=(const LXePMTHit& right)
   fPhysVol   = right.fPhysVol;
   fDrawit    = right.fDrawit;
   fedep      = right.fedep;
-  ftime      = right.ftime;
   return *this;
 }
 

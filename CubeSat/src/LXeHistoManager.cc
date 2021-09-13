@@ -66,6 +66,14 @@ void LXeHistoManager::Book()
 
   // 0
   analysisManager->CreateH1("0", "dummy", nbins, vmin, vmax);
+  //1 New 
+  analysisManager->CreateH1("hits per event", "hits per event", nbins, vmin, vmax);
+  //2
+   analysisManager->CreateH1("energy dep per hit", "energy dep per hit", nbins, vmin, vmax);
+  //3
+   analysisManager->CreateH1("time of each hit","time of each hit", nbins, vmin, vmax);
+   
+  /*
   // 1
   analysisManager->CreateH1("hits per event", "hits per event", nbins, vmin,
                             vmax);
@@ -100,7 +108,7 @@ void LXeHistoManager::Book()
   // 10
   analysisManager->CreateH1("hits per event3", "hits per event3", nbins, vmin,
                             vmax);
-
+  */
   // Create all histograms as inactivated
   for(G4int i = 0; i < analysisManager->GetNofH1s(); ++i)
   {

@@ -80,6 +80,9 @@ LXeEventAction::LXeEventAction(const LXeDetectorConstruction* det)
   fTotE                    = 0.0;
   fTotEljin                = 0.0;
 
+  fedep                    = 0.0;
+  ftime                    = 0.0;
+
   fConvPosSet = false;
   fEdepMax    = 0.0;
 
@@ -111,6 +114,9 @@ void LXeEventAction::BeginOfEventAction(const G4Event*)
   fTotE                    = 0.0;
   fTotEljin                = 0.0;
 
+  fedep                    = 0.0;
+  ftime                    = 0.0;
+
   fConvPosSet = false;
   fEdepMax    = 0.0;
 
@@ -123,7 +129,7 @@ void LXeEventAction::BeginOfEventAction(const G4Event*)
     fPMTCollID = SDman->GetCollectionID("pmtHitCollection");
 
   if(fEljinCollID < 0)
-    fEljinCollID = SDman->GetcollecitonID("eljinCollection");
+    fEljinCollID = SDman->GetCollectionID("eljinCollection");
 
 
 }
@@ -157,7 +163,7 @@ void LXeEventAction::EndOfEventAction(const G4Event* anEvent)
 
   LXeScintHitsCollection* scintHC = nullptr;
   LXePMTHitsCollection* pmtHC     = nullptr;
-  LXeEljinHitsColleciton* eljinHC - nullptr;
+  LXeEljinHitsCollection* eljinHC = nullptr;
   G4HCofThisEvent* hitsCE         = anEvent->GetHCofThisEvent();
 
   // Get the hit collections
@@ -173,7 +179,7 @@ void LXeEventAction::EndOfEventAction(const G4Event* anEvent)
     }
     if(fEljinCollID >=0)
     {
-      eljinHC = (LXeEljinHitsColleciton*) (hitsCE->GetHC(fEljinCollID));
+      eljinHC = (LXeEljinHitsCollection*) (hitsCE->GetHC(fEljinCollID));
     }
  
   }
@@ -201,7 +207,7 @@ void LXeEventAction::EndOfEventAction(const G4Event* anEvent)
       }
     }
 
-    G4AnalysisManager::Instance()->FillH1(7, fTotE);
+    //G4AnalysisManager::Instance()->FillH1(7, fTotE);
 
     if(fTotE == 0.)
     {
@@ -262,14 +268,16 @@ void LXeEventAction::EndOfEventAction(const G4Event* anEvent)
     // Gather info from all PMTs
     for(size_t i = 0; i < pmts; ++i)
     {
-      fHitCount += (*pmtHC)[i]->GetPhotonCount();
-      /* 
-      if(i>1)
-	{
-	  fHitCount_3 +=(*pmtHC)[i]->GetPhotonCount();
-	}
-      */
+
+
+      G4double edep1;
+      edep1 = (*pmtHC)[i]->Getedep();
+    
+      G4double time;
+      time = (*pmtHC)[i]->GetTime();
       
+      fHitCount += (*pmtHC)[i]->GetPhotonCount();
+      /*
       reconPos += (*pmtHC)[i]->GetPMTPos() * (*pmtHC)[i]->GetPhotonCount();
       if((*pmtHC)[i]->GetPhotonCount() >= fPMTThreshold)
       {
@@ -279,34 +287,30 @@ void LXeEventAction::EndOfEventAction(const G4Event* anEvent)
       {  // wasn't above the threshold, turn it back off
         (*pmtHC)[i]->SetDrawit(false);
       }
+      */
+ 
+    G4AnalysisManager::Instance()->FillH1(2, edep1);
+    G4AnalysisManager::Instance()->FillH1(3, time);
     }
+    /*
+      G4double edep1;
+      edep1 = (*pmtHC)[2]->Getedep();
+      //fedep += edep;
 
-    fHitCount_1 += (*pmtHC)[0]->GetPhotonCount();
-    fHitCount_2 += (*pmtHC)[1]->GetPhotonCount();
-    fHitCount_3 += (*pmtHC)[2]->GetPhotonCount();
-    
+      G4double time;
+
+      time = (*pmtHC)[2]->GetTime();
+      //ftime += time;
+      */
+    fHitCount_1 = (*pmtHC)[0]->GetPhotonCount();
+    fHitCount_2 = (*pmtHC)[1]->GetPhotonCount();
+    fHitCount_3 = (*pmtHC)[2]->GetPhotonCount();
+
     
     G4AnalysisManager::Instance()->FillH1(1, fHitCount);
-    G4AnalysisManager::Instance()->FillH1(2, fPMTsAboveThreshold);
-
-    if(fHitCount > 0)
-    {  // don't bother unless there were hits
-      reconPos /= fHitCount;
-      if(fVerbose > 0)
-      {
-        G4cout << "\tReconstructed position of hits in LXe : " << reconPos / mm
-               << G4endl;
-      }
-      fReconPos = reconPos;
-    }
-    pmtHC->DrawAllHits();
-  }
-
-  G4AnalysisManager::Instance()->FillH1(3, fPhotonCount_Scint);
-  G4AnalysisManager::Instance()->FillH1(4, fPhotonCount_Ceren);
-  G4AnalysisManager::Instance()->FillH1(5, fAbsorptionCount);
-  G4AnalysisManager::Instance()->FillH1(6, fBoundaryAbsorptionCount);
  
+  }
+    
   
   // update the run statistics
   LXeRun* run = static_cast<LXeRun*>(
@@ -323,7 +327,7 @@ void LXeEventAction::EndOfEventAction(const G4Event* anEvent)
   run->IncPhotonCount_Scint(fPhotonCount_Scint);
   run->IncPhotonCount_Ceren(fPhotonCount_Ceren);
   run->IncEDep(fTotE);
-  //run->IncEDepE(fTotEljin);
+  run->IncEDepE(fTotEljin);
   run->IncAbsorption(fAbsorptionCount);
   run->IncBoundaryAbsorption(fBoundaryAbsorptionCount);
   run->IncHitsAboveThreshold(fPMTsAboveThreshold);
