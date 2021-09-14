@@ -1,0 +1,138 @@
+Environment variable "G4FORCE_RUN_MANAGER_TYPE" enabled with value == Serial. Forcing G4RunManager type...
+
+        ############################################
+        !!! WARNING - FPE detection is activated !!!
+        ############################################
+
+**************************************************************
+ Geant4 version Name: geant4-10-07-patch-01    (5-February-2021)
+                       Copyright : Geant4 Collaboration
+                      References : NIM A 506 (2003), 250-303
+                                 : IEEE-TNS 53 (2006), 270-278
+                                 : NIM A 835 (2016), 186-225
+                             WWW : http://geant4.org/
+**************************************************************
+
+*********************************************************************************************************
+* G4Track Information:   Particle = opticalphoton,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0       50       50      -50  7.07e-06        0        0         0 scintillator initStep
+    1       50       50       30  7.07e-06        0       80        80      sphere Transportation
+    2       50       50       30  7.07e-06        0        0        80 scintillator Transportation
+    3       50       50     -113  7.07e-06        0      143       223         pmt Transportation
+    4       50       50     -113  7.07e-06        0    0.317       223   photocath Transportation
+    5       50       50     -113  7.07e-06        0        0       223         pmt Transportation
+    6       50       50     -113  7.07e-06        0    0.318       224 scintillator Transportation
+    7       50       50       30  7.07e-06        0      143       367      sphere Transportation
+    8       50       50       30  7.07e-06        0        0       367 scintillator Transportation
+    9       50       50    -37.4  7.07e-06 7.07e-06     67.4       434 scintillator OpAbsorption
+
+*********************************************************************************************************
+* G4Track Information:   Particle = opticalphoton,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0       50       50      -50  7.07e-06        0        0         0 scintillator initStep
+    1       50       50       30  7.07e-06        0       80        80      sphere Transportation
+    2       50       50       30  7.07e-06        0        0        80 scintillator Transportation
+    3       50       50     -113  7.07e-06        0      143       223         pmt Transportation
+    4       50       50     -113  7.07e-06 7.07e-06    0.317       223   photocath Transportation
+WARNING: G4VisManager::IsValidView(): Attempt to draw when no graphics system
+  has been instantiated.  Use "/vis/open" or "/vis/sceneHandler/create".
+  Alternatively, to avoid this message, suppress instantiation of vis
+  manager (G4VisExecutive) and ensure drawing code is executed only if
+  G4VVisManager::GetConcreteInstance() is non-zero.
+
+*********************************************************************************************************
+* G4Track Information:   Particle = opticalphoton,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0       50       50      -50  7.07e-06        0        0         0 scintillator initStep
+    1       50       50       30  7.07e-06        0       80        80      sphere Transportation
+    2       50       50       30  7.07e-06        0        0        80 scintillator Transportation
+    3       50       50     -113  7.07e-06        0      143       223         pmt Transportation
+    4       50       50     -113  7.07e-06 7.07e-06    0.317       223   photocath Transportation
+
+*********************************************************************************************************
+* G4Track Information:   Particle = opticalphoton,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0       50       50      -50  7.07e-06        0        0         0 scintillator initStep
+    1       50       50      2.5  7.07e-06 7.07e-06     52.5      52.5 scintillator OpAbsorption
+
+*********************************************************************************************************
+* G4Track Information:   Particle = opticalphoton,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0       50       50      -50  7.07e-06        0        0         0 scintillator initStep
+    1       50       50       30  7.07e-06        0       80        80      sphere Transportation
+    2       50       50       30  7.07e-06        0        0        80 scintillator Transportation
+    3       50       50     -113  7.07e-06        0      143       223         pmt Transportation
+    4       50       50     -113  7.07e-06 7.07e-06    0.317       223   photocath Transportation
+
+*********************************************************************************************************
+* G4Track Information:   Particle = opticalphoton,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0       50       50      -50  7.07e-06        0        0         0 scintillator initStep
+    1       50       50     28.7  7.07e-06 7.07e-06     78.7      78.7 scintillator OpAbsorption
+
+*********************************************************************************************************
+* G4Track Information:   Particle = opticalphoton,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0       50       50      -50  7.07e-06        0        0         0 scintillator initStep
+    1       50       50    -1.36  7.07e-06 7.07e-06     48.6      48.6 scintillator OpAbsorption
+
+*********************************************************************************************************
+* G4Track Information:   Particle = opticalphoton,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0       50       50      -50  7.07e-06        0        0         0 scintillator initStep
+    1       50       50     18.2  7.07e-06 7.07e-06     68.2      68.2 scintillator OpAbsorption
+
+*********************************************************************************************************
+* G4Track Information:   Particle = opticalphoton,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0       50       50      -50  7.07e-06        0        0         0 scintillator initStep
+    1       50       50       30  7.07e-06        0       80        80      sphere Transportation
+    2       50       50       30  7.07e-06        0        0        80 scintillator Transportation
+    3       50       50     -113  7.07e-06        0      143       223         pmt Transportation
+    4       50       50     -113  7.07e-06 7.07e-06    0.317       223   photocath Transportation
+
+*********************************************************************************************************
+* G4Track Information:   Particle = opticalphoton,   Track ID = 1,   Parent ID = 0
+*********************************************************************************************************
+
+Step#    X(mm)    Y(mm)    Z(mm) KinE(MeV)  dE(MeV) StepLeng TrackLeng  NextVolume ProcName
+    0       50       50      -50  7.07e-06        0        0         0 scintillator initStep
+    1       50       50       30  7.07e-06        0       80        80      sphere Transportation
+    2       50       50       30  7.07e-06        0        0        80 scintillator Transportation
+    3       50       50     -113  7.07e-06        0      143       223         pmt Transportation
+    4       50       50     -113  7.07e-06 7.07e-06    0.317       223   photocath Transportation
+
+ ======================== run summary ======================
+The run was 10 events.
+Number of hits per event:	 0.5 +- 0.1581
+Number of hits per event above threshold:	 0.5 +- 0.1581
+Number of scintillation photons per event :	 0 +- 0
+Number of Cerenkov photons per event:	 0 +- 0
+Number of absorbed photons per event :	 0.5 +- 0.1581
+Number of photons absorbed at boundary per event:	 0 +- 0
+Total energy deposition in scintillator per event:	 0.003535 +- 0.001118 keV.
+
+0 events have been kept for refreshing and/or reviewing.
+  "/vis/reviewKeptEvents" to review them one by one.
+  "/vis/enable", then "/vis/viewer/flush" or "/vis/viewer/rebuild" to see them accumulated.
+Graphics systems deleted.
+Visualization Manager deleting...
