@@ -92,7 +92,7 @@ G4bool LXeVPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
 
   LXeVPMTHit* vpmtHit = new LXeVPMTHit(thePrePV);
   
- G4double edep = aStep->GetPostStepPoint()->GetTotalEnergy();
+  G4double edep = aStep->GetTrack()->GetTotalEnergy();
 
  G4double timeV = aStep->GetTrack()->GetGlobalTime();
 

@@ -88,7 +88,7 @@ G4bool LXeVPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
    G4TouchableHistory* theTouchable =
     (G4TouchableHistory*) (aStep->GetPreStepPoint()->GetTouchable());
    
-  G4VPhysicalVolume* thePrePV = theTouchable->GetVolume(1);
+  G4VPhysicalVolume* thePrePV = theTouchable->GetVolume();
 
   LXeVPMTHit* vpmtHit = new LXeVPMTHit(thePrePV);
   

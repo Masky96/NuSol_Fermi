@@ -188,6 +188,7 @@ void LXeSteppingAction::UserSteppingAction(const G4Step* theStep)
           trackInformation->AddTrackStatusFlag(boundaryAbsorbed);
           fEventAction->IncBoundaryAbsorption();
           break;
+	  /*
         case Detection:  // Note, this assumes that the volume causing detection
                          // is the photocathode because it is the only one with
                          // non-zero efficiency
@@ -196,7 +197,7 @@ void LXeSteppingAction::UserSteppingAction(const G4Step* theStep)
           // absorbed but status was Detection
 
 
-	  /*
+	  
           G4SDManager* SDman = G4SDManager::GetSDMpointer();
           G4String sdName    = "/LXeDet/pmtSD";
           LXePMTSD* pmtSD    = (LXePMTSD*) SDman->FindSensitiveDetector(sdName);
@@ -204,8 +205,8 @@ void LXeSteppingAction::UserSteppingAction(const G4Step* theStep)
             pmtSD->ProcessHits_boundary(theStep, nullptr);
           trackInformation->AddTrackStatusFlag(hitPMT);
           break;
-	  */
-	  /*
+	  
+	  
           G4SDManager* SDman = G4SDManager::GetSDMpointer();
           G4String sdNameV    = "/LXeDet/vpmtSD";
           LXeVPMTSD* vpmtSD   = (LXeVPMTSD*) SDman->FindSensitiveDetector(sdNameV);
@@ -222,7 +223,7 @@ void LXeSteppingAction::UserSteppingAction(const G4Step* theStep)
             gpmtSD->ProcessHits_boundary(theStep, nullptr);
           trackInformation->AddTrackStatusFlag(hitPMT);
           break;
-	  */
+	  
 
 
 
@@ -232,6 +233,7 @@ void LXeSteppingAction::UserSteppingAction(const G4Step* theStep)
 
 
 	}
+      */
         case FresnelReflection:
         case TotalInternalReflection:
         case LambertianReflection:

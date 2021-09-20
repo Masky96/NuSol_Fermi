@@ -14,7 +14,7 @@
 // * regarding  this  software system or assume any liability for its *
 // * use.  Please see the license in the file  LICENSE  and URL above *
 // * for the full disclaimer and the limitation of liability.         *
-// *                                                                  *
+// *                                                         
 // * This  code  implementation is the result of  the  scientific and *
 // * technical work of the GEANT4 collaboration.                      *
 // * By using,  copying,  modifying or  distributing the software (or *
@@ -47,8 +47,8 @@ class LXeMainVolume : public G4PVPlacement
                 LXeDetectorConstruction* c);
 
   //G4LogicalVolume* GetLogPhotoCath() { return fPhotocath_log; }
-  G4LogicalVolume* GetLogPmtV() { return fPmtV_log; }
-  G4LogicalVolume* GetLogPmtG() { return fPmtG_log; }
+  //G4LogicalVolume* GetLogPmtV() { return fPmtV_log; }
+  //G4LogicalVolume* GetLogPmtG() { return fPmtG_log; }
 
   
   G4LogicalVolume* GetLogPhotocathV() { return fPhotocathV_log; }
@@ -103,8 +103,8 @@ class LXeMainVolume : public G4PVPlacement
   //G4Box* fPmt;
   //G4Box* fPhotocath;
 
-  G4Box* fPmtV;
-  G4Box* fPmtG;
+  //G4Box* fPmtV;
+  //G4Box* fPmtG;
   
   G4Box* fPhotocathV;
   G4Box* fPhotocathG;
@@ -124,8 +124,8 @@ class LXeMainVolume : public G4PVPlacement
   //G4LogicalVolume* fPhotocath_lognew;
 
   
-  G4LogicalVolume* fPmtV_log;
-  G4LogicalVolume* fPmtG_log;
+  //G4LogicalVolume* fPmtV_log;
+  //G4LogicalVolume* fPmtG_log;
   
   G4LogicalVolume* fPhotocathV_log;
   G4LogicalVolume* fPhotocathG_log;

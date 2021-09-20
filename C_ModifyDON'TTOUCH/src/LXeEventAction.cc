@@ -31,7 +31,7 @@
 #include "LXeEventAction.hh"
 
 #include "LXeDetectorConstruction.hh"
-#include "LXeHistoManager.hh"
+//#include "LXeHistoManager.hh"
 //#include "LXePMTHit.hh"
 #include "LXeRun.hh"
 #include "LXeScintHit.hh"
@@ -71,13 +71,13 @@ LXeEventAction::LXeEventAction(const LXeDetectorConstruction* det)
   , fGPMTCollID(-1)
 {
   fEventMessenger = new LXeEventMessenger(this);
-
+  /*
   fHitCount                = 0;
   
   fHitCount_1               =0;
   fHitCount_2               =0;
   fHitCount_3               =0;
-
+  */
   
   fPhotonCount_Scint       = 0;
   fPhotonCount_Ceren       = 0;
@@ -89,10 +89,6 @@ LXeEventAction::LXeEventAction(const LXeDetectorConstruction* det)
   fTotEV                 = 0.0;
   fTotEG                 = 0.0;
   
-  
-
-  //fedep                    = 0.0;
-  //ftime                    = 0.0;
 
   fConvPosSet = false;
   fEdepMax    = 0.0;
@@ -108,13 +104,14 @@ LXeEventAction::~LXeEventAction() { delete fEventMessenger; }
 
 void LXeEventAction::BeginOfEventAction(const G4Event*)
 {
+  /*
   fHitCount                = 0;
 
   
   fHitCount_1               =0;
   fHitCount_2               =0;
   fHitCount_3               =0;
-
+  */
 
 
   
@@ -130,10 +127,6 @@ void LXeEventAction::BeginOfEventAction(const G4Event*)
 
 
 
-  
-  //fedep                    = 0.0;
-  //ftime                    = 0.0;
-
   fConvPosSet = false;
   fEdepMax    = 0.0;
 
@@ -142,8 +135,6 @@ void LXeEventAction::BeginOfEventAction(const G4Event*)
   G4SDManager* SDman = G4SDManager::GetSDMpointer();
   if(fScintCollID < 0)
     fScintCollID = SDman->GetCollectionID("scintCollection");
-  //if(fPMTCollID < 0)
-  //fPMTCollID = SDman->GetCollectionID("pmtHitCollection");
   //New 
   if(fEljinCollID < 0)
     fEljinCollID = SDman->GetCollectionID("eljinCollection");
@@ -202,18 +193,11 @@ void LXeEventAction::EndOfEventAction(const G4Event* anEvent)
     {
       scintHC = (LXeScintHitsCollection*) (hitsCE->GetHC(fScintCollID));
     }
-    /*
-    if(fPMTCollID >= 0)
-    {
-      pmtHC = (LXePMTHitsCollection*) (hitsCE->GetHC(fPMTCollID));
-    }
-    */
     if(fEljinCollID >=0)
     {
       eljinHC = (LXeEljinHitsCollection*) (hitsCE->GetHC(fEljinCollID));
     }
-    
-    
+     
     //New
     if(fVPMTCollID >=0)
     {
@@ -239,6 +223,9 @@ void LXeEventAction::EndOfEventAction(const G4Event* anEvent)
     for(size_t i = 0; i < n_hit; ++i)
     {  // gather info on hits in scintillator
       edep = (*scintHC)[i]->GetEdep();
+
+      //G4AnalysisManager::Instance()->FillNtupleDColumn(0,0, edep);
+      
       fTotE += edep;
       eWeightPos +=
         (*scintHC)[i]->GetPos() * edep;  // calculate energy weighted pos
@@ -281,19 +268,16 @@ void LXeEventAction::EndOfEventAction(const G4Event* anEvent)
  if(eljinHC)
   {
     size_t n_hit = eljinHC->entries();
-    //G4ThreeVector eWeightPos(0.);
     G4double edep;
 
     for(size_t i = 0; i < n_hit; ++i)
     {  // gather info on hits in scintillator
       edep = (*eljinHC)[i]->GetEdepE(); //Take individual edeps and make them into a graph later.
+      //G4AnalysisManager::Instance()->FillNtupleDColumn(0,1, edep);
       fTotEljin += edep;
        
     }
 
-   // G4AnalysisManager::Instance()->FillH1(7, fTotEljin);
-
-  
     if(fVerbose > 0)
     {
       G4cout << "\tTotal energy deposition in scintillator : " << fTotE / keV
@@ -301,59 +285,11 @@ void LXeEventAction::EndOfEventAction(const G4Event* anEvent)
     }
   }
 
-  
-
-
- /*
-  if(pmtHC)
-  {
-    G4ThreeVector reconPos(0., 0., 0.);
-    size_t pmts = pmtHC->entries();
-    // Gather info from all PMTs
-    for(size_t i = 0; i < pmts; ++i)
-    {
-
-
-      G4double edep1;
-      edep1 = (*pmtHC)[i]->Getedep();
-    
-      G4double time;
-      time = (*pmtHC)[i]->GetTime();
-      
-      fHitCount += (*pmtHC)[i]->GetPhotonCount();
-      
-      reconPos += (*pmtHC)[i]->GetPMTPos() * (*pmtHC)[i]->GetPhotonCount();
-      if((*pmtHC)[i]->GetPhotonCount() >= fPMTThreshold)
-      {
-        ++fPMTsAboveThreshold;
-      }
-      else
-      {  // wasn't above the threshold, turn it back off
-        (*pmtHC)[i]->SetDrawit(false);
-      }
-      
- 
-    G4AnalysisManager::Instance()->FillH1(2, edep1);
-    G4AnalysisManager::Instance()->FillH1(3, time);
- 
-    }
-    
-
-    fHitCount_1 = (*pmtHC)[0]->GetPhotonCount();
-    fHitCount_2 = (*pmtHC)[1]->GetPhotonCount();
-    fHitCount_3 = (*pmtHC)[2]->GetPhotonCount();
-
-    
-//G4AnalysisManager::Instance()->FillH1(1, fHitCount);
- 
-  }
-*/
 
     
 if(vpmtHC)
   {
     size_t n_hits = vpmtHC->entries();
-    //G4ThreeVector eWeightPos(0.);
     G4double edepV;
     G4double tfirstV;
     G4double timeV;
@@ -368,7 +304,8 @@ if(vpmtHC)
       tdiffV = timeV -tfirstV;
       
       fTotEV += edepV;
-       G4AnalysisManager::Instance()->FillH1(3, tdiffV);
+      //G4AnalysisManager::Instance()->FillNtupleDColumn(0,2, tdiffV);
+      //G4AnalysisManager::Instance()->FillH1(3, tdiffV);
     }
 
   }
@@ -392,7 +329,7 @@ if(vpmtHC)
 
       
       fTotEG += edepG;
-      G4AnalysisManager::Instance()->FillH1(4, tdiffG); 
+      //G4AnalysisManager::Instance()->FillH1(4, tdiffG); 
     }
 
   }
@@ -411,13 +348,13 @@ if(vpmtHC)
   // update the run statistics
   LXeRun* run = static_cast<LXeRun*>(
     G4RunManager::GetRunManager()->GetNonConstCurrentRun());
-
+  /*
   run->IncHitCount(fHitCount);
   
   run->IncHitCount1(fHitCount_1);
   run->IncHitCount2(fHitCount_2);
   run->IncHitCount3(fHitCount_3);
-
+  */
 
   
   run->IncPhotonCount_Scint(fPhotonCount_Scint);

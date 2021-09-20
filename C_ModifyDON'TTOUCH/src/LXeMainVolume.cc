@@ -119,7 +119,6 @@ LXeMainVolume::LXeMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlate,
 
   fIron_log = new G4LogicalVolume(fIronShield, G4Material::GetMaterial("Iron Shield"),"iron_log", 0,0,0);
 
-  //new G4PVPlacement(0, G4ThreeVector(0.,0,(pmt_squarez)/2.),fIron_log, "ironshield",pMotherLogical,false,0);
 
 
   //AirGap between Shield and Detector
@@ -134,14 +133,6 @@ LXeMainVolume::LXeMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlate,
   
 
   //*************************** housing and scintillator
-
-/*
-  fScint_box =
-    new G4Box("scint_box", fScint_x / 2., fScint_y / 2., fScint_z / 2.);
-  fScint_log   = new G4LogicalVolume(fScint_box, G4Material::GetMaterial("LXe"),
-                                   "scint_log", 0, 0, 0);
-*/
-
 //Changing Things Around
 
 
@@ -157,10 +148,7 @@ LXeMainVolume::LXeMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlate,
   fHousing_log = new G4LogicalVolume(
     fHousing_box, G4Material::GetMaterial("Al"), "housing_log", 0, 0, 0);
   
-/*
-  new G4PVPlacement(0, G4ThreeVector(), fScint_log, "scintillator",
-                    fHousing_log, false, 0);
-*/
+
   new G4PVPlacement(0,G4ThreeVector(0,0,0),fVeto_Log,"Veto_Scint",fHousing_log, false , 0); 
 
   new G4PVPlacement(0, G4ThreeVector(0,0,-pmt_squarez/2.), fHousing_log, "housing_al",fAirGap_log,false,0);
@@ -208,112 +196,31 @@ LXeMainVolume::LXeMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlate,
   new G4PVPlacement(0, G4ThreeVector(), fScint_log, "scintillator",
                     falumGAGG_log, false, 0);
   
-  /*
-  fVeto = new G4Box("GAGG", lcrystal_x/2., lcrystal_y/2., lcrystal_z/2.);
-
-  fVeto_Log = new G4LogicalVolume(fVeto, G4Material::GetMaterial("LXe"),"crystal_log",0,0,0);
-
-  new G4PVPlacement(0,G4ThreeVector(0,0,0),fVeto_Log,"Veto_Scint",falumGAGG_log, false , 0); 
-  */
 
 
 
-  //****************** Build PMTs
-  /*
-  G4double innerRadius_pmt   = 0.;
-  G4double height_pmt        = fD_mtl / 2.;
-  G4double startAngle_pmt    = 0.;
-  G4double spanningAngle_pmt = 360. * deg;
-  */
-  /*
-  fPmt = new G4Tubs("pmt_tube", innerRadius_pmt, fOuterRadius_pmt, height_pmt,
-                    startAngle_pmt, spanningAngle_pmt);
-  */
-  //fPmt = new G4Box("pmt_box", pmt_squarex/2., pmt_squarey/2.,0.5*mm/2.);
-
-
-  fPmtV = new G4Box("pmt_veto", pmt_squarex/2., pmt_squarey/2.,0.5*mm/2.);
-  fPmtG = new G4Box("pmt_gagg", pmt_squarex/2., pmt_squarey/2.,0.5*mm/2.);
 
   
-
-  // the "photocathode" is a metal slab at the back of the glass that
-  // is only a very rough approximation of the real thing since it only
-  // absorbs or detects the photons based on the efficiency set below
-
-  /*
-  fPhotocath = new G4Tubs("photocath_tube", innerRadius_pmt, fOuterRadius_pmt,
-                          height_pmt / 2., startAngle_pmt, spanningAngle_pmt);
-  */
-   
-  //fPhotocath = new G4Box("photocath_box",pmt_squarex/2., pmt_squarey/2.,(pmt_squarez-0.5*mm)/2.);
-
+  fPhotocathV = new G4Box("photocath_veto",pmt_squarex/2., pmt_squarey/2.,(pmt_squarez)/2.);
   
-  fPhotocathV = new G4Box("photocath_veto",pmt_squarex/2., pmt_squarey/2.,(pmt_squarez-0.5*mm)/2.);
-  
-  fPhotocathG = new G4Box("photocath_gagg",pmt_squarex/2., pmt_squarey/2.,(pmt_squarez-0.5*mm)/2.);
+  fPhotocathG = new G4Box("photocath_gagg",pmt_squarex/2., pmt_squarey/2.,(pmt_squarez)/2.);
 
   
   
-  /*
-  fPmt_log =
-    new G4LogicalVolume(fPmt, G4Material::GetMaterial("Glass"), "pmt_log");
-  */
-  
-  //fPmt_log = new G4LogicalVolume(fPmt, G4Material::GetMaterial("Glass"), "pmt_log");
-
-
-  fPmtV_log = new G4LogicalVolume(fPmtV, G4Material::GetMaterial("Glass"), "pmtV_log");
-  fPmtG_log = new G4LogicalVolume(fPmtG, G4Material::GetMaterial("Glass"), "pmtG_log");
-
-  
-  /*
-  fPhotocath_log = new G4LogicalVolume(
-    fPhotocath, G4Material::GetMaterial("Al"), "photocath_log");
-  */
-  
-  //fPhotocath_log = new G4LogicalVolume(fPhotocath, G4Material::GetMaterial("Al"), "photocath_log");
-
-
   fPhotocathV_log = new G4LogicalVolume(fPhotocathV, G4Material::GetMaterial("Al"), "photocathV_log");
   fPhotocathG_log = new G4LogicalVolume(fPhotocathG, G4Material::GetMaterial("Al"), "photocathG_log");
   
 
   
-  /*
- new G4PVPlacement(0, G4ThreeVector(0., 0., -height_pmt / 2.), fPhotocath_log,
-                    "photocath", fPmt_log, false, 0);
-  */
-  //new G4PVPlacement(0, G4ThreeVector(0.,0., -(pmt_squarez)/2.), fPhotocath_log, "photocath", fPmt_log,false,0);
 
-   new G4PVPlacement(0, G4ThreeVector(0.,0., -(pmt_squarez)/2.), fPhotocathV_log, "photocathV", fPmtV_log,false,0);
-   new G4PVPlacement(0, G4ThreeVector(0.,0., -(pmt_squarez)/2.), fPhotocathG_log, "photocathG", fPmtG_log,false,0);
-
-  //***********Arrange pmts around the outside of housing**********
-   /*
-  G4double dx = fVeto_x / fNx;
-  G4double dy = fVeto_y / fNy;
-  G4double dz = fVeto_z / fNz;
-
-  G4double x, y, z;
-  G4double xmin = -fVeto_x / 2. - dx / 2.;
-  G4double ymin = -fVeto_y / 2. - dy / 2.;
-  G4double zmin = -fVeto_z / 2. - dz / 2.;
-  G4int k       = 0;
-  
-  z = -fScint_z / 2. - height_pmt;  // front
-  PlacePMTs(fPmt_log, nullptr, x, y, dx, dy, xmin, ymin, fNx, fNy, x, y, z, k);
-  */
   G4RotationMatrix* rm_z = new G4RotationMatrix();
    rm_z->rotateY(180. * deg);
-  G4double z = fVeto_z / 2. + 1*mm/2.;  // back
-  //PlacePMTs(fPmtV_log, rm_z, x, y, dx, dy, xmin, ymin, fNx, fNy, x, y, z, k);
+   G4double z = fVeto_z / 2.;  // back
 
   
-  // PlacePMTs(fPmtG_log, rm_z, x, y, dx, dy, xmin, ymin, fNx, fNy, x, y, z, k);
-  new G4PVPlacement(rm_z, G4ThreeVector(0,0,z-0.25*mm), fPmtV_log, "pmt_veto",fHousing_log, false, 0);
+  new G4PVPlacement(rm_z, G4ThreeVector(0,0,(z+(pmt_squarez/2.))), fPhotocathV_log, "pmt_veto",fHousing_log, false, 0);
   
-  new G4PVPlacement(rm_z, G4ThreeVector(0,0,(al_GAGGz-.5*mm)/2.), fPmtG_log, "pmt_gagg",falumGAGG_log,false, 0);
+  new G4PVPlacement(rm_z, G4ThreeVector(0,0,(lcrystal_z+pmt_squarez)/2.), fPhotocathG_log, "pmt_gagg",falumGAGG_log,false, 0);
 
 
   
@@ -344,89 +251,7 @@ void LXeMainVolume::CopyValues()
   fRefl            = fConstructor->GetHousingReflectivity();
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-/*
-void LXeMainVolume::PlacePMTs(G4LogicalVolume* pmt_log, G4RotationMatrix* rot,
-                              G4double& a, G4double& b, G4double da,
-                              G4double db, G4double amin, G4double bmin,
-                              G4int na, G4int nb, G4double& x, G4double& y,
-                              G4double& z, G4int& k)
-{
-*/
-  /*  PlacePMTs : a different way to parameterize placement that does not depend
-   * on calculating the position from the copy number
-   *
-   *  pmt_log = logical volume for pmts to be placed
-   *  rot = rotation matrix to apply
-   *  a,b = coordinates to vary(ie. if varying in the xy plane then pass x,y)
-   *  da,db = value to increment a,b by
-   *  amin,bmin = start values for a,b
-   *  na,nb = number of repitions in a and b
-   *  x,y,z = just pass x,y, and z by reference (the same ones passed for a,b)
-   *  k = copy number to start with
-   *  sd = sensitive detector for pmts
-   */
 
-  /*
-  a = amin;
-  for(G4int j = 1; j <= na; ++j)
-  {
-    a += da;
-    b = bmin;
-    for(G4int i = 1; i <= nb; ++i)
-    {
-      b += db;
-      new G4PVPlacement(rot, G4ThreeVector(x, y, z), pmt_log, "pmt",
-                        fHousing_log, false, k);
-      fPmtPositions.push_back(G4ThreeVector(x, y, z));
-      ++k;
-    }
-    }
-  
-  
-  G4double lcrystal_x = 2*2.54*cm;
-  G4double lcrystal_y = 2*2.54*cm;
-  G4double lcrystal_z = 2.54*cm;
-
-  G4double air_pocketx = lcrystal_x+1*mm;
-  G4double air_pockety = lcrystal_y+1*mm;
-  //G4double air_pocketz = lcrystal_z + pmt_squarez+1*mm;
-
-  G4double althinx = air_pocketx + 1*mm;
-  G4double althiny = air_pockety + 1*mm;
-  //G4double althinz = air_pocketz + 1*mm;
-  
-  G4double fVeto_x = althinx + 2*cm;
-  G4double fVeto_y = althiny + 2*cm;
-  //G4double fScint_z = air_pocketz + 2*cm;
-  
-
-  
-  G4double al_GAGGz = lcrystal_z+1*mm;
-
-  
-  new G4PVPlacement(rot, G4ThreeVector(-fVeto_x/4.,-fVeto_y/4.,z-0.25*mm), fPmt_log, "pmt",fHousing_log, false, k);
-fPmtPositions.push_back(G4ThreeVector(-fVeto_x/4.,-fVeto_y/4.,z-0.25*mm));
- 
-new G4PVPlacement(rot, G4ThreeVector(fVeto_x/4.,fVeto_y/4.,z-0.25*mm), fPmt_log, "pmt",fHousing_log, false,1);
-fPmtPositions.push_back(G4ThreeVector(fVeto_x/4.,fVeto_y/4.,z-0.25*mm));
-  
-  
-  new G4PVPlacement(rot, G4ThreeVector(0,0,(al_GAGGz-.5*mm)/2.), fPmt_log, "pmt",falumGAGG_log,false,2);
-fPmtPositions.push_back(G4ThreeVector(0,0,(al_GAGGz-.5*mm)/2.));
-  
-
-
-
-  //new G4PVPlacement(rot, G4ThreeVector(-fVeto_x/4.,-fVeto_y/4.,z-0.25*mm), fPmtV_log, "pmt_veto",fHousing_log, false, 0);
-  new G4PVPlacement(rot, G4ThreeVector(0,0,z-0.25*mm), fPmtV_log, "pmt_veto",fHousing_log, false, 0);
-  
-  new G4PVPlacement(rot, G4ThreeVector(0,0,(al_GAGGz-.5*mm)/2.), fPmtG_log, "pmt_gagg",falumGAGG_log,false, 0);
-
- 
-  				      
-}
-*/
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void LXeMainVolume::VisAttributes()
@@ -453,8 +278,18 @@ void LXeMainVolume::SurfaceProperties()
 				    ((c_light*h_Planck)/(640*nm))*eV, ((c_light*h_Planck)/(650*nm))*eV};
   
   //**Scintillator housing properties
-  std::vector<G4double> reflectivity     = { fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl, fRefl};
-  std::vector<G4double> efficiency       = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,0.0, 0.0, 0.0, 0.0, 0.0, 0.0,0.0, 0.0, 0.0, 0.0, 0.0, 0.0,0.0, 0.0, 0.0, 0.0, 0.0, 0.0,0.0, 0.0};
+  std::vector<G4double> reflectivity     = { fRefl, fRefl, fRefl, fRefl, fRefl, fRefl,
+					     fRefl, fRefl, fRefl, fRefl, fRefl, fRefl,
+					     fRefl, fRefl, fRefl, fRefl, fRefl, fRefl,
+					     fRefl, fRefl, fRefl, fRefl, fRefl, fRefl,
+					     fRefl, fRefl};
+  
+  std::vector<G4double> efficiency       = { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+					     0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+					     0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+					     0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+					     0.0, 0.0};
+  
   G4MaterialPropertiesTable* scintHsngPT = new G4MaterialPropertiesTable();
   scintHsngPT->AddProperty("REFLECTIVITY", ephoton, reflectivity);
   scintHsngPT->AddProperty("EFFICIENCY", ephoton, efficiency);
@@ -467,9 +302,24 @@ void LXeMainVolume::SurfaceProperties()
   
   
   //**Photocathode surface properties
-  std::vector<G4double> photocath_EFF     = { 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,1.,1.};
-  std::vector<G4double> photocath_ReR     = { 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92, 1.92};
-  std::vector<G4double> photocath_ImR     = { 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69, 1.69};
+  std::vector<G4double> photocath_EFF     = { 1., 1., 1., 1., 1., 1.,
+					      1., 1., 1., 1., 1., 1.,
+					      1., 1., 1., 1., 1., 1.,
+					      1., 1., 1., 1., 1., 1.,
+					      1.,1.};
+  
+  std::vector<G4double> photocath_ReR     = { 1.92, 1.92, 1.92, 1.92, 1.92, 1.92,
+					      1.92, 1.92, 1.92, 1.92, 1.92, 1.92,
+					      1.92, 1.92, 1.92, 1.92, 1.92, 1.92,
+					      1.92, 1.92, 1.92, 1.92, 1.92, 1.92,
+					      1.92, 1.92};
+  
+  std::vector<G4double> photocath_ImR     = { 1.69, 1.69, 1.69, 1.69, 1.69, 1.69,
+					      1.69, 1.69, 1.69, 1.69, 1.69, 1.69,
+					      1.69, 1.69, 1.69, 1.69, 1.69, 1.69,
+					      1.69, 1.69, 1.69, 1.69, 1.69, 1.69,
+					      1.69, 1.69};
+  
   G4MaterialPropertiesTable* photocath_mt = new G4MaterialPropertiesTable();
   photocath_mt->AddProperty("EFFICIENCY", ephoton, photocath_EFF);
   photocath_mt->AddProperty("REALRINDEX", ephoton, photocath_ReR);
@@ -479,21 +329,51 @@ void LXeMainVolume::SurfaceProperties()
   photocath_opsurf->SetMaterialPropertiesTable(photocath_mt);
 
 
+ 
+
+
+  /*
+     std::vector<G4double> lxe_RIND  = { 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9};
+  
+    G4MaterialPropertiesTable* gagg_mt = new G4MaterialPropertiesTable();
+    gagg_mt->AddProperty("RINDEX", ephoton, lxe_RIND);
+    G4OpticalSurface* GAGG_surf = new G4OpticalSurface(
+    "gaggsurf_opsurf", glisur, polished, dielectric_dielectric);
+    GAGG_surf->SetMaterialPropertiesTable(gagg_mt);
+
+
+
+    std::vector<G4double> Eljin_Energy ={((c_light*h_Planck)/(400*nm))*eV, ((c_light*h_Planck)/(410*nm))*eV,((c_light*h_Planck)/(420*nm))*eV,((c_light*h_Planck)/(430*nm))*eV,((c_light*h_Planck)/(440*nm))*eV,((c_light*h_Planck)/(450*nm))*eV,
+		                        ((c_light*h_Planck)/(460*nm))*eV,((c_light*h_Planck)/(470*nm))*eV,((c_light*h_Planck)/(480*nm))*eV,((c_light*h_Planck)/(490*nm))*eV,((c_light*h_Planck)/(500*nm))*eV};
+
+   std::vector<G4double> Eljin_RIND  = {1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58};
+    
+    G4MaterialPropertiesTable* eljin_mt = new G4MaterialPropertiesTable();
+    gagg_mt->AddProperty("RINDEX",Eljin_Energy, Eljin_RIND);
+    G4OpticalSurface* eljin_opsurf = new G4OpticalSurface(
+    "eljin_opsurf", glisur, polished, dielectric_dielectric);
+    eljin_opsurf->SetMaterialPropertiesTable(eljin_mt);
+
+    new G4LogicalSkinSurface("GAGG_surf",  fScint_log, GAGG_surf);
+    new G4LogicalSkinSurface("Eljin_surf", fVeto_Log,  eljin_opsurf);
+  */
+
+
+
+
   
   //**Create logical skin surfaces
   new G4LogicalSkinSurface("photocath_surf", fHousing_log,
                            OpScintHousingSurface);
 
-
-  
-  //new G4LogicalSkinSurface("photocath_surf", fPhotocath_log, photocath_opsurf);
-  //new G4LogicalSkinSurface("alum_surf", falum_log,OpScintHousingSurface);
   new G4LogicalSkinSurface("photocathV_surf", fPhotocathV_log, photocath_opsurf);
   new G4LogicalSkinSurface("photocathG_surf", fPhotocathG_log, photocath_opsurf);
 
   
 
-  new G4LogicalSkinSurface("photocath_surf", falumGAGG_log,OpScintHousingSurface);
+  
+
+  new G4LogicalSkinSurface("alumGAGG_surf", falumGAGG_log, OpScintHousingSurface);
   new G4LogicalSkinSurface("alumthin_surf", falumthin_log, OpScintHousingSurface); 
 
   

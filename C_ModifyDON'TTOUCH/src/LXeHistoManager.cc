@@ -56,6 +56,7 @@ void LXeHistoManager::Book()
   analysisManager->SetFileName(fFileName);
   analysisManager->SetVerboseLevel(1);
   analysisManager->SetActivation(true);  // enable inactivation of histograms
+  analysisManager->SetNtupleMerging(true);
 
   // Define histogram indices, titles
 
@@ -64,6 +65,20 @@ void LXeHistoManager::Book()
   G4double vmin = 0.;
   G4double vmax = 100.;
 
+  
+  ntupleID = analysisManager->CreateNtuple("Example", "Example Background");
+
+  analysisManager->CreateNtupleDColumn(ntupleID, "Veto_Edep");
+  analysisManager->CreateNtupleDColumn(ntupleID, "GAGG_Edep");
+
+  analysisManager->CreateNtupleDColumn(ntupleID, "Veto_Time");
+  analysisManager->CreateNtupleDColumn(ntupleID, "GAGG_Time");
+  
+
+
+
+
+  
   // 0
   analysisManager->CreateH1("0", "dummy", nbins, vmin, vmax);
   //1 New 

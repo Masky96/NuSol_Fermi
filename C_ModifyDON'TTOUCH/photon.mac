@@ -7,6 +7,7 @@
 /analysis/h1/set  1 10 0 40000
 /analysis/h1/set  2 10 0 10 eV
 /analysis/h1/set  3 100 0 100 ns
+/analysis/h1/set  4 100 0 100 ns
 #/analysis/h1/set 3 16 300 620 nm
 
 

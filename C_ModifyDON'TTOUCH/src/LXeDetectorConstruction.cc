@@ -220,9 +220,9 @@ void LXeDetectorConstruction::DefineMaterials()
   // Set the Birks Constant for the LXe scintillator
   fGAGG->GetIonisation()->SetBirksConstant(0.126 * mm / MeV);
   fLXe->GetIonisation()->SetBirksConstant(0.126 * mm / MeV);
+ 
 
-
-
+ 
   //Glass Material Properties for the PMT portion
   
   std::vector<G4double> glass_RIND      = { 1.49, 1.49, 1.49, 1.49, 1.49,
@@ -302,6 +302,9 @@ void LXeDetectorConstruction::DefineMaterials()
   feljin_mt->AddConstProperty("SCINTILLATIONYIELD1", 1.0);
   //feljin_mt->AddConstProperty("SCINTILLATIONYIELD2", 0.0);
   fEljin_200->SetMaterialPropertiesTable(feljin_mt);
+  
+
+  
 
 
 }
@@ -374,7 +377,7 @@ if(!fVPMT_SD.Get())
     fVPMT_SD.Put(vpmt_SD);
   }
   G4SDManager::GetSDMpointer()->AddNewDetector(fVPMT_SD.Get());
-  SetSensitiveDetector(fMainVolume->GetLogPmtV(), fVPMT_SD.Get());
+  SetSensitiveDetector(fMainVolume->GetLogPhotocathV(), fVPMT_SD.Get());
 
 
 if(!fGPMT_SD.Get())

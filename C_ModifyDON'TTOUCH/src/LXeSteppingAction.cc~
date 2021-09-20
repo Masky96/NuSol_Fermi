@@ -213,7 +213,7 @@ void LXeSteppingAction::UserSteppingAction(const G4Step* theStep)
             vpmtSD->ProcessHits_boundary(theStep, nullptr);
           trackInformation->AddTrackStatusFlag(hitPMT);
           break;
-	  */
+	  
 
 	  G4SDManager* SDman = G4SDManager::GetSDMpointer();
           G4String sdNameG    = "/LXeDet/gpmtSD";
@@ -222,7 +222,7 @@ void LXeSteppingAction::UserSteppingAction(const G4Step* theStep)
             gpmtSD->ProcessHits_boundary(theStep, nullptr);
           trackInformation->AddTrackStatusFlag(hitPMT);
           break;
-	  
+	  */
 
 
 

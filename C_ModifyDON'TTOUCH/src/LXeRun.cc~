@@ -279,8 +279,8 @@ void LXeRun::EndOfRun()
   else
     rms_enG = 0.;
 
-  G4cout << "Total energy deposition in scintillator PMT  per event:\t " << enG / eV
-         << " +- " << rms_enG / eV << " eV." << G4endl;
+  G4cout << "Total energy deposition in scintillator PMT  per event:\t " << enG/eV
+         << " +- " << rms_enG/eV << " eV." << G4endl;
   //-------------------------------------------------------------------
   G4double enV     = fTotEV / n_evt;
   G4double enV2    = fTotEV2 / n_evt;
@@ -290,8 +290,8 @@ void LXeRun::EndOfRun()
   else
     rms_enV = 0.;
 
-  G4cout << "Total energy deposition in VETO PMT  per event:\t " << enV / eV
-         << " +- " << rms_enV / eV << " eV." << G4endl;
+  G4cout << "Total energy deposition in VETO PMT  per event:\t " << enV/eV 
+         << " +- " << rms_enV/eV  << " eV." << G4endl;
 
 
 

@@ -81,16 +81,15 @@ G4bool LXeGPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
      G4OpticalPhoton::OpticalPhotonDefinition())
     return false;
   
-  // G4double edep = aStep->GetTrack()->GetKineticEnergy();
 
   G4TouchableHistory* theTouchable =
     (G4TouchableHistory*) (aStep->GetPreStepPoint()->GetTouchable());
   
-  G4VPhysicalVolume* thePrePV = theTouchable->GetVolume();
+  G4VPhysicalVolume* thePrePV = theTouchable->GetVolume(0);
 
   LXeGPMTHit* gpmtHit = new LXeGPMTHit(thePrePV);
-
-  G4double edep = aStep->GetTrack()->GetKineticEnergy();
+  
+  G4double edep = aStep->GetTrack()->GetTotalEnergy();
   G4double timeG = aStep->GetTrack()->GetGlobalTime();
 
   gpmtHit->SetEdepG(edep);

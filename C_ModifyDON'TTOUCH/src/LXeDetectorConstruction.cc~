@@ -237,7 +237,7 @@ void LXeDetectorConstruction::DefineMaterials()
 					    420. * cm, 420. * cm, 420. * cm, 420. * cm, 420. * cm, 420. * cm,
 					    420. * cm, 420. * cm, 420. * cm, 420. * cm, 420. * cm, 420. * cm,
 					    420. * cm, 420. * cm};
-  
+  /*
   std::vector<G4double> glass_EFF       = { 1., 1., 1., 1., 1., 1.,
 					    1., 1., 1., 1., 1., 1.,
 					    1., 1., 1., 1., 1., 1.,
@@ -251,17 +251,17 @@ void LXeDetectorConstruction::DefineMaterials()
 					    1.39, 1.39, 1.39, 1.39, 1.39, 1.39,
 					    1.39, 1.39};
   
-
+  */
   G4MaterialPropertiesTable* glass_mt   = new G4MaterialPropertiesTable();
   glass_mt->AddProperty("ABSLENGTH", lxe_Energy, glass_AbsLength);
   glass_mt->AddProperty("RINDEX", lxe_Energy, glass_RIND);
-  glass_mt->AddProperty("EFFICIENCY", lxe_Energy, glass_EFF);
-  glass_mt->AddProperty("IMAGINARYRINDEX",lxe_Energy , glass_ImR);
+  // glass_mt->AddProperty("EFFICIENCY", lxe_Energy, glass_EFF);
+  //glass_mt->AddProperty("IMAGINARYRINDEX",lxe_Energy , glass_ImR);
   fGlass->SetMaterialPropertiesTable(glass_mt);
-  /*
-  G4OpticalSurface* pmt_opsurf = new G4OpticalSurface("pmt_opsurf", glisur, polished, dielectric_metal);
-  pmt_opsurf->SetMaterialPropertiesTable(glass_mt);
-  */
+  
+  //G4OpticalSurface* pmt_opsurf = new G4OpticalSurface("pmt_opsurf", glisur, polished, dielectric_metal);
+  //pmt_opsurf->SetMaterialPropertiesTable(glass_mt);
+  
   
 
 
@@ -313,9 +313,9 @@ G4VPhysicalVolume* LXeDetectorConstruction::Construct()
 
 
   // The experimental hall walls are all 1m away from housing walls
-  G4double expHall_x = fD_mtl + 2. * m;
-  G4double expHall_y = fD_mtl + 2. * m;
-  G4double expHall_z = fD_mtl + 2. * m;
+  G4double expHall_x = 1*mm + 2. * m;
+  G4double expHall_y = 1*mm + 2. * m;
+  G4double expHall_z = 1*mm + 2. * m;
 
   // Create experimental hall
   fExperimentalHall_box =
@@ -344,38 +344,7 @@ void LXeDetectorConstruction::ConstructSDandField()
   if(!fMainVolume)
     return;
 
-  /*
-  // PMT SD
 
-  LXePMTSD* pmt = fPmt_SD.Get();
-  if(!pmt)
-  {
-    // Created here so it exists as pmts are being placed
-    G4cout << "Construction /LXeDet/pmtSD" << G4endl;
-    LXePMTSD* pmt_SD = new LXePMTSD("/LXeDet/pmtSD");
-    fPmt_SD.Put(pmt_SD);
-
-    pmt_SD->InitPMTs();
-    pmt_SD->SetPmtPositions(fMainVolume->GetPmtPositions());
-  }
-  else
-  {
-    pmt->InitPMTs();
-    pmt->SetPmtPositions(fMainVolume->GetPmtPositions());
-  }
-  G4SDManager::GetSDMpointer()->AddNewDetector(fPmt_SD.Get());
-  // sensitive detector is not actually on the photocathode.
-  // processHits gets done manually by the stepping action.
-  // It is used to detect when photons hit and get absorbed & detected at the
-  // boundary to the photocathode (which doesn't get done by attaching it to a
-  // logical volume.
-  // It does however need to be attached to something or else it doesn't get
-  // reset at the begining of events
-
-  SetSensitiveDetector(fMainVolume->GetLogPhotoCath(), fPmt_SD.Get());
-
-
-  */
 //This is delacring the GAGG crystal as a sensitive detector
   if(!fScint_SD.Get())
   {
@@ -405,7 +374,7 @@ if(!fVPMT_SD.Get())
     fVPMT_SD.Put(vpmt_SD);
   }
   G4SDManager::GetSDMpointer()->AddNewDetector(fVPMT_SD.Get());
-  SetSensitiveDetector(fMainVolume->GetLogPmtV(), fVPMT_SD.Get());
+  SetSensitiveDetector(fMainVolume->GetLogPhotocathV(), fVPMT_SD.Get());
 
 
 if(!fGPMT_SD.Get())
@@ -415,7 +384,7 @@ if(!fGPMT_SD.Get())
     fGPMT_SD.Put(gpmt_SD);
   }
   G4SDManager::GetSDMpointer()->AddNewDetector(fGPMT_SD.Get());
-  SetSensitiveDetector(fMainVolume->GetLogPmtG(), fGPMT_SD.Get());
+  SetSensitiveDetector(fMainVolume->GetLogPhotocathG(), fGPMT_SD.Get());
   
 
 
@@ -435,13 +404,13 @@ void LXeDetectorConstruction::SetDimensions(G4ThreeVector dims)
 }
 */
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-
+/*
 void LXeDetectorConstruction::SetHousingThickness(G4double d_mtl)
 {
   fD_mtl = d_mtl;
   G4RunManager::GetRunManager()->ReinitializeGeometry();
 }
-
+*/
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 void LXeDetectorConstruction::SetNX(G4int nx)
@@ -479,27 +448,27 @@ void LXeDetectorConstruction::SetPMTRadius(G4double outerRadius_pmt)
 void LXeDetectorConstruction::SetDefaults()
 {
   // Resets to default values
-  fD_mtl = 1* mm;
+  //fD_mtl= 1* mm;
   /*
   fScint_x = 17.8 * cm;
   fScint_y = 17.8 * cm;
   fScint_z = 22.6 * cm;
   */
-  fNx = 2;
-  fNy = 2;
-  fNz = 0;
+  //fNx = 2;
+  //fNy = 2;
+  //fNz = 0;
 
-  fOuterRadius_pmt = 2.3 * mm;
+  //fOuterRadius_pmt = 2.3 * mm;
 
   //fSphereOn = true;
   fRefl     = 1.0;
 
-  fNfibers      = 15;
+  //fNfibers      = 15;
   //fWLSslab      = false;
   fMainVolumeOn = true;
   fMainVolume   = nullptr;
-  //fSlab_z       = 2.5 * mm;
-
+  //Fslab_z       = 2.5 * mm;
+  /*
   G4UImanager::GetUIpointer()->ApplyCommand(
     "/LXe/detector/scintYieldFactor 1.");
 
@@ -507,9 +476,10 @@ void LXeDetectorConstruction::SetDefaults()
     fLXe_mt->AddConstProperty("SCINTILLATIONYIELD", 12000. / MeV);
   if(fMPTPStyrene)
     fMPTPStyrene->AddConstProperty("SCINTILLATIONYIELD", 10. / keV);
+  */
 }
 
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+//....Ooooo0oooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 /*
 void LXeDetectorConstruction::SetSphereOn(G4bool b)
 {

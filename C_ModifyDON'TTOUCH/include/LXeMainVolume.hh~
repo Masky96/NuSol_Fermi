@@ -47,9 +47,12 @@ class LXeMainVolume : public G4PVPlacement
                 LXeDetectorConstruction* c);
 
   //G4LogicalVolume* GetLogPhotoCath() { return fPhotocath_log; }
-  G4LogicalVolume* GetLogPmtV() { return fPmtV_log; }
-  G4LogicalVolume* GetLogPmtG() { return fPmtG_log; }
+  //G4LogicalVolume* GetLogPmtV() { return fPmtV_log; }
+  //G4LogicalVolume* GetLogPmtG() { return fPmtG_log; }
 
+  
+  G4LogicalVolume* GetLogPhotocathV() { return fPhotocathV_log; }
+  G4LogicalVolume* GetLogPhotocathG() { return fPhotocathG_log; }
   
   G4LogicalVolume* GetLogScint() { return fScint_log; }
   G4LogicalVolume* GetLogVeto() { return fVeto_Log; }
