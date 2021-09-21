@@ -68,29 +68,35 @@ LXeMainVolume::LXeMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlate,
 
  
 
-  G4double lcrystal_x = 2*2.54*cm;
-  G4double lcrystal_y = 2*2.54*cm;
-  G4double lcrystal_z = 2.54*cm;
+  G4double lcrystal_x = 3*cm;
+  G4double lcrystal_y = 3*cm;
+  G4double lcrystal_z = 1*cm;
   
-  G4double pmt_squarex = 2.54*cm;
-  G4double pmt_squarey = 2.54*cm;
-  G4double pmt_squarez = 2.54*cm;
+  G4double pmt_gaggx = 3.05*cm;
+  G4double pmt_gaggy = 3.05*cm;
+  G4double pmt_gaggz = 3.6*cm;
+  
+  G4double pmt_vetox = 5.2*cm;
+  G4double pmt_vetoy = 5.2*cm;
+  G4double pmt_vetoz = 3.9*cm;
+
+  
 
   G4double air_pocketx = lcrystal_x+2*mm;
   G4double air_pockety = lcrystal_y+2*mm;
-  G4double air_pocketz = lcrystal_z + pmt_squarez+3*mm;
+  G4double air_pocketz = lcrystal_z + pmt_gaggz+3*mm;
 
   G4double al_GAGGx = lcrystal_x+1*mm;
   G4double al_GAGGy = lcrystal_y+1*mm;
-  G4double al_GAGGz = lcrystal_z+1.1*mm;
+  G4double al_GAGGz = lcrystal_z+1*mm;
   
   G4double althinx = air_pocketx + 1*mm;
   G4double althiny = air_pockety + 1*mm;
   G4double althinz = air_pocketz + 1*mm;
 
-  G4double fVeto_x = althinx + 2*cm;
-  G4double fVeto_y = althiny + 2*cm;
-  G4double fVeto_z = althinz + 2*cm;
+  G4double fVeto_x = 5.15*cm;
+  G4double fVeto_y = 5.15*cm;
+  G4double fVeto_z = 6.7*cm;
   
 /*
   G4double fVeto_x = air_pocketx + 2*cm;
@@ -109,9 +115,9 @@ LXeMainVolume::LXeMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlate,
   G4double housing_y = fVeto_y + 2. * 1*mm;
   G4double housing_z = fVeto_z + 2. * 1*mm;
 
-  G4double iron_shieldx = housing_x + 2*mm+3*cm;
-  G4double iron_shieldy = housing_y + 2*mm +3*cm;
-  G4double iron_shieldz = housing_z + pmt_squarez + 3*cm +2*mm;
+  G4double iron_shieldx = 8.3*cm;
+  G4double iron_shieldy = 8.3*cm;
+  G4double iron_shieldz = 13.7*cm;
 
   //Iron Shield Outside
   
@@ -123,7 +129,7 @@ LXeMainVolume::LXeMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlate,
 
   //AirGap between Shield and Detector
 
-  fAirGap = new G4Box("air_gap", (housing_x+2*mm)/2.,(housing_y+2*mm)/2., (housing_z+ pmt_squarez + 2*mm)/2.);
+  fAirGap = new G4Box("air_gap", (housing_x+2*mm)/2.,(housing_y+2*mm)/2., (housing_z+ pmt_vetoz + 2*mm)/2.);
 
   fAirGap_log = new G4LogicalVolume(fAirGap, G4Material::GetMaterial("Air"), "air_gap", 0,0,0);
 
@@ -151,7 +157,7 @@ LXeMainVolume::LXeMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlate,
 
   new G4PVPlacement(0,G4ThreeVector(0,0,0),fVeto_Log,"Veto_Scint",fHousing_log, false , 0); 
 
-  new G4PVPlacement(0, G4ThreeVector(0,0,-pmt_squarez/2.), fHousing_log, "housing_al",fAirGap_log,false,0);
+  new G4PVPlacement(0, G4ThreeVector(0,0,-pmt_vetoz/2.), fHousing_log, "housing_al",fAirGap_log,false,0);
 
 
   //----------------------------------------------------------------------------
@@ -179,7 +185,7 @@ LXeMainVolume::LXeMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlate,
 
   falumGAGG_log = new G4LogicalVolume(falumGAGG, G4Material::GetMaterial("Al"), "al_GAGG", 0,0,0);
 
-  new G4PVPlacement(0, G4ThreeVector(0,0,-(al_GAGGz)/2.),falumGAGG_log, "alum_gagg", fair_log,false,0);
+  new G4PVPlacement(0, G4ThreeVector(0,0,(al_GAGGz-air_pocketz+1.5*mm)/2.),falumGAGG_log, "alum_gagg", fair_log,false,0);
 
 
 
@@ -201,9 +207,9 @@ LXeMainVolume::LXeMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlate,
 
 
   
-  fPhotocathV = new G4Box("photocath_veto",pmt_squarex/2., pmt_squarey/2.,(pmt_squarez)/2.);
+  fPhotocathV = new G4Box("photocath_veto",pmt_vetox/2., pmt_vetoy/2.,(pmt_vetoz)/2.);
   
-  fPhotocathG = new G4Box("photocath_gagg",pmt_squarex/2., pmt_squarey/2.,(pmt_squarez)/2.);
+  fPhotocathG = new G4Box("photocath_gagg",pmt_gaggx/2., pmt_gaggy/2.,(pmt_gaggz)/2.);
 
   
   
@@ -218,9 +224,9 @@ LXeMainVolume::LXeMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlate,
    G4double z = fVeto_z / 2.;  // back
 
   
-  new G4PVPlacement(rm_z, G4ThreeVector(0,0,(z+(pmt_squarez/2.))), fPhotocathV_log, "pmt_veto",fHousing_log, false, 0);
+  new G4PVPlacement(rm_z, G4ThreeVector(0,0,(z+(pmt_vetoz/2.))), fPhotocathV_log, "pmt_veto",fHousing_log, false, 0);
   
-  new G4PVPlacement(rm_z, G4ThreeVector(0,0,(lcrystal_z+pmt_squarez)/2.), fPhotocathG_log, "pmt_gagg",falumGAGG_log,false, 0);
+  new G4PVPlacement(rm_z, G4ThreeVector(0,0,(lcrystal_z+pmt_gaggz)/2.), fPhotocathG_log, "pmt_gagg",falumGAGG_log,false, 0);
 
 
   

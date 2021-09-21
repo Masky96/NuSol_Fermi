@@ -329,6 +329,38 @@ void LXeMainVolume::SurfaceProperties()
   photocath_opsurf->SetMaterialPropertiesTable(photocath_mt);
 
 
+ 
+
+
+  /*
+     std::vector<G4double> lxe_RIND  = { 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9};
+  
+    G4MaterialPropertiesTable* gagg_mt = new G4MaterialPropertiesTable();
+    gagg_mt->AddProperty("RINDEX", ephoton, lxe_RIND);
+    G4OpticalSurface* GAGG_surf = new G4OpticalSurface(
+    "gaggsurf_opsurf", glisur, polished, dielectric_dielectric);
+    GAGG_surf->SetMaterialPropertiesTable(gagg_mt);
+
+
+
+    std::vector<G4double> Eljin_Energy ={((c_light*h_Planck)/(400*nm))*eV, ((c_light*h_Planck)/(410*nm))*eV,((c_light*h_Planck)/(420*nm))*eV,((c_light*h_Planck)/(430*nm))*eV,((c_light*h_Planck)/(440*nm))*eV,((c_light*h_Planck)/(450*nm))*eV,
+		                        ((c_light*h_Planck)/(460*nm))*eV,((c_light*h_Planck)/(470*nm))*eV,((c_light*h_Planck)/(480*nm))*eV,((c_light*h_Planck)/(490*nm))*eV,((c_light*h_Planck)/(500*nm))*eV};
+
+   std::vector<G4double> Eljin_RIND  = {1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58, 1.58};
+    
+    G4MaterialPropertiesTable* eljin_mt = new G4MaterialPropertiesTable();
+    gagg_mt->AddProperty("RINDEX",Eljin_Energy, Eljin_RIND);
+    G4OpticalSurface* eljin_opsurf = new G4OpticalSurface(
+    "eljin_opsurf", glisur, polished, dielectric_dielectric);
+    eljin_opsurf->SetMaterialPropertiesTable(eljin_mt);
+
+    new G4LogicalSkinSurface("GAGG_surf",  fScint_log, GAGG_surf);
+    new G4LogicalSkinSurface("Eljin_surf", fVeto_Log,  eljin_opsurf);
+  */
+
+
+
+
   
   //**Create logical skin surfaces
   new G4LogicalSkinSurface("photocath_surf", fHousing_log,
@@ -336,6 +368,8 @@ void LXeMainVolume::SurfaceProperties()
 
   new G4LogicalSkinSurface("photocathV_surf", fPhotocathV_log, photocath_opsurf);
   new G4LogicalSkinSurface("photocathG_surf", fPhotocathG_log, photocath_opsurf);
+
+  
 
   
 
