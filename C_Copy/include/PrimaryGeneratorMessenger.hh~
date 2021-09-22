@@ -1,0 +1,42 @@
+/**
+ * @file PrimaryGeneratorMessenger.hh
+ * @brief 
+ * @author John Watts
+ * @version 0.0
+ * @date 2013-08-08
+ */
+
+#ifndef PrimaryGeneratorMessenger_hh
+#define PrimaryGeneratorMessenger_hh
+
+#include "globals.hh"
+#include "G4UImessenger.hh"
+
+class G4UIdirectory;
+class G4UIcmdWithADoubleAndUnit;
+//class G4UIcmdWithAString;
+
+namespace User{
+
+  class NuSolarPrimaryGeneratorAction;
+
+  /**
+   * @brief 
+   *  Messenger for PrimaryGenerator
+   */
+  class PrimaryGeneratorMessenger: public G4UImessenger
+  {
+  public:
+    PrimaryGeneratorMessenger(NuSolarPrimaryGeneratorAction*);
+    ~PrimaryGeneratorMessenger();
+    void SetNewValue(G4UIcommand*, G4String);
+    
+  protected:
+    NuSolarPrimaryGeneratorAction* Action;
+    G4UIdirectory*               gunDir; 
+    G4UIcmdWithADoubleAndUnit*   polarCmd;
+  };
+
+}
+#endif // PrimaryGeneratorMessenger_hh
+
