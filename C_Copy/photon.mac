@@ -4,12 +4,12 @@
 #/gun/particle mu-
 #/gun/energy 1 GeV
 #/analysis/setFileName testFile
-#/analysis/h1/set  3 100 0 100 ns
-#/analysis/h1/set  4 100 0 100 ns
+#/analysis/h1/set  3 100 1 100 ms
+#/analysis/h1/set  4 10000 10 200 ns
 #/analysis/h1/set 3 16 300 620 nm
 
 /gps/particle nu_e
-/gps/energy 100 MeV
+/gps/energy 2 MeV
 /gps/pos/type Volume
 /gps/pos/shape Sphere
 /gps/pos/centre 0 0 -3.85 cm

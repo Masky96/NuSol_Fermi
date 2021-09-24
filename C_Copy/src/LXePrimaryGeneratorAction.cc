@@ -40,10 +40,10 @@
 #include "G4GeneralParticleSource.hh"
 #include "Randomize.hh"
 #include "G4ParticleGun.hh"
-#include "G4DecayPhysics.hh"
 #include "G4IonTable.hh"
 #include "G4ParticlePropertyData.hh"
-#include "G4NuclearDecay.hh"
+#include "G4Electron.hh"
+
 
 
 
@@ -72,20 +72,20 @@ LXePrimaryGeneratorAction::LXePrimaryGeneratorAction()
     energyPri=0.;
   */
 
-    
+  
   G4int n_particle = 1;
   fparticleGun     = new G4ParticleGun(n_particle);
 
-  G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-
+  // G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+  /*
   //G4String particleName;
-  fparticleGun->SetParticleDefinition(particleTable->FindParticle(particleName = "e-"));
+  fparticleGun->SetParticleDefinition(particleTable->FindParticle(particleName = "geantino"));
   // Default energy,position,momentum
-  fparticleGun->SetParticleEnergy(1*GeV);
+  fparticleGun->SetParticleEnergy(0*GeV);
   fparticleGun->SetParticleTime(0.0*ns);
-  fparticleGun->SetParticlePosition(G4ThreeVector(0, 0., -20. * cm));
+  fparticleGun->SetParticlePosition(G4ThreeVector(0, 0., -3.85 * cm));
   fparticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
- 
+  */
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -100,6 +100,23 @@ LXePrimaryGeneratorAction::~LXePrimaryGeneratorAction()
 
 void LXePrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
+  G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+  
+  fparticleGun->SetParticleDefinition(particleTable->FindParticle(particleName = "e-"));
+  // Default energy,position,momentum
+  fparticleGun->SetParticleEnergy(60*MeV);
+  fparticleGun->SetParticleTime(0.0*ns);
+  fparticleGun->SetParticlePosition(G4ThreeVector(0, 0., -2*m));
+  fparticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
+  fparticleGun->GeneratePrimaryVertex(anEvent);
+
+  fparticleGun->SetParticleDefinition(particleTable->FindParticle(particleName = "e-"));
+  // Default energy,position,momentum
+  fparticleGun->SetParticleEnergy(60*MeV);
+  fparticleGun->SetParticleTime(2000*ns);
+  fparticleGun->SetParticlePosition(G4ThreeVector(0, 0., -2*m));
+  fparticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
+
 
   
   fparticleGun->GeneratePrimaryVertex(anEvent);
@@ -146,25 +163,13 @@ void LXePrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     //Program control
    
     G4int neutrinoprocess = 1;  //0 for cosmic rays, 1 for neutrino events
-    G4int galliumprocess =0;  // 0 for Gallium-69, 1 for Gallium-71
+    G4int galliumprocess =1;  // 0 for Gallium-69, 1 for Gallium-71
     G4int gammaprocess = 1;  // 69Ge:  0 for ground state, 1 for 87 keV gamma, 2 for 397 keV gamma
                              // 71Ge:  0 for ground state, 1 for 198 keV excited state
                              // 71Ge:  2 is for firing the 174 keV state
 
     G4int fireparticle = 0; 
-    // Normally both are fired (fireparticle = 0)
-    // if fireparticle is 0, then fire both particles
-    // if fireparticle is 1, then fire the electron only
-    // if fireparticle is 2, then fire the excited germanium state only
-    //Note that if gammaprocess is 0, we will fire the ground state
-
-
-    //For background studies, set neutrinoprocess equal to 0 to skip the following
-    //but edit phys.mac accordingly
-
-    //    G4double energy1, energy2;
-    //    G4double p1x, p1y, p1z, p2x, p2y, p2z;
- 
+   
 
     G4double atomicmassunit = 931.4940954*MeV;
    
@@ -178,8 +183,7 @@ void LXePrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       G4double delay = 0.;            //the half-life of the excited germanium state
       G4double ionCharge = 1.*eplus;  //We go from a neutral gallium to a charged germanium
 
-      //G4double pc1;
-      //G4double wx, wy, wz, norm1;
+   
       G4int Z, A;
 
       //particle and mass refer to either the electron or positron in each of the decays.  
@@ -282,7 +286,11 @@ void LXePrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
       germanium -> SetPDGStable(false);
       germanium -> SetPDGLifeTime(delay);
-      
+
+
+
+
+    
       // G4cout << "Delay for Ge(198 keV) state is " << delay << G4endl;
  
       // G4double massge = germanium->GetPDGMass();
@@ -303,12 +311,17 @@ void LXePrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	massge = massge0;
       }
 
-     
+   
+
+
+
       //neutrino + particle0 (gallium) --> germanium + e- ; 
       //Geant will facilitate germanium --> germanium0 + photon
 
       //*********************************************
 
+
+      
       //Calculate boost quantities to get to the lab frame (common to all cases)
 
       //Note that the target Gallium is at rest in the lab frame, but the center of mass is not.
@@ -354,12 +367,7 @@ void LXePrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       
       // PCCM IS THE BACK-TO-BACK MOMENTUM FOR MASS AND MASS1 IN THEIR CENTER OF MASS FRAME
 
-      // G4cout << "RobTest4:  invmass^2 is " << invariantmass*invariantmass << " and massinv is " << (mass + mass1)*(mass + mass1) << G4endl;
-
       pccm = (invariantmass*invariantmass - (mass1 + mass)*(mass1 + mass));
-      // if (pccm < 0 ) {
-      //	G4cout << "RobAlert1: Negative momentum!!!" << " Energy is " << energyPri << G4endl;
-      //}
       pccm = pccm*(invariantmass*invariantmass - (mass1 - mass)*(mass1 - mass));
       pccm = sqrt(pccm) / (2.*invariantmass);
 
@@ -406,31 +414,7 @@ void LXePrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       py=py/norm;
       pz=pz/norm;
 
-      kineticenergy = energy0 - mass;
-      //if (kineticenergy < 0) {
-      //	G4cout << "RobAlert3: KE of mass < 0 in the lab frame " << kineticenergy << "Particle is " << particle->GetParticleName()<< G4endl;
-      //}
-
-      //SetParticleEnergy sets the kinetic energy
-      //SetParticleMomentum requires that the G4ThreeVector is a unit vector
-      //Note:  We now are using a second particle gun, fparticleGun, for the neutrino by-products
-     
-      //Set the characteristics of the electron
-
-      //Fire an ELECTRON with the particle gun if fireparticle is 0 or 1
-     
-      if (fireparticle != 2) {
-	fparticleGun->SetParticleDefinition(particle);
-	fparticleGun->SetParticleMomentumDirection(G4ThreeVector(px,py,pz));
-	fparticleGun->SetParticleEnergy(kineticenergy);
-	fparticleGun->SetParticlePosition(GunPosition);
-	fparticleGun->SetParticleTime(0.0*ns);
-	fparticleGun->GeneratePrimaryVertex(anEvent); 
-      }
-
-      //      G4cout << "energy of the electron is " << kineticenergy << G4endl;
-
-      //In all cases, mass1 is the invariant mass of everything besides the electron.
+      
      
       ux=-ux;
       uy=-uy;
@@ -438,81 +422,79 @@ void LXePrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       energy = sqrt ( pccm*pccm + mass1*mass1 );
       
       //momentum for mass1
-      px=pccm*ux;
-      py=pccm*uy;
-      pz=pccm*uz;
+      //px=pccm*ux;
+      //py=pccm*uy;
+      //pz=pccm*uz;
 
       //boost mass1 into the lab frame  (energy0 and pz are now lab frame variables)
-      energy0 = gamma*energy + gamma*beta*pz;
-      pz = gamma*beta*energy + gamma*pz;  
+      //energy0 = gamma*energy + gamma*beta*pz;
+      //pz = gamma*beta*energy + gamma*pz;  
 
       
       //Comment this out if only the ground state should be fired
+      
       norm = px*px + py*py + pz*pz;
       norm = sqrt(norm);
       px = px/norm;
       py = py/norm;
       pz = pz/norm;
-
-      kineticenergy = energy0 - mass1;
-
-      //The germanium will be stopped prior to its decay
-      //we try and fire it with zero kinetic energy
-      //to see if this impacts the double pulse event topology
       
-      //kineticenergy = 0.;
+      //G4double kineticenergyGe = energy0 - mass1;
 
-      //Fire the excited germanium state if fireparticle is 0 or 2
+      G4double pxGer = 0;
+      G4double pyGer = 0;
+      G4double pzGer = 0;
+      G4double kineticenergyGer = 0;
+      
+      fparticleGun->SetParticleDefinition(particle);
+      fparticleGun->SetParticleMomentumDirection(G4ThreeVector(px,py,pz));
+      fparticleGun->SetParticleEnergy(kineticenergy);
+      fparticleGun->SetParticlePosition(GunPosition);
+      fparticleGun->SetParticleTime(0.0*ns);
+      fparticleGun->GeneratePrimaryVertex(anEvent);
+      
+      G4double lifetime = germanium ->GetPDGLifeTime();
 
-      if (fireparticle != 1) {
-
-	if (fireparticle==2 && galliumprocess == 1 && gammaprocess == 2) {
-	  px = 0;
-	  py = 0;
-	  pz = 0;
-	  kineticenergy = 0;
-	}
-
-	fparticleGun->SetParticleDefinition(germanium);
-	fparticleGun->SetParticleMomentumDirection(G4ThreeVector(px,py,pz));
-	fparticleGun->SetParticleEnergy(kineticenergy);
-	fparticleGun->SetParticlePosition(GunPosition);
-	fparticleGun->SetParticleTime(0.0*ns);
-	//	fparticleGun->SetParticleCharge(ionCharge);
-	fparticleGun->GeneratePrimaryVertex(anEvent); 
-      }
-
+      G4cout << "Delay of the Germanium Atom is: " << lifetime*ns << G4endl;
+      
+      fparticleGun->SetParticleDefinition(germanium);
+      fparticleGun->SetParticleMomentumDirection(G4ThreeVector(pxGer,pyGer,pzGer));
+      fparticleGun->SetParticleEnergy(kineticenergyGer);
+      fparticleGun->SetParticlePosition(GunPosition);
+      fparticleGun->SetParticleTime(0.0*ns);
+      
+      fparticleGun->GeneratePrimaryVertex(anEvent);
     }
   */
-  }
+}
   
   
 
-// void LXePrimaryGeneratorAction::SetOptPhotonPolar(G4double angle)
-// {
-    /*
-    if (particleGun->GetParticleDefinition()->GetParticleName() != "opticalphoton")
-      {
-	G4cout << "--> warning from NuSolarPrimaryGeneratorAction::SetOptPhotonPolar() :"
-	  "the particleGun is not an opticalphoton" << G4endl;
-	return;
-      }
-           
-    G4ThreeVector normal (1., 0., 0.);
-    G4ThreeVector kphoton = particleGun->GetParticleMomentumDirection();
-    G4ThreeVector product = normal.cross(kphoton); 
-    G4double modul2       = product*product;
- 
-    G4ThreeVector e_perpend (0., 0., 1.);
-    if (modul2 > 0.) {
-      e_perpend = (1./sqrt(modul2))*product;
-    } 
-    G4ThreeVector e_paralle    = e_perpend.cross(kphoton);
+void LXePrimaryGeneratorAction::SetOptPhotonPolar(G4double angle)
+{
     
-    G4ThreeVector polar = cos(angle)*e_paralle + sin(angle)*e_perpend;
-    particleGun->SetParticlePolarization(polar);
-    */
-//  }
+  if (particleGun->GetParticleDefinition()->GetParticleName() != "opticalphoton")
+    {
+      G4cout << "--> warning from NuSolarPrimaryGeneratorAction::SetOptPhotonPolar() :"
+	"the particleGun is not an opticalphoton" << G4endl;
+      return;
+    }
+           
+  G4ThreeVector normal (1., 0., 0.);
+  G4ThreeVector kphoton = particleGun->GetParticleMomentumDirection();
+  G4ThreeVector product = normal.cross(kphoton); 
+  G4double modul2       = product*product;
+ 
+  G4ThreeVector e_perpend (0., 0., 1.);
+  if (modul2 > 0.) {
+    e_perpend = (1./sqrt(modul2))*product;
+  } 
+  G4ThreeVector e_paralle    = e_perpend.cross(kphoton);
+    
+  G4ThreeVector polar = cos(angle)*e_paralle + sin(angle)*e_perpend;
+  particleGun->SetParticlePolarization(polar);
+    
+}
 
   
 

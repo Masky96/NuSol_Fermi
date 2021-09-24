@@ -82,7 +82,7 @@ void LXeGPMTSD::Initialize(G4HCofThisEvent* hitsCE)
 G4bool LXeGPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
  
 
-  if(aStep->GetTrack()->GetDefinition() != G4OpticalPhoton::OpticalPhotonDefinition() &&  aStep->GetTrack()->GetDefinition() != G4Gamma::GammaDefinition())
+  if(aStep->GetTrack()->GetDefinition() != G4OpticalPhoton::OpticalPhotonDefinition()) //&&  aStep->GetTrack()->GetDefinition() != G4Gamma::GammaDefinition())
     {
       return false;
     }
@@ -107,12 +107,21 @@ G4bool LXeGPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
   G4double mom = thePrePoint->GetMomentum().mag();
   G4double wavelength = (1.239841939*eV/mom)*1E+03*nm; 
   
-  G4double timeG = aStep->GetTrack()->GetGlobalTime();
+  G4double timeG = aStep->GetTrack()->GetLocalTime();
 
-  G4AnalysisManager::Instance()->FillNtupleDColumn(2 , 0 , timeG);
-  G4AnalysisManager::Instance()->FillNtupleDColumn(2 , 1 , wavelength);
-  G4AnalysisManager::Instance()->AddNtupleRow(2);
+  /*
+  if (timeG > 50*ns)
+    {
+      G4AnalysisManager::Instance()->FillNtupleDColumn(2 , 0 , timeG*ns);
+      G4AnalysisManager::Instance()->FillNtupleDColumn(2 , 1 , wavelength);
+      G4AnalysisManager::Instance()->AddNtupleRow(2);
+    }
+  */
 
+  //G4AnalysisManager::Instance()->FillNtupleDColumn(2 , 0 , timeG*ns);
+  //G4AnalysisManager::Instance()->FillNtupleDColumn(2 , 1 , wavelength);
+  //G4AnalysisManager::Instance()->AddNtupleRow(2);
+  G4AnalysisManager::Instance()->FillH1(4, timeG);
   
  
   gpmtHit->SetTimeG(timeG);

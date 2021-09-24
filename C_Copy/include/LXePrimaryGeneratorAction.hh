@@ -57,7 +57,7 @@ class G4Event;
      *
      * @param G4Event*
      */
-    //void SetOptPhotonPolar(G4double);
+    void SetOptPhotonPolar(G4double);
 
     /**
      * @brief 

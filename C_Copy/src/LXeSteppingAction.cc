@@ -50,6 +50,14 @@
 #include "G4TrackStatus.hh"
 #include "G4VPhysicalVolume.hh"
 
+
+
+#include "G4SystemOfUnits.hh"
+#include "G4UnitsTable.hh"
+
+#include "G4ParticleTypes.hh"
+#include "G4ParticleDefinition.hh"
+#include "G4VProcess.hh"
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 LXeSteppingAction::LXeSteppingAction(LXeEventAction* ea)
@@ -69,6 +77,65 @@ LXeSteppingAction::~LXeSteppingAction() { delete fSteppingMessenger; }
 
 void LXeSteppingAction::UserSteppingAction(const G4Step* theStep)
 {
+
+
+  G4double time = theStep->GetPreStepPoint()->GetGlobalTime();
+  G4LogicalVolume* volume = theStep->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume();
+  G4String name = volume->GetName();
+
+  G4String particlename = theStep->GetTrack()->GetDefinition()->GetParticleName();
+  G4int trackID = theStep->GetTrack()->GetTrackID();
+  G4double energy = theStep->GetPreStepPoint()->GetTotalEnergy();
+
+
+  const G4VProcess* creatorProcess = theStep->GetTrack()->GetCreatorProcess();
+  G4String processName = "hello";
+
+  if (creatorProcess !=0) { 
+    //the initial particle is not created...this leads to an error without this if-statement
+    processName = creatorProcess->GetProcessName();
+  }
+ 
+  if ( processName =="RadioactiveDecay")
+    //&& name == "scintillator")time > 50*ns && time < 200000*ns
+    {
+    G4cout << "Radioactive Decay occurred in LSC at time" << name << " and particle name is " << particlename << G4endl;
+  }
+  
+    
+  //kill any tracks associated with the decay of the Germanium-69 ground state (64 hours)
+  
+  if (time > 1*s) {
+    
+    theStep->GetTrack()->SetTrackStatus(fStopAndKill); 
+    
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   G4Track* theTrack = theStep->GetTrack();
 
   if(theTrack->GetCurrentStepNumber() == 1)

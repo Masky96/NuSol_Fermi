@@ -329,8 +329,10 @@ if(vpmtHC)
 
       
       //fTotEG += edepG;
+      //G4AnalysisManager::Instance()->FillNtupleDColumn(2 , 0 , tdiffG*ns);
+      //G4AnalysisManager::Instance()->AddNtupleRow(2);
       //G4AnalysisManager::Instance()->FillNtupleDColumn(0, 3 ,(*gpmtHC)[i]->GetTimeG()-(*gpmtHC)[0]->GetTimeG());
-      G4AnalysisManager::Instance()->FillH1(4, tdiffG); 
+      //G4AnalysisManager::Instance()->FillH1(4, tdiffG); 
     }
 
   }
