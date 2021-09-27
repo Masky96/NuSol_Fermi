@@ -65,8 +65,9 @@ int main(int argc, char** argv)
   LXeDetectorConstruction* det = new LXeDetectorConstruction();
   runManager->SetUserInitialization(det);
 
-  G4VModularPhysicsList* physicsList = new FTFP_BERT;
+  G4VModularPhysicsList* physicsList = new FTFP_BERT();
   physicsList->ReplacePhysics(new G4EmLivermorePhysics());
+  
 
   //Declaring our Decay and RadioActive Decay's.
   

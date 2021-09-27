@@ -43,6 +43,9 @@
 #include "G4IonTable.hh"
 #include "G4ParticlePropertyData.hh"
 #include "G4Electron.hh"
+#include "G4Step.hh"
+#include "G4Track.hh"
+
 
 
 
@@ -100,6 +103,15 @@ LXePrimaryGeneratorAction::~LXePrimaryGeneratorAction()
 
 void LXePrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
+
+
+
+
+
+
+
+
+  
   /*
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
   

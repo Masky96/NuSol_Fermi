@@ -103,10 +103,12 @@ int main(int argc, char** argv)
 
   runManager->SetUserInitialization(new LXeActionInitialization(det));
 
+
+
+  
   // initialize visualization
   G4VisManager* visManager = new G4VisExecutive;
-  visManager->Initialize();
-
+  /*
 //Color the particle tracks according to the particle type.
   G4TrajectoryDrawByParticleID* model = new G4TrajectoryDrawByParticleID;
   model -> SetDefault ("cyan");
@@ -118,7 +120,12 @@ int main(int argc, char** argv)
   model-> Set("proton", G4Colour(1.,0.5,0.)); //orange
 
   visManager->RegisterModel(model);
+  */
 
+  
+  visManager->Initialize();
+  
+  
 
 
 
@@ -132,6 +139,10 @@ int main(int argc, char** argv)
   if(ui)
   {
     // interactive mode
+    UImanager->ApplyCommand("/process/em/auger true");
+    UImanager->ApplyCommand("/process/em/augerCascade true");
+    UImanager->ApplyCommand("/process/em/pixe true");
+    UImanager->ApplyCommand("/process/em/deexcitationIgnoreCut true");
     UImanager->ApplyCommand("/control/execute vis.mac");
     UImanager->ApplyCommand("/vis/ogl/set/displayListLimit 100000000");
     UImanager->ApplyCommand("/vis/multithreading/actionOnEventQueueFull wait");
