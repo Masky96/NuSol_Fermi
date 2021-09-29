@@ -92,9 +92,6 @@ G4bool CSatGPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
       return false;
     }
   */
-  G4int parentID = aStep->GetTrack()->GetParentID();
-
-  //G4cout << "The Parent ID is: " << parentID << G4endl;
   aStep->GetTrack()->SetTrackStatus(fStopAndKill);
 
   G4TouchableHistory* theTouchable =
@@ -120,20 +117,11 @@ G4bool CSatGPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
       G4AnalysisManager::Instance()->AddNtupleRow(2);
     }
   */
- 
+
   G4AnalysisManager::Instance()->FillNtupleDColumn(2 , 0 , timeG*ns);
   G4AnalysisManager::Instance()->FillNtupleDColumn(2 , 1 , wavelength);
   G4AnalysisManager::Instance()->AddNtupleRow(2);
-  if (parentID == 6)
-    {
-      G4AnalysisManager::Instance()->FillH1(5, timeG);
-    }
-  else
-    {
-      G4AnalysisManager::Instance()->FillH1(4, timeG);
-    }
-  //G4AnalysisManager::Instance()->FillH1(4, timeG);
-  //G4AnalysisManager::Instance()->FillH1(5, timeG);
+  G4AnalysisManager::Instance()->FillH1(4, timeG);
   
  
   gpmtHit->SetTimeG(timeG);

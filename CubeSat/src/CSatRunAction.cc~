@@ -77,7 +77,7 @@ CSatRunAction::CSatRunAction()
  analysisManager->FinishNtuple(ntupleID1);
 
  G4int ntupleID2 = analysisManager->CreateNtuple("Time of Hits GAGG", "Time of Hits GAGG");
- analysisManager->CreateNtupleDColumn(ntupleID2, "GAGG_Time(Electron)"); //ID 0
+ analysisManager->CreateNtupleDColumn(ntupleID2, "GAGG_Time"); //ID 0
  analysisManager->CreateNtupleDColumn(ntupleID2, "Wavelength");
  analysisManager->FinishNtuple(ntupleID2);
 
@@ -92,9 +92,7 @@ CSatRunAction::CSatRunAction()
   //3
    analysisManager->CreateH1("time of each hit Veto","time of each hit Veto", nbins, vmin, vmax);
    //4
-   analysisManager->CreateH1("Time of hit from Initial particle","time of each hit GAGG", nbins, vmin, vmax);
-    //5
-   analysisManager->CreateH1("Time of hit from Secondary particle","time of each hit GAGG", nbins, vmin, vmax);
+   analysisManager->CreateH1("time of each hit GAGG","time of each hit GAGG", nbins, vmin, vmax);
    
 
  
