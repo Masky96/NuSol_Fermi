@@ -50,7 +50,7 @@ CSatRunAction::CSatRunAction()
   analysisManager->SetVerboseLevel(1);
   analysisManager->SetFileName("Tutorial");
   analysisManager->SetNtupleMerging(true);
-  
+  analysisManager->SetActivation(true);
   G4int nbins   = 100;
   G4double vmin = 0.;
   G4double vmax = 100.;
@@ -95,11 +95,13 @@ CSatRunAction::CSatRunAction()
    analysisManager->CreateH1("Time of hit from Initial particle","time of each hit GAGG", nbins, vmin, vmax);
     //5
    analysisManager->CreateH1("Time of hit from Secondary particle","time of each hit GAGG", nbins, vmin, vmax);
-   
-
- 
 
 
+   for(G4int i = 0; i < analysisManager->GetNofH1s(); ++i)
+  {
+    analysisManager->SetH1Activation(i, false);
+  }
+  
   
 }
 
