@@ -273,7 +273,7 @@ void CSatDetectorConstruction::DefineMaterials()
   
   feljin_mt->AddProperty("RINDEX", Eljin_Energy, Eljin_RIND);
   feljin_mt->AddProperty("ABSLENGTH", Eljin_Energy, Eljin_ABSL);
-  feljin_mt->AddConstProperty("SCINTILLATIONYIELD", 10000. / MeV);
+  feljin_mt->AddConstProperty("SCINTILLATIONYIELD", 100. / MeV);
   feljin_mt->AddConstProperty("RESOLUTIONSCALE", 1.0);
   feljin_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 20. * ns);
   feljin_mt->AddConstProperty("SCINTILLATIONYIELD1", 1.0);

@@ -202,7 +202,7 @@ void CSatDetectorConstruction::DefineMaterials()
   fCSat_mt->AddProperty("ABSLENGTH", lxe_Energy, lxe_ABSL);
   fCSat_mt->AddConstProperty("SCINTILLATIONYIELD", 42000. / MeV);
   fCSat_mt->AddConstProperty("RESOLUTIONSCALE", 1.0);
-  fCSat_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 20. * ns);
+  fCSat_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 80. * ns);
   //fCSat_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT2", 45. * ns);
   fCSat_mt->AddConstProperty("SCINTILLATIONYIELD1", 1.0);
   //fCSat_mt->AddConstProperty("SCINTILLATIONYIELD2", 0.0);
@@ -275,7 +275,7 @@ void CSatDetectorConstruction::DefineMaterials()
   feljin_mt->AddProperty("ABSLENGTH", Eljin_Energy, Eljin_ABSL);
   feljin_mt->AddConstProperty("SCINTILLATIONYIELD", 10000. / MeV);
   feljin_mt->AddConstProperty("RESOLUTIONSCALE", 1.0);
-  feljin_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 20. * ns);
+  feljin_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 2. * ns);
   feljin_mt->AddConstProperty("SCINTILLATIONYIELD1", 1.0);
   fEljin_200->SetMaterialPropertiesTable(feljin_mt);
   

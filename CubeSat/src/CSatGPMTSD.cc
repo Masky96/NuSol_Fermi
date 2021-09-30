@@ -46,7 +46,7 @@
 #include "G4VTouchable.hh"
 #include "G4ParticleTable.hh"
 #include "G4SystemOfUnits.hh" 
-
+#include "G4RunManager.hh"
 #include "G4Gamma.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -92,6 +92,11 @@ G4bool CSatGPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
       return false;
     }
   */
+
+
+  G4int evtID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
+  //G4cout << "The Event ID is: " << evtID << G4endl;
+  
   G4int parentID = aStep->GetTrack()->GetParentID();
 
   //G4cout << "The Parent ID is: " << parentID << G4endl;
@@ -121,19 +126,282 @@ G4bool CSatGPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
     }
   */
  
-  G4AnalysisManager::Instance()->FillNtupleDColumn(2 , 0 , timeG*ns);
+  G4AnalysisManager::Instance()->FillNtupleDColumn(2 , 0 , timeG);
   G4AnalysisManager::Instance()->FillNtupleDColumn(2 , 1 , wavelength);
   G4AnalysisManager::Instance()->AddNtupleRow(2);
-  if (parentID == 6)
+  if(evtID == 0)
     {
-      G4AnalysisManager::Instance()->FillH1(5, timeG);
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(1, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(2, timeG);
+	}
     }
-  else
+
+if(evtID == 1)
     {
-      G4AnalysisManager::Instance()->FillH1(4, timeG);
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(3, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(4, timeG);
+	}
     }
-  //G4AnalysisManager::Instance()->FillH1(4, timeG);
-  //G4AnalysisManager::Instance()->FillH1(5, timeG);
+
+if(evtID == 2)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(5, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(6, timeG);
+	}
+    }
+
+
+if(evtID == 3)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(7, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(8, timeG);
+	}
+    }
+
+if(evtID == 4)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(9, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(10, timeG);
+	}
+    }
+
+if(evtID == 5)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(11, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(12, timeG);
+	}
+    }
+
+if(evtID == 6)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(13, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(14, timeG);
+	}
+    }
+
+if(evtID == 7)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(15, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(16, timeG);
+	}
+    }
+
+
+if(evtID == 8)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(17, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(18, timeG);
+	}
+    }
+
+if(evtID == 9)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(19, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(20, timeG);
+	}
+    }
+
+if(evtID == 10)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(21, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(22, timeG);
+	}
+    }
+
+
+if(evtID == 11)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(23, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(24, timeG);
+	}
+    }
+
+if(evtID == 12)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(25, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(26, timeG);
+	}
+    }
+
+
+if(evtID == 13)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(27, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(28, timeG);
+	}
+    }
+
+
+if(evtID == 14)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(29, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(30, timeG);
+	}
+    }
+
+if(evtID == 15)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(31, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(32, timeG);
+	}
+    }
+if(evtID == 16)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(33, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(34, timeG);
+	}
+    }
+
+if(evtID == 17)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(35, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(36, timeG);
+	}
+    }
+
+if(evtID == 18)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(37, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(38, timeG);
+	}
+    }
+
+if(evtID == 19)
+    {
+      if (parentID == 2)
+	{
+	  G4AnalysisManager::Instance()->FillH1(39, timeG);
+	}
+      else
+	{
+	  G4AnalysisManager::Instance()->FillH1(40, timeG);
+	}
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   
  
   gpmtHit->SetTimeG(timeG);

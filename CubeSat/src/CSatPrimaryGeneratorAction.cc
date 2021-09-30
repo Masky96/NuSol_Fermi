@@ -1,29 +1,3 @@
-//
-// ********************************************************************
-// * License and Disclaimer                                           *
-// *                                                                  *
-// * The  Geant4 software  is  copyright of the Copyright Holders  of *
-// * the Geant4 Collaboration.  It is provided  under  the terms  and *
-// * conditions of the Geant4 Software License,  included in the file *
-// * LICENSE and available at  http://cern.ch/geant4/license .  These *
-// * include a list of copyright holders.                             *
-// *                                                                  *
-// * Neither the authors of this software system, nor their employing *
-// * institutes,nor the agencies providing financial support for this *
-// * work  make  any representation or  warranty, express or implied, *
-// * regarding  this  software system or assume any liability for its *
-// * use.  Please see the license in the file  LICENSE  and URL above *
-// * for the full disclaimer and the limitation of liability.         *
-// *                                                                  *
-// * This  code  implementation is the result of  the  scientific and *
-// * technical work of the GEANT4 collaboration.                      *
-// * By using,  copying,  modifying or  distributing the software (or *
-// * any work based  on the software)  you  agree  to acknowledge its *
-// * use  in  resulting  scientific  publications,  and indicate your *
-// * acceptance of all terms of the Geant4 Software license.          *
-// ********************************************************************
-//
-//
 /// \file optical/CSat/src/CSatPrimaryGeneratorAction.cc
 /// \brief Implementation of the CSatPrimaryGeneratorAction class
 //
@@ -194,7 +168,7 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     //Program control
    
     G4int neutrinoprocess = 1;  //0 for cosmic rays, 1 for neutrino events
-    G4int galliumprocess =1;  // 0 for Gallium-69, 1 for Gallium-71
+    G4int galliumprocess = 0;  // 0 for Gallium-69, 1 for Gallium-71
     G4int gammaprocess = 2;  // 69Ge:  0 for ground state, 1 for 87 keV gamma, 2 for 397 keV gamma
                              // 71Ge:  0 for ground state, 1 for 198 keV excited state
                              // 71Ge:  2 is for firing the 174 keV state
@@ -484,9 +458,9 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       fparticleGun->SetParticleTime(0.0*ns);
       fparticleGun->GeneratePrimaryVertex(anEvent);
       
-      G4double lifetime = germanium ->GetPDGLifeTime();
+      //G4double lifetime = germanium ->GetPDGLifeTime();
 
-      G4cout << "Delay of the Germanium Atom is: " << lifetime*ns << G4endl;
+      //G4cout << "Delay of the Germanium Atom is: " << lifetime*ns << G4endl;
       
       fparticleGun->SetParticleDefinition(germanium);
       fparticleGun->SetParticleMomentumDirection(G4ThreeVector(pxGer,pyGer,pzGer));
@@ -526,6 +500,3 @@ void CSatPrimaryGeneratorAction::SetOptPhotonPolar(G4double angle)
   particleGun->SetParticlePolarization(polar);
     
 }
-
-  
-
