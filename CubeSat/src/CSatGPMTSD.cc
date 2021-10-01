@@ -133,271 +133,326 @@ G4bool CSatGPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(1, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(1, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(3 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(3);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(2, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(2, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(4 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(4);
 	}
     }
 
-if(evtID == 1)
+  if(evtID == 1)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(3, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(3, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(5 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(5);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(4, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(4, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(6 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(6);
 	}
     }
 
-if(evtID == 2)
+  if(evtID == 2)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(5, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(5, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(7 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(7);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(6, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(6, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(8 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(8);
 	}
     }
 
 
-if(evtID == 3)
+  if(evtID == 3)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(7, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(7, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(9 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(9);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(8, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(8, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(10 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(10);
 	}
     }
 
-if(evtID == 4)
+  if(evtID == 4)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(9, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(9, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(11 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(11);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(10, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(10, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(12 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(12);
 	}
     }
 
-if(evtID == 5)
+  if(evtID == 5)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(11, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(11, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(13 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(13);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(12, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(12, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(14 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(14);
 	}
     }
 
-if(evtID == 6)
+  if(evtID == 6)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(13, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(13, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(15 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(15);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(14, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(14, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(16 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(16);
 	}
     }
 
-if(evtID == 7)
+  if(evtID == 7)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(15, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(15, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(17 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(17);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(16, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(16, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(18 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(18);
 	}
     }
 
 
-if(evtID == 8)
+  if(evtID == 8)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(17, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(17, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(19 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(19);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(18, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(18, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(20 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(20);
 	}
     }
 
-if(evtID == 9)
+  if(evtID == 9)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(19, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(19, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(21 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(21);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(20, timeG);
+	  // G4AnalysisManager::Instance()->FillH1(20, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(22 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(22);
 	}
     }
 
-if(evtID == 10)
+  if(evtID == 10)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(21, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(21, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(23 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(23);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(22, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(22, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(24 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(24);
 	}
     }
 
 
-if(evtID == 11)
+  if(evtID == 11)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(23, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(23, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(25 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(25);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(24, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(24, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(26 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(26);
 	}
     }
 
-if(evtID == 12)
+  if(evtID == 12)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(25, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(25, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(27 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(27);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(26, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(26, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(28 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(28);
+	  
 	}
     }
 
 
-if(evtID == 13)
+  if(evtID == 13)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(27, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(27, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(29 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(29);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(28, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(28, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(30 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(30);
 	}
     }
 
 
-if(evtID == 14)
+  if(evtID == 14)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(29, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(29, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(31 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(31);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(30, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(30, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(32 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(32);
 	}
     }
 
-if(evtID == 15)
+  if(evtID == 15)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(31, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(31, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(33 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(33);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(32, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(32, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(34 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(34);
 	}
     }
-if(evtID == 16)
+  if(evtID == 16)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(33, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(33, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(35 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(35);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(34, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(34, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(36 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(36);
 	}
     }
 
-if(evtID == 17)
+  if(evtID == 17)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(35, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(35, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(37 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(37);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(36, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(36, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(38 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(38);
 	}
     }
 
-if(evtID == 18)
+  if(evtID == 18)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(37, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(37, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(39 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(39);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(38, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(38, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(40 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(40);
 	}
     }
 
-if(evtID == 19)
+  if(evtID == 19)
     {
       if (parentID == 2)
 	{
-	  G4AnalysisManager::Instance()->FillH1(39, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(39, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(41 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(41);
 	}
       else
 	{
-	  G4AnalysisManager::Instance()->FillH1(40, timeG);
+	  //G4AnalysisManager::Instance()->FillH1(40, timeG);
+	  G4AnalysisManager::Instance()->FillNtupleDColumn(42 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(42);
 	}
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

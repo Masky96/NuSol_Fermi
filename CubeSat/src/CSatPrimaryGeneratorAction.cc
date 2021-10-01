@@ -167,7 +167,7 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
     //Program control
    
-    G4int neutrinoprocess = 1;  //0 for cosmic rays, 1 for neutrino events
+    G4int neutrinoprocess = 0;  //0 for cosmic rays, 1 for neutrino events
     G4int galliumprocess = 0;  // 0 for Gallium-69, 1 for Gallium-71
     G4int gammaprocess = 2;  // 69Ge:  0 for ground state, 1 for 87 keV gamma, 2 for 397 keV gamma
                              // 71Ge:  0 for ground state, 1 for 198 keV excited state

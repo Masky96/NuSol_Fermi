@@ -51,9 +51,9 @@ CSatRunAction::CSatRunAction()
   analysisManager->SetFileName("Tutorial");
   analysisManager->SetNtupleMerging(true);
   analysisManager->SetActivation(true);
-  G4int nbins   = 100;
+  G4int nbins   = 1000;
   G4double vmin = 0.;
-  G4double vmax = 100.;
+  G4double vmax = 1000.;
  
 
  
@@ -130,41 +130,41 @@ CSatRunAction::CSatRunAction()
  analysisManager->CreateH1("Time of hit from Initial particle evt 10","time of each hit GAGG", nbins, vmin, vmax);
  //22
  analysisManager->CreateH1("Time of hit from Secondary particle evt 10","time of each hit GAGG", nbins, vmin, vmax);
- //22 
+ //23 
  analysisManager->CreateH1("Time of hit from Initial particle evt 11","time of each hit GAGG", nbins, vmin, vmax);
- //23
- analysisManager->CreateH1("Time of hit from Secondary particle evt 11","time of each hit GAGG", nbins, vmin, vmax);
  //24
- analysisManager->CreateH1("Time of hit from Initial particle evt 12","time of each hit GAGG", nbins, vmin, vmax);
+ analysisManager->CreateH1("Time of hit from Secondary particle evt 11","time of each hit GAGG", nbins, vmin, vmax);
  //25
- analysisManager->CreateH1("Time of hit from Secondary particle evt 12","time of each hit GAGG", nbins, vmin, vmax); 
+ analysisManager->CreateH1("Time of hit from Initial particle evt 12","time of each hit GAGG", nbins, vmin, vmax);
  //26
- analysisManager->CreateH1("Time of hit from Initial particle evt 13","time of each hit GAGG", nbins, vmin, vmax);
+ analysisManager->CreateH1("Time of hit from Secondary particle evt 12","time of each hit GAGG", nbins, vmin, vmax); 
  //27
- analysisManager->CreateH1("Time of hit from Secondary particle evt 13","time of each hit GAGG", nbins, vmin, vmax);
+ analysisManager->CreateH1("Time of hit from Initial particle evt 13","time of each hit GAGG", nbins, vmin, vmax);
  //28
- analysisManager->CreateH1("Time of hit from Initial particle evt 14","time of each hit GAGG", nbins, vmin, vmax);
+ analysisManager->CreateH1("Time of hit from Secondary particle evt 13","time of each hit GAGG", nbins, vmin, vmax);
  //29
+ analysisManager->CreateH1("Time of hit from Initial particle evt 14","time of each hit GAGG", nbins, vmin, vmax);
+ //30
  analysisManager->CreateH1("Time of hit from Secondary particle evt 14","time of each hit GAGG", nbins, vmin, vmax);
- //30  
+ //31  
  analysisManager->CreateH1("Time of hit from Initial particle evt 15","time of each hit GAGG", nbins, vmin, vmax);
- //31
- analysisManager->CreateH1("Time of hit from Secondary particle evt 15","time of each hit GAGG", nbins, vmin, vmax);
  //32
- analysisManager->CreateH1("Time of hit from Initial particle evt 16","time of each hit GAGG", nbins, vmin, vmax);
+ analysisManager->CreateH1("Time of hit from Secondary particle evt 15","time of each hit GAGG", nbins, vmin, vmax);
  //33
- analysisManager->CreateH1("Time of hit from Secondary particle evt 16","time of each hit GAGG", nbins, vmin, vmax);
+ analysisManager->CreateH1("Time of hit from Initial particle evt 16","time of each hit GAGG", nbins, vmin, vmax);
  //34
- analysisManager->CreateH1("Time of hit from Initial particle evt 17","time of each hit GAGG", nbins, vmin, vmax);
+ analysisManager->CreateH1("Time of hit from Secondary particle evt 16","time of each hit GAGG", nbins, vmin, vmax);
  //35
- analysisManager->CreateH1("Time of hit from Secondary particle evt 17","time of each hit GAGG", nbins, vmin, vmax); 
+ analysisManager->CreateH1("Time of hit from Initial particle evt 17","time of each hit GAGG", nbins, vmin, vmax);
  //36
- analysisManager->CreateH1("Time of hit from Initial particle evt 18","time of each hit GAGG", nbins, vmin, vmax);
+ analysisManager->CreateH1("Time of hit from Secondary particle evt 17","time of each hit GAGG", nbins, vmin, vmax); 
  //37
- analysisManager->CreateH1("Time of hit from Secondary particle evt 18","time of each hit GAGG", nbins, vmin, vmax);
+ analysisManager->CreateH1("Time of hit from Initial particle evt 18","time of each hit GAGG", nbins, vmin, vmax);
  //38
- analysisManager->CreateH1("Time of hit from Initial particle evt 19","time of each hit GAGG", nbins, vmin, vmax);
+ analysisManager->CreateH1("Time of hit from Secondary particle evt 18","time of each hit GAGG", nbins, vmin, vmax);
  //39
+ analysisManager->CreateH1("Time of hit from Initial particle evt 19","time of each hit GAGG", nbins, vmin, vmax);
+ //40
  analysisManager->CreateH1("Time of hit from Secondary particle evt 19","time of each hit GAGG", nbins, vmin, vmax);
   
 
@@ -181,12 +181,12 @@ CSatRunAction::CSatRunAction()
  
   
 
-
+ 
    for(G4int i = 0; i < analysisManager->GetNofH1s(); ++i)
   {
     analysisManager->SetH1Activation(i, false);
   }
-  
+ 
   
 }
 
