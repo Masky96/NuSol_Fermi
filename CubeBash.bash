@@ -18,7 +18,7 @@
 for particleName in  "nu_e" 
 do
     #For Particle energies in MeV*10^-1
-    for EnergyValue in 20 25 30 35 40 45 50 55 60 65 70 75 80 85 90 95 100
+    for EnergyValue in 35 #30 35 40 45 50 55 60 65 70 75 80 85 90 95 100
     do
         
 	for gammaProcess in 1 2
@@ -61,48 +61,7 @@ do
 
 	       #Creating Histograms
 /analysis/setFileName "$particleName+$EnergyValue+$gammaProcess"
-/analysis/h1/set 1 100 0 300 ns
-/analysis/h1/set 2 1000 1000 30000 ns
-/analysis/h1/set 3 100 0 300 ns
-/analysis/h1/set 4 1000 1000 30000 ns
-/analysis/h1/set 5 100 0 300 ns
-/analysis/h1/set 6 1000 1000 30000 ns
-/analysis/h1/set 7 100 0 300 ns
-/analysis/h1/set 8 1000 1000 30000 ns
-/analysis/h1/set 9 100 0 300 ns
-/analysis/h1/set 10 1000 1000 30000 ns
-/analysis/h1/set 11 100 0 300 ns
-/analysis/h1/set 12 1000 1000 30000 ns
-/analysis/h1/set 13 100 0 300 ns
-/analysis/h1/set 14 1000 1000 30000 ns
 
-/analysis/h1/set 15 100 0 300 ns
-/analysis/h1/set 16 1000 1000 30000 ns
-/analysis/h1/set 17 100 0 300 ns
-/analysis/h1/set 18 1000 1000 30000 ns
-/analysis/h1/set 19 100 0 300 ns
-/analysis/h1/set 20 1000 1000 30000 ns
-/analysis/h1/set 21 100 0 300 ns
-/analysis/h1/set 22 1000 1000 30000 ns
-/analysis/h1/set 23 100 0 300 ns
-/analysis/h1/set 24 1000 1000 30000 ns
-/analysis/h1/set 25 100 0 300 ns
-/analysis/h1/set 26 1000 1000 30000 ns
-/analysis/h1/set 27 100 0 300 ns
-/analysis/h1/set 28 1000 1000 30000 ns
-/analysis/h1/set 29 100 0 300 ns
-/analysis/h1/set 30 1000 1000 30000 ns
-/analysis/h1/set 31 100 0 300 ns
-/analysis/h1/set 32 1000 1000 30000 ns
-/analysis/h1/set 33 100 0 300 ns
-/analysis/h1/set 34 1000 1000 30000 ns
-
-/analysis/h1/set 35 100 0 300 ns
-/analysis/h1/set 36 1000 1000 30000 ns
-/analysis/h1/set 37 100 0 300 ns
-/analysis/h1/set 38 1000 1000 30000 ns
-/analysis/h1/set 39 100 0 300 ns
-/analysis/h1/set 40 1000 1000 30000 ns
 
 
 
