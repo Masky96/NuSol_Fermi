@@ -7,55 +7,58 @@ void histoCombinerFermi () {  // file for opening
   
   //First Hist to Open
 
-  TFile* myFile = TFile::Open("TestFile.root");
+  TFile* myFile = TFile::Open("nu_e+35+2.root");
   //TFile* myFile = new TFile("Tutorial.root", "READ");
 
  
-  TH1D* electronevt0 = new TH1D("Parent Electron Hit EVT 0","", 100, 0, 300);
-  TH1D* gammaevt0   = new TH1D("Parent Gamma Hit EVT 0","", 1000, 1000,30000);
-  TH1D* electron_evt1 = new TH1D("Parent Electron Hit EVT 1","", 100, 0, 300);
-  TH1D* gamma_evt1   = new TH1D("Parent Gamma Hit EVT 1","", 1000, 1000,30000);
-  TH1D* electron_evt2 = new TH1D("Parent Electron Hit EVT 2","", 100, 0, 300);
-  TH1D* gamma_evt2   = new TH1D("Parent Gamma Hit EVT 2","", 1000, 1000,30000);
-  TH1D* electron_evt3 = new TH1D("Parent Electron Hit EVT 3","", 100, 0, 300);
-  TH1D* gamma_evt3   = new TH1D("Parent Gamma Hit EVT 3","", 1000, 1000,30000);
-  TH1D* electron_evt4 = new TH1D("Parent Electron Hit EVT 4","", 100, 0, 300);
-  TH1D* gamma_evt4   = new TH1D("Parent Gamma Hit EVT 4","", 1000, 1000,30000);
-  TH1D* electron_evt5 = new TH1D("Parent Electron Hit EVT 5","", 100, 0, 300);
-  TH1D* gamma_evt5   = new TH1D("Parent Gamma Hit EVT 5","", 1000, 1000,30000);
-  TH1D* electron_evt6 = new TH1D("Parent Electron Hit EVT 6","", 100, 0, 300);
-  TH1D* gamma_evt6   = new TH1D("Parent Gamma Hit EVT 6","", 1000, 1000,30000);
-  TH1D* electron_evt7 = new TH1D("Parent Electron Hit EVT 7","", 100, 0, 300);
-  TH1D* gamma_evt7   = new TH1D("Parent Gamma Hit EVT 7","", 1000, 1000,30000);
-  TH1D* electron_evt8 = new TH1D("Parent Electron Hit EVT 8","", 100, 0, 300);
-  TH1D* gamma_evt8   = new TH1D("Parent Gamma Hit EVT 8","", 1000, 1000,30000);
-  TH1D* electron_evt9 = new TH1D("Parent Electron Hit EVT 9","", 100, 0, 300);
-  TH1D* gamma_evt9   = new TH1D("Parent Gamma Hit EVT 9","", 1000, 1000,30000);
-  TH1D* electron_evt10 = new TH1D("Parent Electron Hit EVT 10","", 100, 0, 300);
-  TH1D* gamma_evt10   = new TH1D("Parent Gamma Hit EVT 10","", 1000, 1000,30000);
-  TH1D* electron_evt11 = new TH1D("Parent Electron Hit EVT 11","", 100, 0, 300);
-  TH1D* gamma_evt11   = new TH1D("Parent Gamma Hit EVT 11","", 1000, 1000,30000);
-  TH1D* electron_evt12 = new TH1D("Parent Electron Hit EVT 12","", 100, 0, 300);
-  TH1D* gamma_evt12   = new TH1D("Parent Gamma Hit EVT 12","", 1000, 1000,30000);
-  TH1D* electron_evt13 = new TH1D("Parent Electron Hit EVT 13","", 100, 0, 300);
-  TH1D* gamma_evt13   = new TH1D("Parent Gamma Hit EVT 13","", 1000, 1000,30000);
-  TH1D* electron_evt14 = new TH1D("Parent Electron Hit EVT 14","", 100, 0, 300);
-  TH1D* gamma_evt14   = new TH1D("Parent Gamma Hit EVT 14","", 1000, 1000,30000);
-  TH1D* electron_evt15 = new TH1D("Parent Electron Hit EVT 15","", 100, 0, 300);
-  TH1D* gamma_evt15   = new TH1D("Parent Gamma Hit EVT 15","", 1000, 1000,30000);
-  TH1D* electron_evt16 = new TH1D("Parent Electron Hit EVT 16","", 100, 0, 300);
-  TH1D* gamma_evt16   = new TH1D("Parent Gamma Hit EVT 16","", 1000, 1000,30000);
-  TH1D* electron_evt17 = new TH1D("Parent Electron Hit EVT 17","", 100, 0, 300);
-  TH1D* gamma_evt17   = new TH1D("Parent Gamma Hit EVT 17","", 1000, 1000,30000);
-  TH1D* electron_evt18 = new TH1D("Parent Electron Hit EVT 18","", 100, 0, 300);
-  TH1D* gamma_evt18   = new TH1D("Parent Gamma Hit EVT 18","", 1000, 1000,30000);
-  TH1D* electron_evt19 = new TH1D("Parent Electron Hit EVT 19","", 100, 0, 300);
-  TH1D* gamma_evt19   = new TH1D("Parent Gamma Hit EVT 19","", 1000, 1000,30000);
+  TH1D* electronevt0 = new TH1D("Parent Electron Hit EVT 0","", 300, 0, 300);
+  TH1D* gammaevt0   = new TH1D("Parent Gamma Hit EVT 0","", 30000, 0,30000);
+  TH1D* electron_evt1 = new TH1D("Parent Electron Hit EVT 1","", 300, 0, 300);
+  TH1D* gamma_evt1   = new TH1D("Parent Gamma Hit EVT 1","", 30000, 0,30000);
+  TH1D* electron_evt2 = new TH1D("Parent Electron Hit EVT 2","", 300, 0, 300);
+  TH1D* gamma_evt2   = new TH1D("Parent Gamma Hit EVT 2","", 30000, 0,30000);
+  TH1D* electron_evt3 = new TH1D("Parent Electron Hit EVT 3","", 300, 0, 300);
+  TH1D* gamma_evt3   = new TH1D("Parent Gamma Hit EVT 3","", 30000, 0,30000);
+  TH1D* electron_evt4 = new TH1D("Parent Electron Hit EVT 4","", 300, 0, 300);
+  TH1D* gamma_evt4   = new TH1D("Parent Gamma Hit EVT 4","", 30000, 0,30000);
+  TH1D* electron_evt5 = new TH1D("Parent Electron Hit EVT 5","", 300, 0, 300);
+  TH1D* gamma_evt5   = new TH1D("Parent Gamma Hit EVT 5","", 30000, 0,30000);
+  TH1D* electron_evt6 = new TH1D("Parent Electron Hit EVT 6","", 300, 0, 300);
+  TH1D* gamma_evt6   = new TH1D("Parent Gamma Hit EVT 6","", 30000, 0,30000);
+  TH1D* electron_evt7 = new TH1D("Parent Electron Hit EVT 7","", 300, 0, 300);
+  TH1D* gamma_evt7   = new TH1D("Parent Gamma Hit EVT 7","", 30000, 0,30000);
+  TH1D* electron_evt8 = new TH1D("Parent Electron Hit EVT 8","", 300, 0, 300);
+  TH1D* gamma_evt8   = new TH1D("Parent Gamma Hit EVT 8","", 30000, 0,30000);
+  TH1D* electron_evt9 = new TH1D("Parent Electron Hit EVT 9","", 300, 0, 300);
+  TH1D* gamma_evt9   = new TH1D("Parent Gamma Hit EVT 9","", 30000, 0,30000);
+  TH1D* electron_evt10 = new TH1D("Parent Electron Hit EVT 10","", 300, 0, 300);
+  TH1D* gamma_evt10   = new TH1D("Parent Gamma Hit EVT 10","", 30000, 0,30000);
+  TH1D* electron_evt11 = new TH1D("Parent Electron Hit EVT 11","", 300, 0, 300);
+  TH1D* gamma_evt11   = new TH1D("Parent Gamma Hit EVT 11","", 30000, 0,30000);
+  TH1D* electron_evt12 = new TH1D("Parent Electron Hit EVT 12","", 300, 0, 300);
+  TH1D* gamma_evt12   = new TH1D("Parent Gamma Hit EVT 12","", 30000, 0,30000);
+  TH1D* electron_evt13 = new TH1D("Parent Electron Hit EVT 13","", 300, 0, 300);
+  TH1D* gamma_evt13   = new TH1D("Parent Gamma Hit EVT 13","", 30000, 0,30000);
+  TH1D* electron_evt14 = new TH1D("Parent Electron Hit EVT 14","", 300, 0, 300);
+  TH1D* gamma_evt14   = new TH1D("Parent Gamma Hit EVT 14","", 30000, 0,30000);
+  TH1D* electron_evt15 = new TH1D("Parent Electron Hit EVT 15","", 300, 0, 300);
+  TH1D* gamma_evt15   = new TH1D("Parent Gamma Hit EVT 15","", 30000, 0,30000);
+  TH1D* electron_evt16 = new TH1D("Parent Electron Hit EVT 16","", 300, 0, 300);
+  TH1D* gamma_evt16   = new TH1D("Parent Gamma Hit EVT 16","", 30000, 0,30000);
+  TH1D* electron_evt17 = new TH1D("Parent Electron Hit EVT 17","", 300, 0, 300);
+  TH1D* gamma_evt17   = new TH1D("Parent Gamma Hit EVT 17","", 30000, 0,30000);
+  TH1D* electron_evt18 = new TH1D("Parent Electron Hit EVT 18","", 300, 0, 300);
+  TH1D* gamma_evt18   = new TH1D("Parent Gamma Hit EVT 18","", 30000, 0,30000);
+  TH1D* electron_evt19 = new TH1D("Parent Electron Hit EVT 19","", 300, 0, 300);
+  TH1D* gamma_evt19   = new TH1D("Parent Gamma Hit EVT 19","", 30000, 0,30000);
  
+  //auto canvas = new TCanvas("c","c");
+  
 
-
+  /*
   myFile->GetObject("Time of hit from Initial particle evt 0", electronevt0);
   myFile->GetObject("Time of hit from Secondary particle evt 0", gammaevt0);
+  
   
   myFile->GetObject("Time of hit from Initial particle evt 1;1", electron_evt1);
   myFile->GetObject("Time of hit from Secondary particle evt 1;1", gamma_evt1);
@@ -113,11 +116,31 @@ void histoCombinerFermi () {  // file for opening
   
   myFile->GetObject("Time of hit from Initial particle evt 19;1", electron_evt19);
   myFile->GetObject("Time of hit from Secondary particle evt 19;1", gamma_evt19);
+  */
+
+  struct eventStruct{
+    Double_t ElectronTime;
+  };
+  eventStruct myEvent;
 
   
+  TTree*myTree;
 
+  myFile->GetObject("Time of Hit of ElectronEVT0",myTree);
+  
+  myTree->SetBranchAddress("ElectronTime", &(myEvent.ElectronTime) );
+  
+unsigned int mysize = myTree->GetEntries();
 
+ for (unsigned int i = 0; i < mysize; ++i) {
+   myTree->GetEntry(i);
+   electronevt0->Fill(myEvent.ElectronTime);
+ }
 
+ auto canvas = new TCanvas("c","c");
+ electronevt0->Draw();
+ canvas->Draw();
+ 
   
  
   
@@ -125,8 +148,7 @@ void histoCombinerFermi () {  // file for opening
   gROOT->ForceStyle();
   
   
-  //electron->SetBinsLength(100);
-  //gamma->SetBinsLength(100);
+  
  
 
   /*
@@ -142,7 +164,7 @@ void histoCombinerFermi () {  // file for opening
  
 
   
-  
+  /*
   //Creating Canvas and Stack placeholders. 
   auto canvas_new = new TCanvas("canvas","canvas");
   
@@ -150,11 +172,17 @@ void histoCombinerFermi () {  // file for opening
   gStyle->SetPalette(kRainBow);
   //electron_evt0->SetLineColor(kWhite);
   //gamma_evt0->SetLineColor(kWhite);
+  
   hs0->Add(electronevt0);
   hs0->Add(gammaevt0);
- 
+  
+    
+  hs0->Draw("HIST pfc nostack");
+  hs0->GetHistogram()->GetXaxis()->SetRange(0,10000);
   hs0->Draw("HIST pfc nostack");
   canvas_new->Draw();
+  */
+  
   /*
  auto hs1 = new THStack("hs1", "Timing of Photons hitting PMT in evt 1;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
@@ -394,7 +422,7 @@ auto hs19 = new THStack("hs19", "Timing of Photons hitting PMT in evt 19;Time of
 
 
   
-  canvas_new->Draw();
+  //canvas_new->Draw();
   
 
   
