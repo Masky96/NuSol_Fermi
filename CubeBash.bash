@@ -18,7 +18,7 @@
 for particleName in  "nu_e" 
 do
     #For Particle energies in MeV*10^-1
-    for EnergyValue in 35 #30 35 40 45 50 55 60 65 70 75 80 85 90 95 100
+    for EnergyValue in 40 45 50 55 60 65 70 75 80 85 90 95 100
     do
         
 	for gammaProcess in 1 2
