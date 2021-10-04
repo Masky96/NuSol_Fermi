@@ -12,13 +12,13 @@ void histoCombinerFermi () {  // file for opening
 
  
   TH1D* electronevt0 = new TH1D("Parent Electron Hit EVT 0","", 100, 0, 1000);
-  TH1D* gammaevt0   = new TH1D("Parent Gamma Hit EVT 0","", 500, 0, 5000);
+  TH1D* gammaevt0   = new TH1D("Parent Gamma Hit EVT 0","", 350, 0, 3500);
   TH1D* electron_evt1 = new TH1D("Parent Electron Hit EVT 1","", 100, 0, 1000);
-  TH1D* gamma_evt1   = new TH1D("Parent Gamma Hit EVT 1","", 500, 0, 5000);
+  TH1D* gamma_evt1   = new TH1D("Parent Gamma Hit EVT 1","", 350, 0, 3500);
   TH1D* electron_evt2 = new TH1D("Parent Electron Hit EVT 2","", 100, 0, 1000);
-  TH1D* gamma_evt2   = new TH1D("Parent Gamma Hit EVT 2","", 500, 0, 5000);
+  TH1D* gamma_evt2   = new TH1D("Parent Gamma Hit EVT 2","", 350, 0, 3500);
   TH1D* electron_evt3 = new TH1D("Parent Electron Hit EVT 3","", 100, 0, 1000);
-  TH1D* gamma_evt3   = new TH1D("Parent Gamma Hit EVT 3","", 500, 0, 5000);
+  TH1D* gamma_evt3   = new TH1D("Parent Gamma Hit EVT 3","", 350, 0, 3500);
   TH1D* electron_evt4 = new TH1D("Parent Electron Hit EVT 4","", 100, 0, 1000);
   TH1D* gamma_evt4   = new TH1D("Parent Gamma Hit EVT 4","", 500, 0, 5000);
   TH1D* electron_evt5 = new TH1D("Parent Electron Hit EVT 5","", 100, 0, 1000);
@@ -642,7 +642,7 @@ void histoCombinerFermi () {  // file for opening
   //Creating Canvas and Stack placeholders. 
   auto canvas_1 = new TCanvas("canvas","canvas");
   
-  auto hs0 = new THStack("hs0", "Timing of Photons hitting PMT in evt 0;Time of Photon hits (ns);Photon Counts");
+  auto hs0 = new THStack("hs0", "Timing of Photons hitting PMT in Event 0;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electronevt0->SetLineColor(kWhite);
   gammaevt0->SetLineColor(kWhite);
@@ -656,7 +656,7 @@ void histoCombinerFermi () {  // file for opening
   
   
   
-  auto hs1 = new THStack("hs1", "Timing of Photons hitting PMT in evt 1;Time of Photon hits (ns);Photon Counts");
+  auto hs1 = new THStack("hs1", "Timing of Photons hitting PMT in Event 1;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt1->SetLineColor(kWhite);
   gamma_evt1->SetLineColor(kWhite);
@@ -668,7 +668,7 @@ void histoCombinerFermi () {  // file for opening
   //canvas_new->Draw();
   
   
- auto hs2 = new THStack("hs2", "Timing of Photons hitting PMT in evt 2;Time of Photon hits (ns);Photon Counts");
+ auto hs2 = new THStack("hs2", "Timing of Photons hitting PMT in Event 2;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt2->SetLineColor(kWhite);
   gamma_evt2->SetLineColor(kWhite);
@@ -679,7 +679,7 @@ void histoCombinerFermi () {  // file for opening
   //hs2->Draw("HIST pfc nostack");
 
   
- auto hs3 = new THStack("hs3", "Timing of Photons hitting PMT in evt 3;Time of Photon hits (ns);Photon Counts");
+ auto hs3 = new THStack("hs3", "Timing of Photons hitting PMT in Event 3;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt3->SetLineColor(kWhite);
   gamma_evt3->SetLineColor(kWhite);
@@ -700,9 +700,17 @@ void histoCombinerFermi () {  // file for opening
   canvas_1->cd(4);
   hs3->Draw("HIST pfc nostack");
 
+
+  canvas_1->SetCanvasSize(1600,1600);
+  canvas_1->SetWindowSize(400,400);
   canvas_1->Draw();
-  //----------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
- auto hs4 = new THStack("hs4", "Timing of Photons hitting PMT in evt 4;Time of Photon hits (ns);Photon Counts");
+  
+  canvas_1->Print("Set0-3.png");
+  canvas_1->Close();
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ auto canvas_2 = new TCanvas("canvas","canvas");
+ 
+ auto hs4 = new THStack("hs4", "Timing of Photons hitting PMT in Event 4;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt4->SetLineColor(kWhite);
   gamma_evt4->SetLineColor(kWhite);
@@ -713,7 +721,7 @@ void histoCombinerFermi () {  // file for opening
   //hs4->Draw("HIST pfc nostack");
 
 
- auto hs5 = new THStack("hs5", "Timing of Photons hitting PMT in evt 5;Time of Photon hits (ns);Photon Counts");
+ auto hs5 = new THStack("hs5", "Timing of Photons hitting PMT in Event 5;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt5->SetLineColor(kWhite);
   gamma_evt5->SetLineColor(kWhite);
@@ -724,7 +732,7 @@ void histoCombinerFermi () {  // file for opening
   //hs5->Draw("HIST pfc nostack");
 
 
- auto hs6 = new THStack("hs6", "Timing of Photons hitting PMT in evt 6;Time of Photon hits (ns);Photon Counts");
+ auto hs6 = new THStack("hs6", "Timing of Photons hitting PMT in Event 6;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt6->SetLineColor(kWhite);
   gamma_evt6->SetLineColor(kWhite);
@@ -736,7 +744,7 @@ void histoCombinerFermi () {  // file for opening
 
 
 
- auto hs7 = new THStack("hs7", "Timing of Photons hitting PMT in evt 7;Time of Photon hits (ns);Photon Counts");
+ auto hs7 = new THStack("hs7", "Timing of Photons hitting PMT in Event 7;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt7->SetLineColor(kWhite);
   gamma_evt7->SetLineColor(kWhite);
@@ -745,10 +753,15 @@ void histoCombinerFermi () {  // file for opening
   hs7->Add(gamma_evt7);
  
   //hs7->Draw("HIST pfc nostack");
-
-
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
- auto hs8 = new THStack("hs8", "Timing of Photons hitting PMT in evt 8;Time of Photon hits (ns);Photon Counts");
+  canvas_2->SetCanvasSize(1600,1600);
+  canvas_2->SetWindowSize(400,400);
+  canvas_2->Draw();
+  
+  canvas_2->Print("Set4-7.png");
+  canvas_2->Close();
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ auto canvas_3 = new TCanvas("canvas","canvas");
+ auto hs8 = new THStack("hs8", "Timing of Photons hitting PMT in Event 8;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt8->SetLineColor(kWhite);
   gamma_evt8->SetLineColor(kWhite);
@@ -760,7 +773,7 @@ void histoCombinerFermi () {  // file for opening
 
 
 
- auto hs9 = new THStack("hs9", "Timing of Photons hitting PMT in evt 9;Time of Photon hits (ns);Photon Counts");
+ auto hs9 = new THStack("hs9", "Timing of Photons hitting PMT in Event 9;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt9->SetLineColor(kWhite);
   gamma_evt9->SetLineColor(kWhite);
@@ -771,7 +784,7 @@ void histoCombinerFermi () {  // file for opening
   //hs9->Draw("HIST pfc nostack");
 
   
-auto hs10 = new THStack("hs10", "Timing of Photons hitting PMT in evt 10;Time of Photon hits (ns);Photon Counts");
+auto hs10 = new THStack("hs10", "Timing of Photons hitting PMT in Event 10;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt10->SetLineColor(kWhite);
   gamma_evt10->SetLineColor(kWhite);
@@ -782,7 +795,7 @@ auto hs10 = new THStack("hs10", "Timing of Photons hitting PMT in evt 10;Time of
   //hs10->Draw("HIST pfc nostack");
 
 
-auto hs11 = new THStack("hs11", "Timing of Photons hitting PMT in evt 11;Time of Photon hits (ns);Photon Counts");
+auto hs11 = new THStack("hs11", "Timing of Photons hitting PMT in Event 11;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt11->SetLineColor(kWhite);
   gamma_evt11->SetLineColor(kWhite);
@@ -791,10 +804,16 @@ auto hs11 = new THStack("hs11", "Timing of Photons hitting PMT in evt 11;Time of
   hs11->Add(gamma_evt11);
  
   // hs11->Draw("HIST pfc nostack");
+  canvas_3->SetCanvasSize(1600,1600);
+  canvas_3->SetWindowSize(400,400);
+  canvas_3->Draw();
+  
+  canvas_3->Print("Set8-11.png");
+  canvas_3->Close();
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  
-auto hs12 = new THStack("hs12", "Timing of Photons hitting PMT in evt 12;Time of Photon hits (ns);Photon Counts");
+auto canvas_4 = new TCanvas("canvas","canvas");
+auto hs12 = new THStack("hs12", "Timing of Photons hitting PMT in Event 12;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt12->SetLineColor(kWhite);
   gamma_evt12->SetLineColor(kWhite);
@@ -806,7 +825,7 @@ auto hs12 = new THStack("hs12", "Timing of Photons hitting PMT in evt 12;Time of
 
 
   
-auto hs13 = new THStack("hs13", "Timing of Photons hitting PMT in evt 13;Time of Photon hits (ns);Photon Counts");
+auto hs13 = new THStack("hs13", "Timing of Photons hitting PMT in Event 13;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt13->SetLineColor(kWhite);
   gamma_evt13->SetLineColor(kWhite);
@@ -817,7 +836,7 @@ auto hs13 = new THStack("hs13", "Timing of Photons hitting PMT in evt 13;Time of
   //hs13->Draw("HIST pfc nostack");
 
   
-auto hs14 = new THStack("hs14", "Timing of Photons hitting PMT in evt 14;Time of Photon hits (ns);Photon Counts");
+auto hs14 = new THStack("hs14", "Timing of Photons hitting PMT in Event 14;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt14->SetLineColor(kWhite);
   gamma_evt14->SetLineColor(kWhite);
@@ -828,7 +847,7 @@ auto hs14 = new THStack("hs14", "Timing of Photons hitting PMT in evt 14;Time of
   //hs14->Draw("HIST pfc nostack");
 
 
-auto hs15 = new THStack("hs15", "Timing of Photons hitting PMT in evt 15;Time of Photon hits (ns);Photon Counts");
+auto hs15 = new THStack("hs15", "Timing of Photons hitting PMT in Event 15;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt15->SetLineColor(kWhite);
   gamma_evt15->SetLineColor(kWhite);
@@ -837,9 +856,16 @@ auto hs15 = new THStack("hs15", "Timing of Photons hitting PMT in evt 15;Time of
   hs15->Add(gamma_evt15);
  
   //hs15->Draw("HIST pfc nostack");
+  canvas_4->SetCanvasSize(1600,1600);
+  canvas_4->SetWindowSize(400,400);
+  canvas_4->Draw();
+  
+  canvas_4->Print("Set12-15.png");
+  canvas_4->Close();
 
-  //----------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-auto hs16 = new THStack("hs16", "Timing of Photons hitting PMT in evt 16;Time of Photon hits (ns);Photon Counts");
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  auto canvas_5 = new TCanvas("canvas","canvas");
+  auto hs16 = new THStack("hs16", "Timing of Photons hitting PMT in Event 16;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt16->SetLineColor(kWhite);
   gamma_evt16->SetLineColor(kWhite);
@@ -850,7 +876,7 @@ auto hs16 = new THStack("hs16", "Timing of Photons hitting PMT in evt 16;Time of
   //hs16->Draw("HIST pfc nostack");
 
 
-auto hs17 = new THStack("hs17", "Timing of Photons hitting PMT in evt 17;Time of Photon hits (ns);Photon Counts");
+  auto hs17 = new THStack("hs17", "Timing of Photons hitting PMT in Event 17;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt17->SetLineColor(kWhite);
   gamma_evt17->SetLineColor(kWhite);
@@ -862,7 +888,7 @@ auto hs17 = new THStack("hs17", "Timing of Photons hitting PMT in evt 17;Time of
 
 
 
-auto hs18 = new THStack("hs18", "Timing of Photons hitting PMT in evt 18;Time of Photon hits (ns);Photon Counts");
+  auto hs18 = new THStack("hs18", "Timing of Photons hitting PMT in Event 18;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt18->SetLineColor(kWhite);
   gamma_evt18->SetLineColor(kWhite);
@@ -873,7 +899,7 @@ auto hs18 = new THStack("hs18", "Timing of Photons hitting PMT in evt 18;Time of
   //hs18->Draw("HIST pfc nostack");
 
   
-auto hs19 = new THStack("hs19", "Timing of Photons hitting PMT in evt 19;Time of Photon hits (ns);Photon Counts");
+  auto hs19 = new THStack("hs19", "Timing of Photons hitting PMT in Event 19;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt19->SetLineColor(kWhite);
   gamma_evt19->SetLineColor(kWhite);
@@ -882,51 +908,57 @@ auto hs19 = new THStack("hs19", "Timing of Photons hitting PMT in evt 19;Time of
   hs19->Add(gamma_evt19);
  
   // hs19->Draw("HIST pfc nostack");
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------   
+  canvas_5->SetCanvasSize(1600,1600);
+  canvas_5->SetWindowSize(400,400);
+  canvas_5->Draw();
+  
+  canvas_5->Print("Set16-19.png");
+  canvas_5->Close();
+  //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------   
 
   
   //canvas_new->Divide(2,2);
   /*
-  canvas_new->cd(1);
-  hs0->Draw("HIST pfc nostack");
-  canvas_new->cd(2);
-  hs1->Draw("HIST pfc nostack");
-  canvas_new->cd(3);
-  hs2->Draw("HIST pfc nostack");
-  canvas_new->cd(4);
-  hs3->Draw("HIST pfc nostack");
-  canvas_new->cd(5);
-  hs4->Draw("HIST pfc nostack");
-  canvas_new->cd(6);
-  hs5->Draw("HIST pfc nostack");
-  canvas_new->cd(7);
-  hs6->Draw("HIST pfc nostack");
-  canvas_new->cd(8);
-  hs7->Draw("HIST pfc nostack");
-  canvas_new->cd(9);
-  hs8->Draw("HIST pfc nostack");
-  canvas_new->cd(10);
-  hs9->Draw("HIST pfc nostack");
-  canvas_new->cd(11);
-  hs10->Draw("HIST pfc nostack");
-  canvas_new->cd(12);
-  hs11->Draw("HIST pfc nostack");
-  canvas_new->cd(13);
-  hs12->Draw("HIST pfc nostack");
-  canvas_new->cd(14);
-  hs13->Draw("HIST pfc nostack");
-  canvas_new->cd(15);
-  hs14->Draw("HIST pfc nostack");
-  canvas_new->cd(16);
-  hs15->Draw("HIST pfc nostack");
-  canvas_new->cd(17);
-  hs16->Draw("HIST pfc nostack");
-  canvas_new->cd(18);
-  hs17->Draw("HIST pfc nostack");
-  canvas_new->cd(19);
-  hs18->Draw("HIST pfc nostack");
-  canvas_new->cd(20);
-  hs19->Draw("HIST pfc nostack");
+    canvas_new->cd(1);
+    hs0->Draw("HIST pfc nostack");
+    canvas_new->cd(2);
+    hs1->Draw("HIST pfc nostack");
+    canvas_new->cd(3);
+    hs2->Draw("HIST pfc nostack");
+    canvas_new->cd(4);
+    hs3->Draw("HIST pfc nostack");
+    canvas_new->cd(5);
+    hs4->Draw("HIST pfc nostack");
+    canvas_new->cd(6);
+    hs5->Draw("HIST pfc nostack");
+    canvas_new->cd(7);
+    hs6->Draw("HIST pfc nostack");
+    canvas_new->cd(8);
+    hs7->Draw("HIST pfc nostack");
+    canvas_new->cd(9);
+    hs8->Draw("HIST pfc nostack");
+    canvas_new->cd(10);
+    hs9->Draw("HIST pfc nostack");
+    canvas_new->cd(11);
+    hs10->Draw("HIST pfc nostack");
+    canvas_new->cd(12);
+    hs11->Draw("HIST pfc nostack");
+    canvas_new->cd(13);
+    hs12->Draw("HIST pfc nostack");
+    canvas_new->cd(14);
+    hs13->Draw("HIST pfc nostack");
+    canvas_new->cd(15);
+    hs14->Draw("HIST pfc nostack");
+    canvas_new->cd(16);
+    hs15->Draw("HIST pfc nostack");
+    canvas_new->cd(17);
+    hs16->Draw("HIST pfc nostack");
+    canvas_new->cd(18);
+    hs17->Draw("HIST pfc nostack");
+    canvas_new->cd(19);
+    hs18->Draw("HIST pfc nostack");
+    canvas_new->cd(20);
+    hs19->Draw("HIST pfc nostack");
   */
 
 
@@ -940,64 +972,64 @@ auto hs19 = new THStack("hs19", "Timing of Photons hitting PMT in evt 19;Time of
 
 
   
- /*
-  THStack* myStack = new THStack("myStack","Events;Radius(Solar Radii);Events/Bin");
+  /*
+    THStack* myStack = new THStack("myStack","Events;Radius(Solar Radii);Events/Bin");
 
-  TLegend *EnerLegend = new TLegend(0.15,0.65,0.55,0.85);
-  EnerLegend -> SetHeader("Legend");
+    TLegend *EnerLegend = new TLegend(0.15,0.65,0.55,0.85);
+    EnerLegend -> SetHeader("Legend");
   
-  cosmicRadHist->SetFillColor(kRed);
-  cosmicRadHist->Rebin(2);
-  myStack->Add(cosmicRadHist);
+    cosmicRadHist->SetFillColor(kRed);
+    cosmicRadHist->Rebin(2);
+    myStack->Add(cosmicRadHist);
   
-  solarRadHist ->SetFillColor(kYellow);
-  solarRadHist->Rebin(2);
-  myStack->Add(solarRadHist);
+    solarRadHist ->SetFillColor(kYellow);
+    solarRadHist->Rebin(2);
+    myStack->Add(solarRadHist);
   
-  nRadHist->SetFillColor(kBlue);
-  nRadHist->Rebin(2);
-  myStack -> Add( nRadHist );
+    nRadHist->SetFillColor(kBlue);
+    nRadHist->Rebin(2);
+    myStack -> Add( nRadHist );
 
 
-  TCanvas *c1 = new TCanvas("c1","Stacked",700,900);
-  myStack->Draw("");
+    TCanvas *c1 = new TCanvas("c1","Stacked",700,900);
+    myStack->Draw("");
 
-  EnerLegend -> AddEntry(nRadHist,"Neutrino Signal");
-  EnerLegend -> AddEntry(solarRadHist,"Solar Background");
-  EnerLegend -> AddEntry(cosmicRadHist,"Cosmic Background");
-  EnerLegend -> Draw();
-
-
+    EnerLegend -> AddEntry(nRadHist,"Neutrino Signal");
+    EnerLegend -> AddEntry(solarRadHist,"Solar Background");
+    EnerLegend -> AddEntry(cosmicRadHist,"Cosmic Background");
+    EnerLegend -> Draw();
 
 
 
-  THStack* myStack1 = new THStack("myStack1","Events;Radius(Solar Radii);Events/Bin");
 
-  TLegend *EnerLegend1 = new TLegend(0.45,0.65,0.85,0.85);
-  EnerLegend1 -> SetHeader("Legend");
+
+    THStack* myStack1 = new THStack("myStack1","Events;Radius(Solar Radii);Events/Bin");
+
+    TLegend *EnerLegend1 = new TLegend(0.45,0.65,0.85,0.85);
+    EnerLegend1 -> SetHeader("Legend");
   
-  cosmic35RadHist->SetFillColor(kRed);
-  //cosmicRadHist->Rebin(2);
-  myStack1->Add(cosmic35RadHist);
+    cosmic35RadHist->SetFillColor(kRed);
+    //cosmicRadHist->Rebin(2);
+    myStack1->Add(cosmic35RadHist);
   
-  solar35RadHist ->SetFillColor(kYellow);
-  //solarRadHist->Rebin(2);
-  myStack1->Add(solar35RadHist);
+    solar35RadHist ->SetFillColor(kYellow);
+    //solarRadHist->Rebin(2);
+    myStack1->Add(solar35RadHist);
   
-  n35RadHist->SetFillColor(kBlue);
-  //n35RadHist->Rebin(2);
-  myStack1-> Add( n35RadHist );
+    n35RadHist->SetFillColor(kBlue);
+    //n35RadHist->Rebin(2);
+    myStack1-> Add( n35RadHist );
 
 
 
 
-  TCanvas *c2 = new TCanvas("c2","Stacked",700,900);
-  myStack1->Draw("");
+    TCanvas *c2 = new TCanvas("c2","Stacked",700,900);
+    myStack1->Draw("");
 
-  EnerLegend1 -> AddEntry(n35RadHist,"Neutrino Signal");
-  EnerLegend1 -> AddEntry(solar35RadHist,"Solar Background");
-  EnerLegend1 -> AddEntry(cosmic35RadHist,"Cosmic Background");
-  EnerLegend1 -> Draw();
+    EnerLegend1 -> AddEntry(n35RadHist,"Neutrino Signal");
+    EnerLegend1 -> AddEntry(solar35RadHist,"Solar Background");
+    EnerLegend1 -> AddEntry(cosmic35RadHist,"Cosmic Background");
+    EnerLegend1 -> Draw();
   */
 
 }
