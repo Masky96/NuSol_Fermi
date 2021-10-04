@@ -450,9 +450,7 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       G4double pyGer = 0;
       G4double pzGer = 0;
       G4double kineticenergyGer = 0;
-      G4cout << "required neutrino energy is > " << ((thresholdenergy*thresholdenergy - mass0*mass0)/(2.*mass0)/MeV) << G4endl;
-     
-       
+      
       fparticleGun->SetParticleDefinition(particle);
       fparticleGun->SetParticleMomentumDirection(G4ThreeVector(px,py,pz));
       fparticleGun->SetParticleEnergy(kineticenergy);
@@ -463,7 +461,6 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       //G4double lifetime = germanium ->GetPDGLifeTime();
 
       //G4cout << "Delay of the Germanium Atom is: " << lifetime*ns << G4endl;
-      
       
       fparticleGun->SetParticleDefinition(germanium);
       fparticleGun->SetParticleMomentumDirection(G4ThreeVector(pxGer,pyGer,pzGer));
