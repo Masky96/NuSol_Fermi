@@ -7,50 +7,50 @@ void histoCombinerFermi () {  // file for opening
   
   //First Hist to Open
 
-  TFile* myFile = TFile::Open("nu_e+35+2.root");
+  TFile* myFile = TFile::Open("nu_e+35+1.root");
   //TFile* myFile = new TFile("Tutorial.root", "READ");
 
  
   TH1D* electronevt0 = new TH1D("Parent Electron Hit EVT 0","", 100, 0, 1000);
-  TH1D* gammaevt0   = new TH1D("Parent Gamma Hit EVT 0","", 350, 0, 3500);
+  TH1D* gammaevt0   = new TH1D("Parent Gamma Hit EVT 0","", 3000, 0, 30000);
   TH1D* electron_evt1 = new TH1D("Parent Electron Hit EVT 1","", 100, 0, 1000);
-  TH1D* gamma_evt1   = new TH1D("Parent Gamma Hit EVT 1","", 350, 0, 3500);
+  TH1D* gamma_evt1   = new TH1D("Parent Gamma Hit EVT 1","", 3000, 0, 30000);
   TH1D* electron_evt2 = new TH1D("Parent Electron Hit EVT 2","", 100, 0, 1000);
-  TH1D* gamma_evt2   = new TH1D("Parent Gamma Hit EVT 2","", 350, 0, 3500);
+  TH1D* gamma_evt2   = new TH1D("Parent Gamma Hit EVT 2","", 3000, 0, 30000);
   TH1D* electron_evt3 = new TH1D("Parent Electron Hit EVT 3","", 100, 0, 1000);
-  TH1D* gamma_evt3   = new TH1D("Parent Gamma Hit EVT 3","", 350, 0, 3500);
+  TH1D* gamma_evt3   = new TH1D("Parent Gamma Hit EVT 3","", 3000, 0, 30000);
   TH1D* electron_evt4 = new TH1D("Parent Electron Hit EVT 4","", 100, 0, 1000);
-  TH1D* gamma_evt4   = new TH1D("Parent Gamma Hit EVT 4","", 500, 0, 5000);
+  TH1D* gamma_evt4   = new TH1D("Parent Gamma Hit EVT 4","", 3000, 0, 30000);
   TH1D* electron_evt5 = new TH1D("Parent Electron Hit EVT 5","", 100, 0, 1000);
-  TH1D* gamma_evt5   = new TH1D("Parent Gamma Hit EVT 5","", 500, 0, 5000);
+  TH1D* gamma_evt5   = new TH1D("Parent Gamma Hit EVT 5","", 3000, 0, 30000);
   TH1D* electron_evt6 = new TH1D("Parent Electron Hit EVT 6","", 100, 0, 1000);
-  TH1D* gamma_evt6   = new TH1D("Parent Gamma Hit EVT 6","", 500, 0, 5000);
+  TH1D* gamma_evt6   = new TH1D("Parent Gamma Hit EVT 6","", 3000, 0, 30000);
   TH1D* electron_evt7 = new TH1D("Parent Electron Hit EVT 7","", 100, 0, 1000);
-  TH1D* gamma_evt7   = new TH1D("Parent Gamma Hit EVT 7","", 500, 0, 5000);
+  TH1D* gamma_evt7   = new TH1D("Parent Gamma Hit EVT 7","", 3000, 0, 30000);
   TH1D* electron_evt8 = new TH1D("Parent Electron Hit EVT 8","",100, 0, 1000);
-  TH1D* gamma_evt8   = new TH1D("Parent Gamma Hit EVT 8","", 500, 0, 5000);
+  TH1D* gamma_evt8   = new TH1D("Parent Gamma Hit EVT 8","", 3000, 0, 30000);
   TH1D* electron_evt9 = new TH1D("Parent Electron Hit EVT 9","",100, 0, 1000);
-  TH1D* gamma_evt9   = new TH1D("Parent Gamma Hit EVT 9","", 500, 0, 5000);
+  TH1D* gamma_evt9   = new TH1D("Parent Gamma Hit EVT 9","", 3000, 0, 30000);
   TH1D* electron_evt10 = new TH1D("Parent Electron Hit EVT 10","", 100, 0, 1000);
-  TH1D* gamma_evt10   = new TH1D("Parent Gamma Hit EVT 10","", 500, 0, 5000);
+  TH1D* gamma_evt10   = new TH1D("Parent Gamma Hit EVT 10","", 3000, 0, 30000);
   TH1D* electron_evt11 = new TH1D("Parent Electron Hit EVT 11","", 100, 0, 1000);
-  TH1D* gamma_evt11   = new TH1D("Parent Gamma Hit EVT 11","", 500, 0, 5000);
+  TH1D* gamma_evt11   = new TH1D("Parent Gamma Hit EVT 11","", 3000, 0, 30000);
   TH1D* electron_evt12 = new TH1D("Parent Electron Hit EVT 12","", 100, 0, 1000);
-  TH1D* gamma_evt12   = new TH1D("Parent Gamma Hit EVT 12","", 500, 0, 5000);
+  TH1D* gamma_evt12   = new TH1D("Parent Gamma Hit EVT 12","", 3000, 0, 30000);
   TH1D* electron_evt13 = new TH1D("Parent Electron Hit EVT 13","", 100, 0, 1000);
-  TH1D* gamma_evt13   = new TH1D("Parent Gamma Hit EVT 13","", 500, 0, 5000);
+  TH1D* gamma_evt13   = new TH1D("Parent Gamma Hit EVT 13","", 3000, 0, 30000);
   TH1D* electron_evt14 = new TH1D("Parent Electron Hit EVT 14","", 100, 0, 1000);
-  TH1D* gamma_evt14   = new TH1D("Parent Gamma Hit EVT 14","", 500, 0, 5000);
+  TH1D* gamma_evt14   = new TH1D("Parent Gamma Hit EVT 14","", 3000, 0, 30000);
   TH1D* electron_evt15 = new TH1D("Parent Electron Hit EVT 15","", 100, 0, 1000);
-  TH1D* gamma_evt15   = new TH1D("Parent Gamma Hit EVT 15","", 500, 0, 5000);
+  TH1D* gamma_evt15   = new TH1D("Parent Gamma Hit EVT 15","", 3000, 0, 30000);
   TH1D* electron_evt16 = new TH1D("Parent Electron Hit EVT 16","", 100, 0, 1000);
-  TH1D* gamma_evt16   = new TH1D("Parent Gamma Hit EVT 16","", 500, 0, 5000);
+  TH1D* gamma_evt16   = new TH1D("Parent Gamma Hit EVT 16","", 3000, 0, 30000);
   TH1D* electron_evt17 = new TH1D("Parent Electron Hit EVT 17","", 100, 0, 1000);
-  TH1D* gamma_evt17   = new TH1D("Parent Gamma Hit EVT 17","", 500, 0, 5000);
+  TH1D* gamma_evt17   = new TH1D("Parent Gamma Hit EVT 17","", 3000, 0, 30000);
   TH1D* electron_evt18 = new TH1D("Parent Electron Hit EVT 18","", 100, 0, 1000);
-  TH1D* gamma_evt18   = new TH1D("Parent Gamma Hit EVT 18","", 500, 0, 5000);
+  TH1D* gamma_evt18   = new TH1D("Parent Gamma Hit EVT 18","", 3000, 0, 30000);
   TH1D* electron_evt19 = new TH1D("Parent Electron Hit EVT 19","", 100, 0, 1000);
-  TH1D* gamma_evt19   = new TH1D("Parent Gamma Hit EVT 19","", 500, 0, 5000);
+  TH1D* gamma_evt19   = new TH1D("Parent Gamma Hit EVT 19","", 3000, 0, 30000);
  
 
 
@@ -640,7 +640,7 @@ void histoCombinerFermi () {  // file for opening
   
   
   //Creating Canvas and Stack placeholders. 
-  auto canvas_1 = new TCanvas("canvas","canvas");
+  auto canvas_1 = new TCanvas("canvas1","canvas1");
   
   auto hs0 = new THStack("hs0", "Timing of Photons hitting PMT in Event 0;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
@@ -688,7 +688,7 @@ void histoCombinerFermi () {  // file for opening
   hs3->Add(gamma_evt3);
  
   // hs3->Draw("HIST pfc nostack");
-
+  
   canvas_1->Divide(2,2);
   
   canvas_1->cd(1);
@@ -706,9 +706,10 @@ void histoCombinerFermi () {  // file for opening
   canvas_1->Draw();
   
   canvas_1->Print("Set0-3.png");
-  canvas_1->Close();
+  //canvas_1->Close();
+  
   //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
- auto canvas_2 = new TCanvas("canvas","canvas");
+ auto canvas_2 = new TCanvas("canvas2","canvas2");
  
  auto hs4 = new THStack("hs4", "Timing of Photons hitting PMT in Event 4;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
@@ -756,11 +757,24 @@ void histoCombinerFermi () {  // file for opening
   canvas_2->SetCanvasSize(1600,1600);
   canvas_2->SetWindowSize(400,400);
   canvas_2->Draw();
+
+  canvas_2->Divide(2,2);
+  
+  canvas_2->cd(1);
+  hs4->Draw("HIST pfc nostack");
+  canvas_2->cd(2);
+  hs5->Draw("HIST pfc nostack");
+  canvas_2->cd(3);
+  hs6->Draw("HIST pfc nostack");
+  canvas_2->cd(4);
+  hs7->Draw("HIST pfc nostack");
+
+
   
   canvas_2->Print("Set4-7.png");
-  canvas_2->Close();
+  //canvas_2->Close();
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
- auto canvas_3 = new TCanvas("canvas","canvas");
+ auto canvas_3 = new TCanvas("canvas3","canvas3");
  auto hs8 = new THStack("hs8", "Timing of Photons hitting PMT in Event 8;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt8->SetLineColor(kWhite);
@@ -807,12 +821,26 @@ auto hs11 = new THStack("hs11", "Timing of Photons hitting PMT in Event 11;Time 
   canvas_3->SetCanvasSize(1600,1600);
   canvas_3->SetWindowSize(400,400);
   canvas_3->Draw();
+
+  canvas_3->Divide(2,2);
+  
+  canvas_3->cd(1);
+  hs8->Draw("HIST pfc nostack");
+  canvas_3->cd(2);
+  hs9->Draw("HIST pfc nostack");
+  canvas_3->cd(3);
+  hs10->Draw("HIST pfc nostack");
+  canvas_3->cd(4);
+  hs11->Draw("HIST pfc nostack");
+
+
+
   
   canvas_3->Print("Set8-11.png");
-  canvas_3->Close();
+  //canvas_3->Close();
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-auto canvas_4 = new TCanvas("canvas","canvas");
+auto canvas_4 = new TCanvas("canvas4","canvas4");
 auto hs12 = new THStack("hs12", "Timing of Photons hitting PMT in Event 12;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt12->SetLineColor(kWhite);
@@ -860,11 +888,25 @@ auto hs15 = new THStack("hs15", "Timing of Photons hitting PMT in Event 15;Time 
   canvas_4->SetWindowSize(400,400);
   canvas_4->Draw();
   
+  canvas_4->Divide(2,2);
+  
+  canvas_4->cd(1);
+  hs12->Draw("HIST pfc nostack");
+  canvas_4->cd(2);
+  hs13->Draw("HIST pfc nostack");
+  canvas_4->cd(3);
+  hs14->Draw("HIST pfc nostack");
+  canvas_4->cd(4);
+  hs15->Draw("HIST pfc nostack");
+
+
+
+  
   canvas_4->Print("Set12-15.png");
-  canvas_4->Close();
+  //canvas_4->Close();
 
   //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  auto canvas_5 = new TCanvas("canvas","canvas");
+  auto canvas_5 = new TCanvas("canvas5","canvas5");
   auto hs16 = new THStack("hs16", "Timing of Photons hitting PMT in Event 16;Time of Photon hits (ns);Photon Counts");
   gStyle->SetPalette(kRainBow);
   electron_evt16->SetLineColor(kWhite);
@@ -911,9 +953,20 @@ auto hs15 = new THStack("hs15", "Timing of Photons hitting PMT in Event 15;Time 
   canvas_5->SetCanvasSize(1600,1600);
   canvas_5->SetWindowSize(400,400);
   canvas_5->Draw();
+
+  canvas_5->Divide(2,2);
+  
+  canvas_5->cd(1);
+  hs16->Draw("HIST pfc nostack");
+  canvas_5->cd(2);
+  hs17->Draw("HIST pfc nostack");
+  canvas_5->cd(3);
+  hs18->Draw("HIST pfc nostack");
+  canvas_5->cd(4);
+  hs19->Draw("HIST pfc nostack");
   
   canvas_5->Print("Set16-19.png");
-  canvas_5->Close();
+  //canvas_5->Close();
   //-----------------------------------------------------------------------------------------------------------------------------------------------------------------------   
 
   
