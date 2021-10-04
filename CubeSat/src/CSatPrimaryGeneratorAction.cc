@@ -167,7 +167,7 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
     //Program control
    
-    G4int neutrinoprocess = 0;  //0 for cosmic rays, 1 for neutrino events
+    G4int neutrinoprocess = 1;  //0 for cosmic rays, 1 for neutrino events
     G4int galliumprocess = 0;  // 0 for Gallium-69, 1 for Gallium-71
     G4int gammaprocess = 2;  // 69Ge:  0 for ground state, 1 for 87 keV gamma, 2 for 397 keV gamma
                              // 71Ge:  0 for ground state, 1 for 198 keV excited state
@@ -450,7 +450,9 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       G4double pyGer = 0;
       G4double pzGer = 0;
       G4double kineticenergyGer = 0;
-      
+      G4cout << "required neutrino energy is > " << ((thresholdenergy*thresholdenergy - mass0*mass0)/(2.*mass0)/MeV) << G4endl;
+     
+       
       fparticleGun->SetParticleDefinition(particle);
       fparticleGun->SetParticleMomentumDirection(G4ThreeVector(px,py,pz));
       fparticleGun->SetParticleEnergy(kineticenergy);
@@ -461,6 +463,7 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       //G4double lifetime = germanium ->GetPDGLifeTime();
 
       //G4cout << "Delay of the Germanium Atom is: " << lifetime*ns << G4endl;
+      
       
       fparticleGun->SetParticleDefinition(germanium);
       fparticleGun->SetParticleMomentumDirection(G4ThreeVector(pxGer,pyGer,pzGer));
