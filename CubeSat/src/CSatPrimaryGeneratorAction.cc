@@ -56,11 +56,11 @@ CSatPrimaryGeneratorAction::CSatPrimaryGeneratorAction()
    G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
   
   //G4String particleName;
-  fparticleGun->SetParticleDefinition(particleTable->FindParticle(particleName = "geantino"));
+  fparticleGun->SetParticleDefinition(particleTable->FindParticle(particleName = "mu-"));
   // Default energy,position,momentum
-  fparticleGun->SetParticleEnergy(0*GeV);
+  fparticleGun->SetParticleEnergy(1*GeV);
   fparticleGun->SetParticleTime(0.0*ns);
-  fparticleGun->SetParticlePosition(G4ThreeVector(0, 0., -3.85 * cm));
+  fparticleGun->SetParticlePosition(G4ThreeVector(0, 0., -20 * cm));
   fparticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
   
 }
@@ -77,54 +77,9 @@ CSatPrimaryGeneratorAction::~CSatPrimaryGeneratorAction()
 
 void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-  /*
-  G4Step* theStep = new G4Step();
+ 
   
-  G4String name = theStep->GetPreStepPoint()->GetTouchableHandle()->GetVolume()->GetLogicalVolume()->GetName();
-
-  G4cout << "The name of the volumes are: " << name << G4endl;
-  */
-
-
-
-
-
-
-
-  
-  /*
-  G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-  
-  fparticleGun->SetParticleDefinition(particleTable->FindParticle(particleName = "e-"));
-  // Default energy,position,momentum
-  fparticleGun->SetParticleEnergy(60*MeV);
-  fparticleGun->SetParticleTime(0.0*ns);
-  fparticleGun->SetParticlePosition(G4ThreeVector(0, 0., -2*m));
-  fparticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
   fparticleGun->GeneratePrimaryVertex(anEvent);
-
-    G4int Z = 10, A = 24;
-    G4double ionCharge   = 0.*eplus;
-    G4double excitEnergy = 0.*keV;
-    
-    G4ParticleDefinition* ion
-       = G4IonTable::GetIonTable()->GetIon(Z,A,excitEnergy);
-
-
-
-  
-
-  // Default energy,position,momentum
-  fparticleGun->SetParticleDefinition(ion);
-  fparticleGun->SetParticleCharge(ionCharge);
-  fparticleGun->SetParticleEnergy(60*MeV);
-  fparticleGun->SetParticleTime(2000*ns);
-  fparticleGun->SetParticlePosition(G4ThreeVector(0, 0., -3.85*cm));
-  fparticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
-  */
-
-  
-  //fparticleGun->GeneratePrimaryVertex(anEvent);
   
     //The variable neutrinoprocess controls whether we are studying the background (neutrinoprocess=0)
     //    or
@@ -167,7 +122,7 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
     //Program control
    
-    G4int neutrinoprocess = 1;  //0 for cosmic rays, 1 for neutrino events
+    G4int neutrinoprocess = 0;  //0 for cosmic rays, 1 for neutrino events
     G4int galliumprocess = 0;  // 0 for Gallium-69, 1 for Gallium-71
     G4int gammaprocess = 2;  // 69Ge:  0 for ground state, 1 for 87 keV gamma, 2 for 397 keV gamma
                              // 71Ge:  0 for ground state, 1 for 198 keV excited state

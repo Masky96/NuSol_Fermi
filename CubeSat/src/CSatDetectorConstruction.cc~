@@ -144,7 +144,7 @@ void CSatDetectorConstruction::DefineMaterials()
   fCe = nist ->FindOrBuildMaterial("G4_Ce");
 
   //Getting Fractional Masses of Iron and Epoxy
-  densityCombined = 3*g/cm3;
+  densityCombined = 3.6*g/cm3;
 
   G4double mass_epoxy=1;
   
@@ -200,9 +200,9 @@ void CSatDetectorConstruction::DefineMaterials()
   //fCSat_mt->AddProperty("SCINTILLATIONCOMPONENT2", lxe_Energy, lxe_SCINT);
   fCSat_mt->AddProperty("RINDEX", lxe_Energy, lxe_RIND);
   fCSat_mt->AddProperty("ABSLENGTH", lxe_Energy, lxe_ABSL);
-  fCSat_mt->AddConstProperty("SCINTILLATIONYIELD", 420. / MeV);
+  fCSat_mt->AddConstProperty("SCINTILLATIONYIELD", 42000. / MeV);
   fCSat_mt->AddConstProperty("RESOLUTIONSCALE", 1.0);
-  fCSat_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 20. * ns);
+  fCSat_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 80. * ns);
   //fCSat_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT2", 45. * ns);
   fCSat_mt->AddConstProperty("SCINTILLATIONYIELD1", 1.0);
   //fCSat_mt->AddConstProperty("SCINTILLATIONYIELD2", 0.0);
@@ -273,9 +273,9 @@ void CSatDetectorConstruction::DefineMaterials()
   
   feljin_mt->AddProperty("RINDEX", Eljin_Energy, Eljin_RIND);
   feljin_mt->AddProperty("ABSLENGTH", Eljin_Energy, Eljin_ABSL);
-  feljin_mt->AddConstProperty("SCINTILLATIONYIELD", 100. / MeV);
+  feljin_mt->AddConstProperty("SCINTILLATIONYIELD", 10000. / MeV);
   feljin_mt->AddConstProperty("RESOLUTIONSCALE", 1.0);
-  feljin_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 20. * ns);
+  feljin_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 2. * ns);
   feljin_mt->AddConstProperty("SCINTILLATIONYIELD1", 1.0);
   fEljin_200->SetMaterialPropertiesTable(feljin_mt);
   

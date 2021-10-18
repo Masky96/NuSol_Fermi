@@ -46,6 +46,8 @@ set(LXe_SCRIPTS
     photon.mac
     gui.mac
     vis.mac
+    quantumeff.dat
+
    )
 
 foreach(_script ${LXe_SCRIPTS})

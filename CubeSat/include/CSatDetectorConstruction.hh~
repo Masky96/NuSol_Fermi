@@ -140,7 +140,7 @@ class CSatDetectorConstruction : public G4VUserDetectorConstruction
   G4int fNfibers;
   G4double fRefl;
   G4bool fMainVolumeOn;
-  CSatMainVolume* fMainVolume;
+   CSatMainVolume* fMainVolume;
 
   G4MaterialPropertiesTable* fCSat_mt;
   G4MaterialPropertiesTable* feljin_mt;

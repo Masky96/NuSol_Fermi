@@ -13,7 +13,7 @@
 // * work  make  any representation or  warranty, express or implied, *
 // * regarding  this  software system or assume any liability for its *
 // * use.  Please see the license in the file  LICENSE  and URL above *
-// * for the full disclaimer and the limitation of liability.         *
+// * for the full disclaimer and the limitat\begin{frame}{Cube Sat Detector}
 // *                                                                  *
 // * This  code  implementation is the result of  the  scientific and *
 // * technical work of the GEANT4 collaboration.                      *
@@ -144,7 +144,7 @@ void CSatDetectorConstruction::DefineMaterials()
   fCe = nist ->FindOrBuildMaterial("G4_Ce");
 
   //Getting Fractional Masses of Iron and Epoxy
-  densityCombined = 3*g/cm3;
+  densityCombined = 3.6*g/cm3;
 
   G4double mass_epoxy=1;
   
