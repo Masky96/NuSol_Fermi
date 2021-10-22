@@ -148,7 +148,7 @@ void CSatDetectorConstruction::DefineMaterials()
 
   G4double mass_epoxy=1;
   
-  G4double mass_iron = (densityCombined/(7.87*g/cm3)-1)/(1-densityCombined/(1.15*g/cm3))*mass_epoxy;
+  G4double mass_iron = (((densityCombined/(7.87*g/cm3))-1)/(1-(densityCombined/(1.15*g/cm3))))*mass_epoxy;
   G4double epoxy_frac = mass_epoxy/(mass_iron+mass_epoxy);
   G4double iron_frac = mass_iron/(mass_iron+mass_epoxy);
 
@@ -184,11 +184,19 @@ void CSatDetectorConstruction::DefineMaterials()
   //***Material properties tables
 
 //This portion is acting as the GAGG crystal material properties
-	    std::vector<G4double> lxe_Energy ={((c_light*h_Planck)/(400*nm))*eV, ((c_light*h_Planck)/(410*nm))*eV,((c_light*h_Planck)/(420*nm))*eV,((c_light*h_Planck)/(430*nm))*eV,((c_light*h_Planck)/(440*nm))*eV,((c_light*h_Planck)/(450*nm))*eV,
-		                               ((c_light*h_Planck)/(460*nm))*eV, ((c_light*h_Planck)/(470*nm))*eV,((c_light*h_Planck)/(480*nm))*eV,((c_light*h_Planck)/(490*nm))*eV,((c_light*h_Planck)/(500*nm))*eV, ((c_light*h_Planck)/(510*nm))*eV,
-		                               ((c_light*h_Planck)/(520*nm))*eV, ((c_light*h_Planck)/(530*nm))*eV,((c_light*h_Planck)/(540*nm))*eV,((c_light*h_Planck)/(550*nm))*eV,((c_light*h_Planck)/(560*nm))*eV,((c_light*h_Planck)/(570*nm))*eV,
-					       ((c_light*h_Planck)/(580*nm))*eV, ((c_light*h_Planck)/(590*nm))*eV,((c_light*h_Planck)/(600*nm))*eV,((c_light*h_Planck)/(610*nm))*eV, ((c_light*h_Planck)/(620*nm))*eV, ((c_light*h_Planck)/(630*nm))*eV,
-		                               ((c_light*h_Planck)/(640*nm))*eV, ((c_light*h_Planck)/(650*nm))*eV};
+
+  
+  std::vector<G4double> lxe_Energy ={1.2398/0.4, 1.2398/.41,1.2398/.42,1.2398/.430 ,1.2398/.440 ,1.2398/.450 ,
+		                               1.2398/.460 , 1.2398/.470 ,1.2398/.480 ,1.2398/.490 ,1.2398/.500 , 1.2398/.510 ,
+		                               1.2398/.520 , 1.2398/.530 ,1.2398/.540 ,1.2398/.550 ,1.2398/.560 ,1.2398/.570 ,
+					       1.2398/.580 , 1.2398/.590 ,1.2398/.600 ,1.2398/.610 , 1.2398/.620 , 1.2398/.630 ,
+		                               1.2398/.640 , 1.2398/.650 };
+	    for (size_t i = 0; i < lxe_Energy.size(); ++i) {
+	      G4cout << lxe_Energy[i] << "; ";
+	    }
+	    G4cout << G4endl;
+
+
 
 	    
 
@@ -196,21 +204,17 @@ void CSatDetectorConstruction::DefineMaterials()
   std::vector<G4double> lxe_RIND  = { 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9, 1.9 , 1.9, 1.9, 1.9};
   std::vector<G4double> lxe_ABSL  = { 380.* cm, 380.* cm, 380.* cm, 380.* cm, 380.* cm, 380.* cm, 380.* cm, 380.* cm,380.* cm, 380.* cm, 380.* cm, 380.* cm,380.* cm, 380.* cm, 380.* cm, 380.* cm,380.* cm, 380.* cm, 380.* cm, 380.* cm,380.* cm, 380.* cm, 380.* cm, 380.* cm, 380.* cm, 380.* cm};
   fCSat_mt = new G4MaterialPropertiesTable();
-  fCSat_mt->AddProperty("SCINTILLATIONCOMPONENT1", lxe_Energy, lxe_SCINT);
+  fCSat_mt->AddProperty("SCINTILLATIONCOMPONENT1", lxe_Energy, lxe_SCINT)->SetSpline(true);
   //fCSat_mt->AddProperty("SCINTILLATIONCOMPONENT2", lxe_Energy, lxe_SCINT);
-  fCSat_mt->AddProperty("RINDEX", lxe_Energy, lxe_RIND);
-  fCSat_mt->AddProperty("ABSLENGTH", lxe_Energy, lxe_ABSL);
+  fCSat_mt->AddProperty("RINDEX", lxe_Energy, lxe_RIND)->SetSpline(true);
+  fCSat_mt->AddProperty("ABSLENGTH", lxe_Energy, lxe_ABSL)->SetSpline(true);
   fCSat_mt->AddConstProperty("SCINTILLATIONYIELD", 42000. / MeV);
   fCSat_mt->AddConstProperty("RESOLUTIONSCALE", 1.0);
   fCSat_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 80. * ns);
-  //fCSat_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT2", 45. * ns);
   fCSat_mt->AddConstProperty("SCINTILLATIONYIELD1", 1.0);
-  //fCSat_mt->AddConstProperty("SCINTILLATIONYIELD2", 0.0);
-  fGAGG->SetMaterialPropertiesTable(fCSat_mt);
   fCSat->SetMaterialPropertiesTable(fCSat_mt);
 
   // Set the Birks Constant for the CSat scintillator
-  fGAGG->GetIonisation()->SetBirksConstant(0.126 * mm / MeV);
   fCSat->GetIonisation()->SetBirksConstant(0.126 * mm / MeV);
  
 
@@ -233,8 +237,8 @@ void CSatDetectorConstruction::DefineMaterials()
   
   
   G4MaterialPropertiesTable* glass_mt   = new G4MaterialPropertiesTable();
-  glass_mt->AddProperty("ABSLENGTH", lxe_Energy, glass_AbsLength);
-  glass_mt->AddProperty("RINDEX", lxe_Energy, glass_RIND);
+  glass_mt->AddProperty("ABSLENGTH", lxe_Energy, glass_AbsLength)->SetSpline(true);
+  glass_mt->AddProperty("RINDEX", lxe_Energy, glass_RIND)->SetSpline(true);
 
   fGlass->SetMaterialPropertiesTable(glass_mt);
 
@@ -244,24 +248,24 @@ void CSatDetectorConstruction::DefineMaterials()
 
 //Material needed for when the photons go to Vacuum.
 
-   std::vector<G4double> vacuum_Energy = {((c_light*h_Planck)/(400*nm))*eV, ((c_light*h_Planck)/(410*nm))*eV,((c_light*h_Planck)/(420*nm))*eV,((c_light*h_Planck)/(430*nm))*eV,((c_light*h_Planck)/(440*nm))*eV,((c_light*h_Planck)/(450*nm))*eV,
-		                          ((c_light*h_Planck)/(460*nm))*eV,((c_light*h_Planck)/(470*nm))*eV,((c_light*h_Planck)/(480*nm))*eV,((c_light*h_Planck)/(490*nm))*eV,((c_light*h_Planck)/(500*nm))*eV, ((c_light*h_Planck)/(510*nm))*eV,
-		                          ((c_light*h_Planck)/(520*nm))*eV,((c_light*h_Planck)/(530*nm))*eV,((c_light*h_Planck)/(540*nm))*eV,((c_light*h_Planck)/(550*nm))*eV,((c_light*h_Planck)/(560*nm))*eV,((c_light*h_Planck)/(570*nm))*eV,
-					  ((c_light*h_Planck)/(580*nm))*eV,((c_light*h_Planck)/(590*nm))*eV,((c_light*h_Planck)/(600*nm))*eV,((c_light*h_Planck)/(610*nm))*eV, ((c_light*h_Planck)/(620*nm))*eV, ((c_light*h_Planck)/(630*nm))*eV,
-		                          ((c_light*h_Planck)/(640*nm))*eV, ((c_light*h_Planck)/(650*nm))*eV};
+   std::vector<G4double> vacuum_Energy = {1.2398/.400 , 1.2398/.410 , 1.2398/.420 , 1.2398/.430 , 1.2398/.440 , 1.2398/.450 ,
+		                          1.2398/.460 , 1.2398/.470 , 1.2398/.480 , 1.2398/.490 , 1.2398/.500 , 1.2398/.510 ,
+		                          1.2398/.520 , 1.2398/.530 , 1.2398/.540 , 1.2398/.550 , 1.2398/.560 , 1.2398/.570 ,
+					  1.2398/.580 , 1.2398/.590 , 1.2398/.600 , 1.2398/.610 , 1.2398/.620 , 1.2398/.630 ,
+		                          1.2398/.640 , 1.2398/.650 };
 
   std::vector<G4double> vacuum_RIND    = { 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.,1.,1.,1.,1.};
 
   G4MaterialPropertiesTable* vacuum_mt = new G4MaterialPropertiesTable();
-  vacuum_mt->AddProperty("RINDEX", vacuum_Energy, vacuum_RIND);
+  vacuum_mt->AddProperty("RINDEX", vacuum_Energy, vacuum_RIND)->SetSpline(true);
   fVacuum->SetMaterialPropertiesTable(vacuum_mt);
   fAir->SetMaterialPropertiesTable(vacuum_mt);  // Give air the same rindex
 
 
 
 //Eljin Scintillator (Veto) Properties
-   std::vector<G4double> Eljin_Energy ={((c_light*h_Planck)/(400*nm))*eV, ((c_light*h_Planck)/(410*nm))*eV,((c_light*h_Planck)/(420*nm))*eV,((c_light*h_Planck)/(430*nm))*eV,((c_light*h_Planck)/(440*nm))*eV,((c_light*h_Planck)/(450*nm))*eV,
-		                        ((c_light*h_Planck)/(460*nm))*eV,((c_light*h_Planck)/(470*nm))*eV,((c_light*h_Planck)/(480*nm))*eV,((c_light*h_Planck)/(490*nm))*eV,((c_light*h_Planck)/(500*nm))*eV};
+   std::vector<G4double> Eljin_Energy ={1.2398/.400 , 1.2398/.410 ,1.2398/.420 ,1.2398/.430 ,1.2398/.440 ,1.2398/.450 ,
+		                        1.2398/.460 ,1.2398/.470 ,1.2398/.480 ,1.2398/.490 ,1.2398/.500 };
 
 
   std::vector<G4double> Eljin_SCINT = {0., 0.26, 0.914, 0.98, 0.78, 0.565, 0.445, 0.308, 0.177, 0.097, 0.05};
@@ -269,10 +273,10 @@ void CSatDetectorConstruction::DefineMaterials()
   std::vector<G4double> Eljin_ABSL  = {380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm, 380.*cm};
   feljin_mt = new G4MaterialPropertiesTable();
 
-  feljin_mt->AddProperty("SCINTILLATIONCOMPONENT1", Eljin_Energy, Eljin_SCINT);
+  feljin_mt->AddProperty("SCINTILLATIONCOMPONENT1", Eljin_Energy, Eljin_SCINT)->SetSpline(true);
   
-  feljin_mt->AddProperty("RINDEX", Eljin_Energy, Eljin_RIND);
-  feljin_mt->AddProperty("ABSLENGTH", Eljin_Energy, Eljin_ABSL);
+  feljin_mt->AddProperty("RINDEX", Eljin_Energy, Eljin_RIND)->SetSpline(true);
+  feljin_mt->AddProperty("ABSLENGTH", Eljin_Energy, Eljin_ABSL)->SetSpline(true);
   feljin_mt->AddConstProperty("SCINTILLATIONYIELD", 10000. / MeV);
   feljin_mt->AddConstProperty("RESOLUTIONSCALE", 1.0);
   feljin_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 2. * ns);

@@ -55,6 +55,31 @@ CSatVPMTSD::CSatVPMTSD(G4String name)
 {
   fVPMTCollection = nullptr;
   collectionName.insert("vpmtCollection");
+  quanEff = new G4PhysicsOrderedFreeVector();
+
+  
+  std::ifstream datafileVeto;
+  datafileVeto.open("quantumeffEljin.dat");
+
+  while(1)
+    {
+      G4double wlen, queff;
+
+      datafileVeto >> wlen >> queff;
+
+      if(datafileVeto.eof())
+	break;
+
+      //G4cout << wlen << " " << queff << G4endl;
+
+      quanEff->InsertValues(wlen, queff/100);
+    }
+  
+  datafileVeto.close();
+
+
+  
+  
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -85,12 +110,7 @@ G4bool CSatVPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
     {
       return false;
     }
- /*
-    else if(aStep->GetTrack()->GetDefinition() != G4Gamma::GammaDefinition())
-    {
-      return false;
-    }
-  */
+
 
   aStep->GetTrack()->SetTrackStatus(fStopAndKill);
   
@@ -108,11 +128,14 @@ G4bool CSatVPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
   G4double wavelength = (1.239841939*eV/mom)*1E+03*nm; 
 
   G4double timeV = aStep->GetTrack()->GetGlobalTime();
-  /*
-  G4AnalysisManager::Instance()->FillNtupleDColumn(1 , 0 , timeV);
-  G4AnalysisManager::Instance()->FillNtupleDColumn(1 , 1 , wavelength);
-  G4AnalysisManager::Instance()->AddNtupleRow(1);
-  */
+
+  
+  if (G4UniformRand() < quanEff->Value(wavelength))
+    {
+      G4AnalysisManager::Instance()->FillNtupleDColumn(1 , 0 , timeV);
+      G4AnalysisManager::Instance()->FillNtupleDColumn(1 , 1 , wavelength);
+      G4AnalysisManager::Instance()->AddNtupleRow(1);
+    }
  
   vpmtHit->SetTimeV(timeV);
   

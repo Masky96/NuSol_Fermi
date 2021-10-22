@@ -51,8 +51,6 @@ class CSatVPMTSD : public G4VSensitiveDetector
  private:
   CSatVPMTHitsCollection* fVPMTCollection;
   G4int fHitsCID;
-
-  G4PhysicsOrderedFreeVector* quanEff; 
 };
 
 #endif

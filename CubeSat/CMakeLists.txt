@@ -47,6 +47,7 @@ set(LXe_SCRIPTS
     gui.mac
     vis.mac
     quantumeff.dat
+    quantumeffEljin.dat
 
    )
 

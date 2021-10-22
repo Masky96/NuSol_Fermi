@@ -71,7 +71,7 @@ CSatGPMTSD::CSatGPMTSD(G4String name)
       if(datafile.eof())
 	break;
 
-      G4cout << wlen << " " << queff << G4endl;
+      //G4cout << wlen << " " << queff << G4endl;
 
       quanEff->InsertValues(wlen, queff/100);
     }
@@ -104,24 +104,21 @@ void CSatGPMTSD::Initialize(G4HCofThisEvent* hitsCE)
 G4bool CSatGPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
  
 
-  if(aStep->GetTrack()->GetDefinition() != G4OpticalPhoton::OpticalPhotonDefinition()) //&&  aStep->GetTrack()->GetDefinition() != G4Gamma::GammaDefinition())
+  if(aStep->GetTrack()->GetDefinition() != G4OpticalPhoton::OpticalPhotonDefinition()) 
     {
       return false;
     }
-  /*
-    else if(aStep->GetTrack()->GetDefinition() != G4Gamma::GammaDefinition())
-    {
-      return false;
-    }
-  */
 
 
-  G4int evtID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
+
+  //G4int evtID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
   //G4cout << "The Event ID is: " << evtID << G4endl;
   
-  G4int parentID = aStep->GetTrack()->GetParentID();
+  //G4int parentID = aStep->GetTrack()->GetParentID();
 
   //G4cout << "The Parent ID is: " << parentID << G4endl;
+
+  
   aStep->GetTrack()->SetTrackStatus(fStopAndKill);
 
   G4TouchableHistory* theTouchable =
@@ -139,18 +136,7 @@ G4bool CSatGPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
   
   G4double timeG = aStep->GetTrack()->GetGlobalTime();
 
-  /*
-  if (timeG > 50*ns)
-    {
-      G4AnalysisManager::Instance()->FillNtupleDColumn(2 , 0 , timeG*ns);
-      G4AnalysisManager::Instance()->FillNtupleDColumn(2 , 1 , wavelength);
-      G4AnalysisManager::Instance()->AddNtupleRow(2);
-    }
-  */
 
-  G4AnalysisManager::Instance()->FillNtupleDColumn(1 , 0 , timeG);
-  G4AnalysisManager::Instance()->FillNtupleDColumn(1 , 1 , wavelength);
-  G4AnalysisManager::Instance()->AddNtupleRow(1);
   
   if (G4UniformRand() < quanEff->Value(wavelength))
     {
@@ -159,7 +145,8 @@ G4bool CSatGPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
   G4AnalysisManager::Instance()->AddNtupleRow(2);
   
     }
-  
+
+  /*
   if(evtID == 0)
     {
       if (parentID == 6 )
@@ -566,7 +553,7 @@ G4bool CSatGPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
 	}
     }
 
-
+  */
 
   
   
