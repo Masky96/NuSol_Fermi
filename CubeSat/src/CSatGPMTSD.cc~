@@ -71,7 +71,7 @@ CSatGPMTSD::CSatGPMTSD(G4String name)
       if(datafile.eof())
 	break;
 
-      G4cout << wlen << " " << queff << G4endl;
+      //G4cout << wlen << " " << queff << G4endl;
 
       quanEff->InsertValues(wlen, queff/100);
     }
@@ -140,8 +140,8 @@ G4bool CSatGPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
   
   if (G4UniformRand() < quanEff->Value(wavelength))
     {
-  G4AnalysisManager::Instance()->FillNtupleDColumn(2 , 0 , timeG);
-  G4AnalysisManager::Instance()->FillNtupleDColumn(2 , 1 , wavelength);
+  G4AnalysisManager::Instance()->FillNtupleFColumn(2 , 0 , timeG);
+  G4AnalysisManager::Instance()->FillNtupleFColumn(2 , 1 , wavelength);
   G4AnalysisManager::Instance()->AddNtupleRow(2);
   
     }

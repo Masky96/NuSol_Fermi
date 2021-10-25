@@ -141,7 +141,7 @@ CSatMainVolume::CSatMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlat
 
   
   G4RotationMatrix* rot = new G4RotationMatrix();
-  rot->rotateY(900/10*deg);
+  rot->rotateY(0/10*deg);
   new G4PVPlacement(rot,G4ThreeVector(), fIron_log, "Shielding", emptyspaceLog, false, 0);
   
   

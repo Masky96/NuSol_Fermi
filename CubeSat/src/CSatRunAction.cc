@@ -64,21 +64,21 @@ CSatRunAction::CSatRunAction()
 
 
  
- analysisManager->CreateNtupleDColumn(ntupleID, "GAGG_hits"); //ID 0
- analysisManager->CreateNtupleDColumn(ntupleID, "Veto_hits"); //ID 1 
+ analysisManager->CreateNtupleFColumn(ntupleID, "GAGG_hits"); //ID 0
+ analysisManager->CreateNtupleFColumn(ntupleID, "Veto_hits"); //ID 1 
  //analysisManager->CreateNtupleDColumn(ntupleID, "Veto_Time"); //ID 2 
  //analysisManager->CreateNtupleDColumn(ntupleID, "GAGG_Time"); //ID 3 
  analysisManager->FinishNtuple(ntupleID);
 
  
  G4int ntupleID1 = analysisManager->CreateNtuple("Time of Hits Veto", "Time of Hits Veto");
- analysisManager->CreateNtupleDColumn(ntupleID1, "TimingofhitsAfterQEVeto"); //ID 0
- analysisManager->CreateNtupleDColumn(ntupleID1, "Wavelength");
+ analysisManager->CreateNtupleFColumn(ntupleID1, "TimingofhitsAfterQEVeto"); //ID 0
+ analysisManager->CreateNtupleFColumn(ntupleID1, "Wavelength");
  analysisManager->FinishNtuple(ntupleID1);
 
  G4int ntupleID2 = analysisManager->CreateNtuple("Time of Hits GAGG", "Time of Hits GAGG");
- analysisManager->CreateNtupleDColumn(ntupleID2, "TimingofhitsBeforeQEVeto"); //ID 0
- analysisManager->CreateNtupleDColumn(ntupleID2, "Wavelength");
+ analysisManager->CreateNtupleFColumn(ntupleID2, "TimingofhitsBeforeQEVeto"); //ID 0
+ analysisManager->CreateNtupleFColumn(ntupleID2, "Wavelength");
  analysisManager->FinishNtuple(ntupleID2);
 
 

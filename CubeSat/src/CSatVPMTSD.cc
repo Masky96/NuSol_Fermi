@@ -124,16 +124,16 @@ G4bool CSatVPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
   
   CSatVPMTHit* vpmtHit = new CSatVPMTHit(thePrePV);
   
-  G4double mom = thePrePoint->GetMomentum().mag();
-  G4double wavelength = (1.239841939*eV/mom)*1E+03*nm; 
+  G4float mom = thePrePoint->GetMomentum().mag();
+  G4float wavelength = (1.239841939*eV/mom)*1E+03*nm; 
 
-  G4double timeV = aStep->GetTrack()->GetGlobalTime();
+  G4float timeV = aStep->GetTrack()->GetGlobalTime();
 
   
   if (G4UniformRand() < quanEff->Value(wavelength))
     {
-      G4AnalysisManager::Instance()->FillNtupleDColumn(1 , 0 , timeV);
-      G4AnalysisManager::Instance()->FillNtupleDColumn(1 , 1 , wavelength);
+      G4AnalysisManager::Instance()->FillNtupleFColumn(1 , 0 , timeV);
+      G4AnalysisManager::Instance()->FillNtupleFColumn(1 , 1 , wavelength);
       G4AnalysisManager::Instance()->AddNtupleRow(1);
     }
  
