@@ -260,7 +260,7 @@ CSatRunAction::CSatRunAction()
  */
 
  // 0
- analysisManager->CreateH1("0", "dummy", nbins, vmin, vmax);
+ //analysisManager->CreateH1("0", "dummy", nbins, vmin, vmax);
  
  //1 New
  /*
