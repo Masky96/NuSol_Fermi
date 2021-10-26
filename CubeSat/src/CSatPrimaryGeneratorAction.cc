@@ -58,7 +58,7 @@ CSatPrimaryGeneratorAction::CSatPrimaryGeneratorAction()
   //G4String particleName;
   fparticleGun->SetParticleDefinition(particleTable->FindParticle(particleName = "mu-"));
   // Default energy,position,momentum
-  fparticleGun->SetParticleEnergy(1*GeV);
+  fparticleGun->SetParticleEnergy(1*MeV);
   fparticleGun->SetParticleTime(0.0*ns);
   fparticleGun->SetParticlePosition(G4ThreeVector(0, 0., -20 * cm));
   fparticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));

@@ -50,7 +50,6 @@ CSatRunAction::CSatRunAction()
   analysisManager->SetVerboseLevel(1);
   analysisManager->SetFileName("Tutorial");
   analysisManager->SetNtupleMerging(true);
-  //analysisManager->SetActivation(true);
   G4int nbins   = 1000;
   G4double vmin = 0.;
   G4double vmax = 1000.;

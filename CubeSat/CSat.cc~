@@ -108,19 +108,7 @@ int main(int argc, char** argv)
   
   // initialize visualization
   G4VisManager* visManager = new G4VisExecutive;
-  /*
-//Color the particle tracks according to the particle type.
-  G4TrajectoryDrawByParticleID* model = new G4TrajectoryDrawByParticleID;
-  model -> SetDefault ("cyan");
-  model-> Set("gamma", "green");
-  model-> Set("e+", "magenta");
-  model-> Set("e-","yellow");
-  model-> Set("neutron", "blue");
-  model-> Set("opticalphoton", "cyan");
-  model-> Set("proton", G4Colour(1.,0.5,0.)); //orange
 
-  visManager->RegisterModel(model);
-  */
 
   
   visManager->Initialize();

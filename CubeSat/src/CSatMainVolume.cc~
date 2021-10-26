@@ -39,10 +39,10 @@
 #include "G4Material.hh"
 #include "G4MaterialPropertiesTable.hh"
 #include "G4OpticalSurface.hh"
-#include "G4Sphere.hh"
+//#include "G4Sphere.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4PhysicalConstants.hh"
-#include "G4Tubs.hh"
+//#include "G4Tubs.hh"
 #include "G4VisAttributes.hh"
 
 
@@ -137,11 +137,11 @@ CSatMainVolume::CSatMainVolume(G4RotationMatrix* pRot, const G4ThreeVector& tlat
   
   fIronShield = new G4Box("iron_shield", iron_shieldx/2., iron_shieldy/2., iron_shieldz/2.);
 
-  fIron_log = new G4LogicalVolume(fIronShield, G4Material::GetMaterial("Iron Shield"),"iron_log", 0,0,0);
+  fIron_log = new G4LogicalVolume(fIronShield, G4Material::GetMaterial("Vacuum"),"iron_log", 0,0,0);
 
   
   G4RotationMatrix* rot = new G4RotationMatrix();
-  rot->rotateY(225/10*deg);
+  rot->rotateY(0/10*deg);
   new G4PVPlacement(rot,G4ThreeVector(), fIron_log, "Shielding", emptyspaceLog, false, 0);
   
   
