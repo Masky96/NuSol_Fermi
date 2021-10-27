@@ -213,8 +213,8 @@ void CSatDetectorConstruction::DefineMaterials()
   fCSat_mt->AddConstProperty("RESOLUTIONSCALE", 1.0);
   fCSat_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 80. * ns);
   fCSat_mt->AddConstProperty("SCINTILLATIONYIELD1", 1.0);
-  fCSat->SetMaterialPropertiesTable(fCSat_mt);
-
+  //fCSat->SetMaterialPropertiesTable(fCSat_mt);
+  fGAGG->SetMaterialPropertiesTable(fCSat_mt);
   // Set the Birks Constant for the CSat scintillator
   fCSat->GetIonisation()->SetBirksConstant(0.126 * mm / MeV);
  

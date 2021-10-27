@@ -293,18 +293,16 @@ if(vpmtHC)
     G4double tfirstV;
     G4double timeV;
     G4double tdiffV;
-    //G4AnalysisManager::Instance()->FillNtupleFColumn(1, n_hits);
+    G4AnalysisManager::Instance()->FillNtupleFColumn(1, n_hits);
     for(size_t i = 0; i < n_hits; ++i)
     {  // gather info on hits in scintillator
-      //edepV = (*vpmtHC)[i]->GetEdepV(); //Take individual edeps and make them into a graph later.
+     
       
       tfirstV = (*vpmtHC)[0]->GetTimeV();
       timeV = (*vpmtHC)[i]->GetTimeV();
       tdiffV = timeV -tfirstV;
       
-      //fTotEV += edepV;
-      //G4AnalysisManager::Instance()->FillNtupleDColumn(0 , 2 ,((*vpmtHC)[i]->GetTimeV()-(*vpmtHC)[0]->GetTimeV()));
-      //G4AnalysisManager::Instance()->FillH1(3, tdiffV);
+      
     }
 
   }
@@ -312,7 +310,7 @@ if(vpmtHC)
  if(gpmtHC)
   {
     size_t n_hits = gpmtHC->entries();
-    //G4AnalysisManager::Instance()->FillNtupleFColumn(0, n_hits);
+    G4AnalysisManager::Instance()->FillNtupleFColumn(0, n_hits);
 
     //G4ThreeVector eWeightPos(0.);
     //G4double edepG;
@@ -322,7 +320,7 @@ if(vpmtHC)
     
     for(size_t i = 0; i < n_hits; ++i)
     {  // gather info on hits in scintillator
-      //edepG = (*gpmtHC)[i]->GetEdepG(); //Take individual edeps and make them into a graph later.
+      
       tfirstG = (*gpmtHC)[0]->GetTimeG();
 
       timeG = (*gpmtHC)[i]->GetTimeG();
@@ -334,7 +332,7 @@ if(vpmtHC)
   }
 
  
- //G4AnalysisManager::Instance()->AddNtupleRow(0);
+ G4AnalysisManager::Instance()->AddNtupleRow(0);
 
 
 

@@ -60,7 +60,7 @@ int main(int argc, char** argv)
   }
 
   auto runManager = G4RunManagerFactory::CreateRunManager();
-  runManager-> SetNumberOfThreads(2);
+  runManager-> SetNumberOfThreads(10);
 
   CSatDetectorConstruction* det = new CSatDetectorConstruction();
   runManager->SetUserInitialization(det);

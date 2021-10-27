@@ -111,14 +111,7 @@ G4bool CSatGPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
 
 
 
-  //G4int evtID = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID();
-  //G4cout << "The Event ID is: " << evtID << G4endl;
-  
-  //G4int parentID = aStep->GetTrack()->GetParentID();
-
-  //G4cout << "The Parent ID is: " << parentID << G4endl;
-
-  
+    
   aStep->GetTrack()->SetTrackStatus(fStopAndKill);
 
   G4TouchableHistory* theTouchable =
@@ -132,7 +125,7 @@ G4bool CSatGPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
   CSatGPMTHit* gpmtHit = new CSatGPMTHit(thePrePV);
   
   G4float mom = thePrePoint->GetMomentum().mag();
-  G4float wavelength = (1.239841939*eV/mom)*1E+03*nm; 
+  G4float wavelength = (1.239841939/mom)*1E+03*nm; 
   
   G4float timeG = aStep->GetTrack()->GetGlobalTime();
 

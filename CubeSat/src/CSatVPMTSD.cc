@@ -125,7 +125,7 @@ G4bool CSatVPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
   CSatVPMTHit* vpmtHit = new CSatVPMTHit(thePrePV);
   
   G4float mom = thePrePoint->GetMomentum().mag();
-  G4float wavelength = (1.239841939*eV/mom)*1E+03*nm; 
+  G4float wavelength = (1.239841939/mom)*1E+03*nm; 
 
   G4float timeV = aStep->GetTrack()->GetGlobalTime();
 
