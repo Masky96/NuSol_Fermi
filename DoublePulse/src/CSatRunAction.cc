@@ -30,7 +30,6 @@
 //
 #include "CSatRunAction.hh"
 #include "CSatAnalysis.hh"
-//#include "CSatHistoManager.hh"
 #include "CSatRun.hh"
 #include "G4RunManager.hh"
 
