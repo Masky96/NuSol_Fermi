@@ -105,7 +105,7 @@ void CSatSteppingAction::UserSteppingAction(const G4Step* theStep)
   
   if(theStep->GetTrack()->GetDefinition() == germaniumground)
     {
-      // G4cout << "Hello World" << G4endl;
+      G4cout << "Hello World" << G4endl;
       theStep->GetTrack()->SetTrackStatus(fStopAndKill);
     }
   

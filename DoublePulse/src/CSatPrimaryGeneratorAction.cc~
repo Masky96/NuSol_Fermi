@@ -19,7 +19,7 @@
 #include "G4Electron.hh"
 #include "G4Step.hh"
 #include "G4Track.hh"
-//#include "G4Geantino.hh"
+
 
 
 
@@ -154,8 +154,8 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     //Program control
    
     G4int neutrinoprocess = 1;  //0 for cosmic rays, 1 for neutrino events
-    G4int galliumprocess = 1;  // 0 for Gallium-69, 1 for Gallium-71
-    G4int gammaprocess = 2;  // 69Ge:  0 for ground state, 1 for 87 keV gamma, 2 for 397 keV gamma
+    G4int galliumprocess = 0;  // 0 for Gallium-69, 1 for Gallium-71
+    G4int gammaprocess = 1;  // 69Ge:  0 for ground state, 1 for 87 keV gamma, 2 for 397 keV gamma
                              // 71Ge:  0 for ground state, 1 for 198 keV excited state
                              // 71Ge:  2 is for firing the 174 keV state
 
@@ -207,13 +207,11 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       if (galliumprocess == 0) {
 	A = 69;
 	mass0 = 68.925573513*atomicmassunit;
-	 
       }
 
       if (galliumprocess == 1) {
 	A = 71;
 	mass0 = 70.9247025887*atomicmassunit;
-       
       }
       
       particle0 = ionTable->GetIon(Z,A,excitEnergy);  //Gallium ground state to be studied
@@ -230,8 +228,8 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       
       if (galliumprocess == 0) {
 
-	massge0 =  68.927964514* atomicmassunit;
-                  
+	massge0 = 68.927964514 * atomicmassunit;
+
 	//m1 decay for m69Ge
 	if (gammaprocess == 1) {
 	  
@@ -251,8 +249,8 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
       if (galliumprocess == 1) {
 
-	massge0 =  70.9249523390* atomicmassunit;
- 
+	massge0 = 70.9249523390 * atomicmassunit;
+
 	//Generate the highest energy m71Ge state
 	if (gammaprocess == 1) {
 	  excitEnergy = 198.354 * keV;
@@ -277,7 +275,7 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
       //Below we deliver a radioactive decay.
 
-      germanium -> SetPDGStable(false);
+      germanium -> SetPDGStable(true);
       germanium -> SetPDGLifeTime(delay);
 
 
@@ -331,9 +329,8 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       //minimum energy for producing electron and m69Ge
       G4double thresholdenergy = mass + massge; 
 
-      //G4cout << "Invariantmass is " << invariantmass << " and threshold energy is " << thresholdenergy << G4endl;
+      //  G4cout << "Invariantmass is " << invariantmass << " and threshold energy is " << thresholdenergy << G4endl;
 
-      
       if (thresholdenergy > invariantmass) {
 	G4cout << "Energy is below threshold" << G4endl;
 	G4cout << "thresholdenergy is " << thresholdenergy << " and invariantmass is " << invariantmass << G4endl;
@@ -341,7 +338,6 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 	return;
       }
       
-      G4cout << "required neutrino energy is > " << (thresholdenergy*thresholdenergy - mass0*mass0)/(2.*mass0) << G4endl;
       G4double mass1, mass3;
       G4double mass2;
       G4double mass4;
@@ -359,7 +355,6 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       particle3 = photon;
      
       //mass1 is the  mass of the m1_69Ge (case 2)
-      
       // PCCM IS THE BACK-TO-BACK MOMENTUM FOR MASS AND MASS1 IN THEIR CENTER OF MASS FRAME
 
       pccm = (invariantmass*invariantmass - (mass1 + mass)*(mass1 + mass));
@@ -459,11 +454,14 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
       fparticleGun->SetParticlePosition(GunPosition);
       fparticleGun->GeneratePrimaryVertex(anEvent);
 
-      
 
       
     }
-    
+    //G4IonTable* ionTable = G4IonTable::GetIonTable();
+    //G4ParticleDefinition* germaniumtest = ionTable->GetIon(31,69,0*keV);
+    //germaniumtest->SetPDGStable(true);
+    //G4double lifetime = germaniumtest ->GetPDGLifeTime();
+    //G4cout << "Delay of the Germanium Atom is: " << lifetime/s << G4endl;
 
     
 }
@@ -495,3 +493,6 @@ void CSatPrimaryGeneratorAction::SetOptPhotonPolar(G4double angle)
   particleGun->SetParticlePolarization(polar);
     
 }
+
+
+

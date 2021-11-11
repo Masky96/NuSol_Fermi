@@ -82,7 +82,7 @@ CSatRunAction::CSatRunAction()
  analysisManager->CreateNtupleFColumn(ntupleID2, "Wavelength");
  analysisManager->FinishNtuple(ntupleID2);
 
- int numEvents = 10000;
+ int numEvents = 1000;
  
  for(int i = 0; i < numEvents; i++)
    {
