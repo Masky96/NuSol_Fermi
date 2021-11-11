@@ -9,7 +9,7 @@ void DoublePulseFit() {  // file for opening
   
   //First Hist to Open
 
-  string nameFile = "NeutrinoPulse";
+  string nameFile = "Tutorial";
   string nameFRoot = nameFile + ".root";
 
   const char *nameFRoot2 = nameFRoot.c_str();
@@ -50,11 +50,11 @@ void DoublePulseFit() {  // file for opening
   TTree*myTreeE0;
 
   //Initializing the number of events that it should be reading
-  int numberOfEvents = 10;
+  int numberOfEvents = 1000;
 
 
   //Looping over all of the events Data.
-  for(unsigned int i = 1; i <= 10; ++i)
+  for(unsigned int i = 1; i <= numberOfEvents; ++i)
     {
   
   
@@ -118,7 +118,10 @@ void DoublePulseFit() {  // file for opening
 
   Double_t xposition = 0;
   
-  //Making sure that we get the corresponding x value for our gamma peak which will occur after the electron peak always. 
+  //Making sure that we get the corresponding x value for our gamma peak which will occur after the electron peak always.
+
+  //Good Criteria for the later decays, if it is the 79ns then set decay time limit to 50
+  /*
   if(xpos[0] > 100)
     {
       xposition = xpos[0];
@@ -127,6 +130,17 @@ void DoublePulseFit() {  // file for opening
     {
       xposition = xpos[1];
     }
+  */
+  //Use this for shorter decay time.
+if(xpos[0] > 50)
+    {
+      xposition = xpos[0];
+    }
+  else
+    {
+      xposition = xpos[1];
+    }
+
   
   
 
@@ -138,27 +152,34 @@ void DoublePulseFit() {  // file for opening
   //Creating a fit function using two Landau functions
   TF1* NeuFits = new TF1("NeuFit", " (([0])*(TMath::Landau(x,[1],[2])))+ (([3])*(TMath::Landau(x,[4],[5])))", 0 ,upperB);
   NeuFits->SetParNames("Electron Peak","mpv electron","scale electron", "Gamma Peak", "mpv","scale gamma");
-  NeuFits->SetParameters(100,0, 1 , 500, xposition,1);
+  
+  NeuFits->SetParameters(100,0, 1 , 200, xposition,1);
   //Fixing our mpv gamma value to be the xpositon of the corresponding peak. We don't want it moving too much and it is a good guess for our data.
   NeuFits->FixParameter(4,xposition);
   NeuFits->SetLineColor(4);
 
-
+ 
   
      
 
   
   Double_t par[6];
   
-  //auto canvas = new TCanvas("c","c");
+  auto canvas = new TCanvas("c","c");
 
   //Fitting our Histogram to the function that we defined.
-  Neutrino->Fit(NeuFits, "R");
+  Neutrino->Fit(NeuFits,"Q");
   //Grabbing the parameters of our fit functino and placing the values in par[]
   NeuFits ->GetParameters(&par[0]);
 
-  //canvas->Draw();
+  canvas->Draw();
+
+  const string pName = name + ".png";
+  const char *printName = pName.c_str();
+
+
   
+  canvas->Print(printName);
 
   //Calculating the overall peak of the landau functions respectively because we already have the function defined here.
   Double_t elecPeak = (par[0])*TMath::Landau(par[1], par[1], par[2]);
