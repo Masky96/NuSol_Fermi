@@ -136,6 +136,7 @@ G4bool CSatVPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
       G4AnalysisManager::Instance()->FillNtupleFColumn(1 , 1 , wavelength);
       G4AnalysisManager::Instance()->AddNtupleRow(1);
     }
+
   
   vpmtHit->SetTimeV(timeV);
   

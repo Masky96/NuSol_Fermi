@@ -58,7 +58,9 @@ CSatRunAction::CSatRunAction()
   G4double vmax = 1000.;
  
   analysisManager->CreateH1("0", "dummy", nbins, vmin, vmax);
- 
+  
+  
+  
  G4int ntupleID = analysisManager->CreateNtuple("Example", "Example Background");
 
  //analysisManager->CreateNtupleDColumn("Veto_Edep"); //ID 1
@@ -104,11 +106,25 @@ CSatRunAction::CSatRunAction()
  
  for(int i = 0; i < numEvents; i++)
    {
-     int index = 0;
-     string indexstr = to_string(index);
-     analysisManager->CreateH1("Neutrino Double Pulses Event"+indexstr,"Neutrino Double Pulses Event"+indexstr, 100, 0, 1000);
+     
+     string indexstr = to_string(i);
+     string indexName = "Neutrino Double Pulses Event" +indexstr;
+     const char *indexConst = indexName.c_str();
+     analysisManager->CreateH1(indexConst,indexConst, 100, 0, 1000);
     
-     index ++;
+    
+     
+   }
+
+ for(int i = 0; i < numEvents; i++)
+   {
+     
+     string indexstr = to_string(i);
+     string indexName =  "Veto Timing Event"+indexstr;
+     const char *indexConst = indexName.c_str();
+     analysisManager->CreateH1(indexConst,indexConst, 100, 0, 1000);
+    
+     
    }
  
 
