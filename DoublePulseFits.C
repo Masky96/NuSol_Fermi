@@ -2,6 +2,7 @@
 // It will fit both peaks using a Landau function and output the parameters to a CSV file
 #include <math.h>
 #include <fstream>
+#include <algorithm>
 
 
 
@@ -9,7 +10,7 @@ void DoublePulseFit() {  // file for opening
   
   //First Hist to Open
 
-  string nameFile = "Tutorial";
+  string nameFile = "nu_e+11+2";
   string nameFRoot = nameFile + ".root";
 
   const char *nameFRoot2 = nameFRoot.c_str();
@@ -50,7 +51,7 @@ void DoublePulseFit() {  // file for opening
   TTree*myTreeE0;
 
   //Initializing the number of events that it should be reading
-  int numberOfEvents = 1000;
+  int numberOfEvents = 10;
 
 
   //Looping over all of the events Data.
@@ -77,18 +78,25 @@ void DoublePulseFit() {  // file for opening
   unsigned int mysizeE0 = myTreeE0->GetEntries();
  
   
-  Float_t max = 0;
+  Float_t maximum = 0;
 
   for (unsigned int i = 0; i < mysizeE0; ++i) {
     myTreeE0->GetEntry(i);
    
-    if(myEvent.DoubleTimes>max)
+    if(myEvent.DoubleTimes>maximum)
       {
-	max = myEvent.DoubleTimes;
+	maximum = myEvent.DoubleTimes;
       }
   }
 
-  TH1D* Neutrino = new TH1D(nameNew,"", floor((max+301)/5), 0, max+300);
+  Float_t maxNew = floor(maximum);
+
+  Int_t extra = static_cast<int>(maximum)%10;
+
+  maximum = maxNew - extra + 300;
+
+  
+  TH1D* Neutrino = new TH1D(nameNew,"", maximum/10, -20, maximum);
 
 
 
@@ -146,18 +154,18 @@ if(xpos[0] > 50)
 
   
   //Setting some upper limit to our fit based on the position of the peaks.
-  unsigned int upperB =  std::max((xposition+400) , (xposition * 1.25));
+ unsigned int upperB =  std::max(xposition+400 , xposition * 1.25);
 
   
   //Creating a fit function using two Landau functions
-  TF1* NeuFits = new TF1("NeuFit", " (([0])*(TMath::Landau(x,[1],[2])))+ (([3])*(TMath::Landau(x,[4],[5])))", 0 ,upperB);
+  TF1* NeuFits = new TF1("NeuFit", " (([0])*(TMath::Landau(x,[1],[2])))+ (([3])*(TMath::Landau(x,[4],[5])))", -10 ,upperB);
   NeuFits->SetParNames("Electron Peak","mpv electron","scale electron", "Gamma Peak", "mpv","scale gamma");
   
   NeuFits->SetParameters(100,0, 1 , 200, xposition,1);
   //Fixing our mpv gamma value to be the xpositon of the corresponding peak. We don't want it moving too much and it is a good guess for our data.
   NeuFits->FixParameter(4,xposition);
   NeuFits->SetLineColor(4);
-
+  NeuFits->SetNpx(1000);
  
   
      
@@ -172,13 +180,13 @@ if(xpos[0] > 50)
   //Grabbing the parameters of our fit functino and placing the values in par[]
   NeuFits ->GetParameters(&par[0]);
 
-  canvas->Draw();
+  //canvas->Draw();
 
   const string pName = name + ".png";
   const char *printName = pName.c_str();
 
 
-  
+  //canvas->Draw();
   canvas->Print(printName);
 
   //Calculating the overall peak of the landau functions respectively because we already have the function defined here.
