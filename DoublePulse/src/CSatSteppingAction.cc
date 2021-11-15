@@ -259,9 +259,9 @@ void CSatSteppingAction::UserSteppingAction(const G4Step* theStep)
         case LambertianReflection:
         case LobeReflection:
         case SpikeReflection:
-        case BackScattering:
-          trackInformation->IncReflections();
-          fExpectedNextStatus = StepTooSmall;
+	  //case BackScattering:
+          //trackInformation->IncReflections();
+          //fExpectedNextStatus = StepTooSmall;
           break;
         default:
           break;

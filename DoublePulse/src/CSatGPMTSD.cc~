@@ -132,16 +132,13 @@ G4bool CSatGPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
   
   if (G4UniformRand() < quanEff->Value(wavelength))
     {
-      /*
-	G4AnalysisManager::Instance()->FillNtupleFColumn(evtID+3 , 0 , timeG);
-	G4AnalysisManager::Instance()->AddNtupleRow(evtID+3);
-      */
-      G4AnalysisManager::Instance()->FillH1(evtID+1,timeG);
-      
+	  G4AnalysisManager::Instance()->FillNtupleFColumn(evtID+3 , 0 , timeG);
+	  G4AnalysisManager::Instance()->AddNtupleRow(evtID+3);
+	
     }
 
  
-  
+  G4AnalysisManager::Instance()->FillH1(evtID+1,wavelength);
     
  
   gpmtHit->SetTimeG(timeG);

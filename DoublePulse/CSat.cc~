@@ -60,12 +60,12 @@ int main(int argc, char** argv)
     ui = new G4UIExecutive(argc, argv);
   }
 
-  /*
+
   G4Random::setTheEngine(new CLHEP::RanecuEngine);
   G4int seed = time( NULL );
   G4Random::setTheSeed( seed );
   G4cout<<"The initial random seed is " << seed <<G4endl;
-  */
+
 
   
   auto runManager = G4RunManagerFactory::CreateRunManager();

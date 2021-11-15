@@ -129,14 +129,15 @@ G4bool CSatVPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
 
   G4float timeV = aStep->GetTrack()->GetGlobalTime();
 
-  /*
+  
   if (G4UniformRand() < quanEff->Value(wavelength))
     {
       G4AnalysisManager::Instance()->FillNtupleFColumn(1 , 0 , timeV);
       G4AnalysisManager::Instance()->FillNtupleFColumn(1 , 1 , wavelength);
       G4AnalysisManager::Instance()->AddNtupleRow(1);
     }
-  */
+
+  
   vpmtHit->SetTimeV(timeV);
   
 

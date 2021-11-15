@@ -209,9 +209,9 @@ void CSatDetectorConstruction::DefineMaterials()
   //fCSat_mt->AddProperty("SCINTILLATIONCOMPONENT2", lxe_Energy, lxe_SCINT);
   fCSat_mt->AddProperty("RINDEX", lxe_Energy, lxe_RIND);
   fCSat_mt->AddProperty("ABSLENGTH", lxe_Energy, lxe_ABSL);
-  fCSat_mt->AddConstProperty("SCINTILLATIONYIELD", 12000. / MeV);
+  fCSat_mt->AddConstProperty("SCINTILLATIONYIELD", 30000. / MeV);
   fCSat_mt->AddConstProperty("RESOLUTIONSCALE", 1.0);
-  fCSat_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 20. * ns);
+  fCSat_mt->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 50. * ns);
   fCSat_mt->AddConstProperty("SCINTILLATIONYIELD1", 1.0);
   //fCSat->SetMaterialPropertiesTable(fCSat_mt);
   fGAGG->SetMaterialPropertiesTable(fCSat_mt);
