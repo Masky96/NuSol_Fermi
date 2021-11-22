@@ -23,7 +23,7 @@
 
 /tracking/verbose 1
 /tracking/storeTrajectory 0
-/run/beamOn 1
+/run/beamOn 1000
 
 
 

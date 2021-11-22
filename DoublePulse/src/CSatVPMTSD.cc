@@ -133,15 +133,15 @@ G4bool CSatVPMTSD::ProcessHits(G4Step* aStep, G4TouchableHistory*) {
 
   G4float timeV = aStep->GetTrack()->GetGlobalTime();
 
-  G4int numEvents = 10; 
+  G4int numEvents = 1000;
+  
   if (G4UniformRand() < quanEff->Value(wavelength))
     {
-      /*
-      G4AnalysisManager::Instance()->FillNtupleFColumn(1 , 0 , timeV);
-      G4AnalysisManager::Instance()->FillNtupleFColumn(1 , 1 , wavelength);
-      G4AnalysisManager::Instance()->AddNtupleRow(1);
-      */
-      G4AnalysisManager::Instance()->FillH1(evtID+1+numEvents,timeV);
+      
+      G4AnalysisManager::Instance()->FillNtupleFColumn(evtID+1+numEvents , 0 , timeV);
+      G4AnalysisManager::Instance()->AddNtupleRow(evtID+1+numEvents);
+      
+      //G4AnalysisManager::Instance()->FillH1(evtID+1+numEvents,timeV);
     }
 
   

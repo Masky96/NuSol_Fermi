@@ -77,39 +77,6 @@ CSatPrimaryGeneratorAction::~CSatPrimaryGeneratorAction()
 
 void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-  /*
-  //G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-  G4IonTable* ionTable = G4IonTable::GetIonTable();
-  //G4ParticleDefinition* germaniumtest = ionTable->GetIon(32,69, 397*keV);
-   
-  G4int Z = 32;
-  G4int A = 69;
-
-  G4double charge = 0* eplus;
-  G4double energy = 397*keV;
-  G4ParticleDefinition* germaniumtest = ionTable->GetIon(Z,A, energy);
-  germaniumtest -> SetPDGStable(false);
-  fparticleGun->SetParticleDefinition(germaniumtest);
-  fparticleGun->SetParticleCharge(charge);
-  fparticleGun->SetParticlePosition(G4ThreeVector(0,0,-2.95*cm));
-  fparticleGun->SetParticleEnergy(0*MeV);
-  
-       
-  
-
-  
-  fparticleGun->GeneratePrimaryVertex(anEvent);
-  */
-
-
-
-
-
-
-
-
-
-
 
   
     //The variable neutrinoprocess controls whether we are studying the background (neutrinoprocess=0)
@@ -154,7 +121,7 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     //Program control
    
     G4int neutrinoprocess = 1;  //0 for cosmic rays, 1 for neutrino events
-    G4int galliumprocess = 1;  // 0 for Gallium-69, 1 for Gallium-71
+    G4int galliumprocess = 0;  // 0 for Gallium-69, 1 for Gallium-71
     G4int gammaprocess = 2;  // 69Ge:  0 for ground state, 1 for 87 keV gamma, 2 for 397 keV gamma
                              // 71Ge:  0 for ground state, 1 for 198 keV excited state
                              // 71Ge:  2 is for firing the 174 keV state

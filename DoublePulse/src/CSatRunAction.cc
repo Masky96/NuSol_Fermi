@@ -53,11 +53,11 @@ CSatRunAction::CSatRunAction()
   analysisManager->SetVerboseLevel(1);
   analysisManager->SetFileName("Tutorial");
   analysisManager->SetNtupleMerging(true);
-  G4int nbins   = 1000;
-  G4double vmin = 0.;
-  G4double vmax = 1000.;
+  //G4int nbins   = 1000;
+  //G4double vmin = 0.;
+  //G4double vmax = 1000.;
  
-  analysisManager->CreateH1("0", "dummy", nbins, vmin, vmax);
+  //analysisManager->CreateH1("0", "dummy", nbins, vmin, vmax);
   
   
   
@@ -74,7 +74,7 @@ CSatRunAction::CSatRunAction()
  //analysisManager->CreateNtupleDColumn(ntupleID, "GAGG_Time"); //ID 3 
  analysisManager->FinishNtuple(ntupleID);
 
- 
+ /*
  G4int ntupleID1 = analysisManager->CreateNtuple("Time of Hits Veto", "Time of Hits Veto");
  analysisManager->CreateNtupleFColumn(ntupleID1, "TimingofhitsAfterQEVeto"); //ID 0
  analysisManager->CreateNtupleFColumn(ntupleID1, "Wavelength");
@@ -84,8 +84,9 @@ CSatRunAction::CSatRunAction()
  analysisManager->CreateNtupleFColumn(ntupleID2, "TimingofhitsBeforeQEVeto"); //ID 0
  analysisManager->CreateNtupleFColumn(ntupleID2, "Wavelength");
  analysisManager->FinishNtuple(ntupleID2);
-
- /*
+ */
+ 
+ 
  int numEvents = 1000;
  
  for(int i = 0; i < numEvents; i++)
@@ -98,11 +99,27 @@ CSatRunAction::CSatRunAction()
      analysisManager->FinishNtuple(ntupleIDtest);
      index ++;
    }
- */
+ 
+ /
+ for(int i = 0; i < numEvents; i++)
+   {
+     int index = 0;
+     string indexstr = to_string(index);
+     
+     G4int ntupleIDtest  = analysisManager->CreateNtuple("Veto Detections Event  "+indexstr,"Veto Detections Event"+indexstr); // Event ID 0
+     analysisManager->CreateNtupleFColumn(ntupleIDtest, "Veto"); //ID 0
+     analysisManager->FinishNtuple(ntupleIDtest);
+     index ++;
+   }
+ 
+ 
+
 
 
  
- int numEvents = 10;
+
+ /*
+ int numEvents = 1000;
  
  for(int i = 0; i < numEvents; i++)
    {
@@ -110,7 +127,7 @@ CSatRunAction::CSatRunAction()
      string indexstr = to_string(i);
      string indexName = "Neutrino Double Pulses Event" +indexstr;
      const char *indexConst = indexName.c_str();
-     analysisManager->CreateH1(indexConst,indexConst, 100, 0, 1000);
+     analysisManager->CreateH1(indexConst,indexConst, 2001, -10, 20000);
     
     
      
@@ -122,17 +139,17 @@ CSatRunAction::CSatRunAction()
      string indexstr = to_string(i);
      string indexName =  "Veto Timing Event"+indexstr;
      const char *indexConst = indexName.c_str();
-     analysisManager->CreateH1(indexConst,indexConst, 100, 0, 1000);
+     analysisManager->CreateH1(indexConst,indexConst, 2001, -10, 20000);
     
      
    }
- 
+ */
 
 
 
 
 
- //G4RunManager::GetRunManager()->SetRandomNumberStore(true);
+ G4RunManager::GetRunManager()->SetRandomNumberStore(true);
 
 
 
@@ -140,12 +157,12 @@ CSatRunAction::CSatRunAction()
  
   
  
- 
+ /*
    for(G4int i = 0; i < analysisManager->GetNofH1s(); ++i)
   {
     analysisManager->SetH1Activation(i, false);
   }
- 
+ */
   
 }
 
