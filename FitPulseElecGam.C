@@ -63,6 +63,15 @@ void FitPulseElecGam() {  // file for opening
        << "Binary Interesting"                                  << ','
        << "Gamma Check"                                         << ','
        << "Binary Gamma Check"                                  << ','
+       << "Fake Gamma Check"                                    << ','
+       << "Binary Fake Gam Check"                               << ','
+       << "Did the Combined function fit?"                      << ','
+       << "Binary Combined fit Check"                           << ','
+       << "Total Number of Interesting Events"                  << ','
+       << "Total Number of SS Events (True Singles)"            << ','
+       << "Total Number of SD Events (False Doubles)"           << ','
+       << "Total Number of DS Events (True Double, Measured Singles)" << ','
+       << "Total Number including Corrections for Double Doubles"     << ','
        << endl;
   
 
@@ -86,8 +95,14 @@ void FitPulseElecGam() {  // file for opening
 
   //Initializing the number of events that it should be reading
   int numberOfEvents = 1000;
-  Int_t numInteresting =0;
 
+
+  
+  Int_t numInteresting = 0;
+  Int_t numFakePulses = 0;
+  Int_t numGamNoFit = 0;
+  Int_t NogamNum = 0;
+  Int_t numOfActualDoublePulses =0;
   //Looping over all of the events Data.
   for(unsigned int i = 1; i <= numberOfEvents; ++i)
     {
@@ -217,7 +232,7 @@ auto canvas = new TCanvas("canvas1","canvas1");
 
   //Good Criteria for the later decays, if it is the 79ns then set decay time limit to 50
   
-  if(xpos[0] > 200)
+  if(xpos[0] > 150)
     {
       xposition = xpos[0];
     }
@@ -344,8 +359,10 @@ auto canvas = new TCanvas("canvas1","canvas1");
 
   
   Combined->SetFillColor(kGreen);
+  
   //Fitting our Histogram to the function that we defined.
   Combined->Fit(NeuFits,"Q","bar");
+  
   //Grabbing the parameters of our fit functino and placing the values in par[]
   NeuFits->GetParameters(&par[0]);
   /*
@@ -364,7 +381,6 @@ auto canvas = new TCanvas("canvas1","canvas1");
 
   
   //canvas->Draw();
-  //canvas->Print(printName);
   
   //canvas->Print(nameCombined);
 
@@ -377,13 +393,12 @@ auto canvas = new TCanvas("canvas1","canvas1");
 
 
   
+  //---------------------------------------------------------------------------------------------------------------------------
+
+
   //Checking the parameters for failures and interesting events.
-
-
-  
-
   //Here is our percent tolerance that we want to compare our parameters to. 
-  Double_t percent = 0.1;
+  Double_t percent = 0.5;
 
 
   //Creating intial variables for 0 being False and 1 being True
@@ -460,13 +475,21 @@ auto canvas = new TCanvas("canvas1","canvas1");
     }
 
 
-  //Using a comparison to find if any of the parameters did not match so we can classify them as interesting
-  Int_t interesting = 0;
-  Int_t NogamNum = 0;
-  Int_t GammaCheck = 1;
+
+
+
 
   
-  if((compEpar1 == 0 || compEpar2 == 0 || compEpar3 == 0 || compGpar1 == 0 || compGpar2 == 0 || compGpar3 == 0) && (par[5]>0)) //par[3]>0 ||
+  //Using a comparison to find if any of the parameters did not match so we can classify them as interesting
+  Int_t interesting = 0;
+  Int_t GammaCheck = 0;
+  Int_t FakePulse =0;
+  Int_t GammaNoFit = 0;
+
+  //Performing a logic check on each of the comparisons that were found above, and if Gpar[1] which is the most probable value for the gamma pulse was greater than 0 which means that there was a gamma pulse.
+
+  
+  if((compEpar1 == 0 || compEpar2 == 0 || compEpar3 == 0 || compGpar1 == 0 || compGpar2 == 0 || compGpar3 == 0) && (par[4]>0)) //par[3]>0 ||
     {
       interesting = 1;
     }
@@ -476,71 +499,209 @@ auto canvas = new TCanvas("canvas1","canvas1");
 
 
   //Making a string for our interesting case so I can easily find it in the spread sheet.
-  
   string intCheck = "";
   
   string gamCheck = "";
 
-   
-  if(par[4] ==0)
+  string fakegamCheck="";
+
+  string noFitGamma = "";
+
+
+  string CorrectDoublePulse = "";
+
+
+
+  /*
+    These are my Incremental variables
+    Int_t numInteresting = 0;
+    Int_t numFakePulses = 0;
+    Int_t numGamNoFit = 0;
+    Int_t NogamNum = 0;
+  */
+
+  /*
+  //Initial check for if there was really no gamma pulse because it left the volume, so Gpar[1] = 0
+  if(Gpar[1] ==0)
     {
+
+      //This is the real amount of No Double Pulses Using Parameters
+      if((par[3] < 0 || par[4] == 0 || par[5] < 0))
+	{
       gamCheck = "There was no Gamma Pulse";
       NogamNum++;
-      GammaCheck =0;
+      GammaCheck = 1;
+	}
+      
+      if(par[3]>0 && par[5] > 0)
+	{
+	  fakegamCheck = "This was a fake Gamma Pulse";
+	  numFakePulses++;
+	  FakePulse =1;
+	  
+	}
+      
+      
+    }
+  */
+
+
+  /*
+  if(mysizeE0 > 15 && mysizeG0 > 15)
+    {
+      CorrectDoublePulse = "There was a confirmed Double Pulse";
+      numOfActualDoublePulses++;
+    }
+  */
+  if((Epar[0]>0 && Epar[2]>0) && (Gpar[0]>0 && Gpar[2]>0)
+    {
+      CorrectDoublePulse = "There was a confirmed Double Pulse";
+      numOfActualDoublePulses++;
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
+   if(mysizeG0 < 15)
+    {
+
+    
+      gamCheck = "There was no Gamma Pulse";
+      NogamNum++;
+      GammaCheck = 1;
+
+      
+      if(par[3]>0 && par[5] > 0)
+	{
+	  fakegamCheck = "This was a fake Gamma Pulse";
+	  numFakePulses++;
+	  FakePulse =1;
+	  
+	}
+      
+      
+    }
+ 
+  //This one we can modify for what we consider is a fake pulse that is generated.
+
+  //If we are not fixing the position of the first two fits then this is the boolean you want to use:
+  /*
+  if((par[3]<0 || par[5] < 0) && Gpar[1] != 0)
+	{
+	  noFitGamma = "The Combined Funciton could not fit the Gamma";
+          numGamNoFit++;
+	  GammaNoFit =1;
+	}
+
+  */
+
+  
+  //If you are fixing the position of each of the fits, then use this boolean. 
+  
+   if((par[3]<0 || par[5] < 0 || par[0]< 0|| par[2]<0) && (mysizeG0 >15))
+	{
+	  noFitGamma = "The Combined Funciton could not fit the Gamma";
+          numGamNoFit++;
+	  GammaNoFit =1;
+	}
+  
+  //Now what we consider Interesting is that when we have one of our interesting cases from above, but also connected with there was a gamma pulse. This means that we need to check that file to make sure it fit correctly or if something was wrong. 
   if(interesting == 1 && gamCheck == "")
     {
       intCheck = "Check Here";
-      numInteresting++;
-	
+      numInteresting++;	
     }
 
 
- 
   
-
-
-
-  
-
-  
-
- 
   
   //Taking the parameters and placing them into our CSV file that we can later manipulate.
-  data
-
-
-    << Epar[0]     << ','
-    << Epar[1]     << ','
-    << Epar[2]     << ','
-    << Gpar[0]     << ','
-    << Gpar[1]     << ','
-    << Gpar[2]     << ','
-    << par[0]      << ','
-    << par[1]      << ','
-    << par[2]      << ','
-    << par[3]      << ','
-    << par[4]      << ','
-    << par[5]      << ','
-    //<< compEpar1   << ','
-    //<< compEpar2   << ','
-    //<< compEpar3   << ','
-    //<< compGpar1   << ','
-    //<< compGpar2   << ','
-    //<< compGpar3   << ','
-    << intCheck    << ','
-    << interesting << ','
-    << gamCheck    << ','
-    << GammaCheck  << ','
-    << endl;
+  data << Epar[0]     << ','
+       << Epar[1]     << ','
+       << Epar[2]     << ','
+       << Gpar[0]     << ','
+       << Gpar[1]     << ','
+       << Gpar[2]     << ','
+       << par[0]      << ','
+       << par[1]      << ','
+       << par[2]      << ','
+       << par[3]      << ','
+       << par[4]      << ','
+       << par[5]      << ','
+       //<< compEpar1   << ','
+       //<< compEpar2   << ','
+       //<< compEpar3   << ','
+       //<< compGpar1   << ','
+       //<< compGpar2   << ','
+       //<< compGpar3   << ','
+       << intCheck    <<  ','
+       << interesting <<  ','
+       << gamCheck    <<  ','
+       << GammaCheck  <<  ','
+       << fakegamCheck << ','
+       << FakePulse    << ','
+       << noFitGamma   << ','
+       << GammaNoFit   << ','
+       << ""           << ','
+       << ""           << ','
+       << ""           << ','
+       << ""           << ','
+       << ""           << ','
+       << ""           << ',' 
+       
+       << endl;
   
    }
-  
+   data << ""     << ','
+       <<  ""     << ','
+       <<  ""     << ','
+	<< ""     << ','
+       << ""      << ','
+       << ""      << ','
+       << ""      << ','
+       << ""      << ','
+       << ""      << ','
+       << ""      << ','
+       << ""      << ','
+       << ""      << ','
+       //<< compEpar1   << ','
+       //<< compEpar2   << ','
+       //<< compEpar3   << ','
+       //<< compGpar1   << ','
+       //<< compGpar2   << ','
+       //<< compGpar3   << ','
+       << ""      << ','
+       << ""      << ','
+       << ""      << ','
+       << ""      << ','
+       << ""      << ','
+       << ""      << ','
+       << ""      << ','
+       << ""      << ','
+       << numInteresting << ','
+       << NogamNum     << ','
+       << numFakePulses << ','
+       << numGamNoFit   << ','
+       << ""           << ',' 
+       
+       << endl;
   data.close();
-  cout << numInteresting << endl; 
+  //cout << "This is the total number of Truely positive Double Pulses: " << numberOfEvents -(numFakePulses+ NogamNum + numGamNoFit)  << endl;
+  //cout << "Check the each of the interesting results and add the ones that did truly fit to your result: " << numInteresting << endl;
   
 }
 
