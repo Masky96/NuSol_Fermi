@@ -106,7 +106,6 @@ class CSatDetectorConstruction : public G4VUserDetectorConstruction
   // Materials & Elements
   G4Material* fCSat;
   G4Material* fAl;
-  G4Material* fSi;
   G4Material* fN;
   G4Material* fO;
   G4Material* fAir;
