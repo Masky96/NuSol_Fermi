@@ -345,25 +345,6 @@ void CSatDetectorConstruction::ConstructSDandField()
 
 //Same usage but this will be for the Veto System.
 
-if(!fEljin_SD.Get())
-  {
-    G4cout << "Construction /CSatDet/eljinSD" << G4endl;
-    CSatEljinSD* eljin_SD = new CSatEljinSD("/CSatDet/eljinSD");
-    fEljin_SD.Put(eljin_SD);
-  }
-  G4SDManager::GetSDMpointer()->AddNewDetector(fEljin_SD.Get());
-  SetSensitiveDetector(fMainVolume->GetLogVeto(), fEljin_SD.Get());
-
-  
-if(!fVPMT_SD.Get())
-  {
-    G4cout << "Construction /CSatDet/vpmtSD" << G4endl;
-    CSatVPMTSD* vpmt_SD = new CSatVPMTSD("/CSatDet/vpmtSD");
-    fVPMT_SD.Put(vpmt_SD);
-  }
-  G4SDManager::GetSDMpointer()->AddNewDetector(fVPMT_SD.Get());
-  SetSensitiveDetector(fMainVolume->GetLogPhotocathV(), fVPMT_SD.Get());
-
 
 if(!fGPMT_SD.Get())
   {

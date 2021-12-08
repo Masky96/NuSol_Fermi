@@ -175,23 +175,9 @@ void CSatMainVolume::VisAttributes()
   gagg_VA->SetForceSolid(true);
   fScint_log->SetVisAttributes(gagg_VA);
 
-  G4VisAttributes* Veto_VA = new G4VisAttributes(G4Colour(0, 0, 0.5, 0.3));
-  Veto_VA->SetForceSolid(true);
-  fVeto_Log->SetVisAttributes(Veto_VA);
-
-  G4VisAttributes* VetoPMT_VA = new G4VisAttributes(G4Colour(1, 0, 0, 1));
-  VetoPMT_VA->SetForceSolid(true);
-  fPhotocathV_log->SetVisAttributes(VetoPMT_VA);
-
   G4VisAttributes* gaggPMT_VA = new G4VisAttributes(G4Colour(1, 0, 0, 0.7));
   gaggPMT_VA->SetForceSolid(true);
   fPhotocathG_log->SetVisAttributes(gaggPMT_VA);
-  
- 
-
-  G4VisAttributes* Iron_VA = new G4VisAttributes(G4Colour(0.5, 0.5, 0.5, 0.3));
-  Iron_VA->SetForceSolid(true);
-  fIron_log->SetVisAttributes(Iron_VA);
 
    
  

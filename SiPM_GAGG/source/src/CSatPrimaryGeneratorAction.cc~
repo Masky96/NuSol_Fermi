@@ -82,13 +82,6 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
     //G4IonTable* ionTable = G4IonTable::GetIonTable();
     
-
-
-    fparticleGun->GeneratePrimaryVertex(anEvent); 
-
-    
-    /* // shower starts
-    
     //energyPri = 0.;
     //G4cout << "Before copy\n";
     std::vector< std::vector< User::event* >* > showerCopy = *(CSatRunAction::showers);
@@ -119,7 +112,22 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     // for some reason this 
     //G4cout << "before while loop\n";
     while( !(theShowerCopy -> empty()) ){
+      /*
+      thisParticle = theShowerCopy -> back();
       
+      //G4cout << "The momentum I'm puttting in is " << *(thisParticle -> momentum) << "\n";
+      fparticleGun->SetParticleMomentumDirection( *(thisParticle -> momentum) );
+      //G4cout << "The energy I'm puttting in is " << *(thisParticle -> energy) << "\n";
+      fparticleGun->SetParticleEnergy( *(thisParticle -> energy) );
+      //G4cout << "The position I'm puttting in is " << *(thisParticle -> position) << "\n";
+      fparticleGun->SetParticlePosition( *(thisParticle -> position) );
+      fparticleGun->SetParticleTime(0.0*ns);
+      G4String partName = *(thisParticle -> particleType);
+      //G4cout << "The particle I'm running is " << partName << '\n';
+      G4ParticleDefinition* theParticle = particleTable -> FindParticle(partName);
+      fparticleGun->SetParticleDefinition(theParticle);
+      //G4cout << "marker 1 \n";
+      */
       fparticleGun->GeneratePrimaryVertex(anEvent); 
       //G4cout << "marker 2 \n";
       
@@ -131,11 +139,6 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     delete theShowerCopy;
     
     delete thisParticle;
-
-    */ //End Shower Generator
-    
-    
-    
   //fparticleGun->GeneratePrimaryVertex(anEvent);
   
   /*
