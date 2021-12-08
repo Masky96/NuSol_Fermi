@@ -57,10 +57,10 @@ RM = /opt/software/software/CMake/3.20.1-GCCcore-10.3.0/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/q557z543/Geant4/CosmicCube/source
+CMAKE_SOURCE_DIR = /home/q557z543/Geant4/SiPM_GAGG/source
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/q557z543/Geant4/CosmicCube/build
+CMAKE_BINARY_DIR = /home/q557z543/Geant4/SiPM_GAGG/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -132,9 +132,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/q557z543/Geant4/CosmicCube/build/CMakeFiles /home/q557z543/Geant4/CosmicCube/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/q557z543/Geant4/SiPM_GAGG/build/CMakeFiles /home/q557z543/Geant4/SiPM_GAGG/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/q557z543/Geant4/CosmicCube/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/q557z543/Geant4/SiPM_GAGG/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

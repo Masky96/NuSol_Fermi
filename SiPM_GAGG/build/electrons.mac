@@ -1,13 +1,29 @@
-# shoot Cosmic rays
+# shoot optical photons
+
 /run/initialize
+#/gun/particle mu-
+#/gun/energy 1 GeV
+#/analysis/setFileName testFile
+#/analysis/h1/set  3 100 1 100 ms
+#/analysis/h1/set  4 10000 10 200 ns
+#/analysis/h1/set 3 16 300 620 nm
+
+/gps/particle e-
+/gps/energy 2000 keV
+/gps/pos/type Point
+#/gps/pos/shape Sphere
+#/gps/pos/centre 0 0 -2.95 cm
+#/gps/pos/radius 0.3 cm
+/gps/pos/centre 0 0 -10 cm
+/gps/direction 0 0 1
 
 
 
 
 
-/tracking/verbose 0
+/tracking/verbose 1
 /tracking/storeTrajectory 0
-/run/beamOn 10
+/run/beamOn 100
 
 
 
