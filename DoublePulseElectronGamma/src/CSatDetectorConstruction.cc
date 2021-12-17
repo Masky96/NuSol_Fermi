@@ -216,7 +216,7 @@ void CSatDetectorConstruction::DefineMaterials()
   //fCSat->SetMaterialPropertiesTable(fCSat_mt);
   fGAGG->SetMaterialPropertiesTable(fCSat_mt);
   // Set the Birks Constant for the CSat scintillator
-  fCSat->GetIonisation()->SetBirksConstant(0.126 * mm / MeV);
+  fGAGG->GetIonisation()->SetBirksConstant(0.126 * mm / MeV);
  
 
  

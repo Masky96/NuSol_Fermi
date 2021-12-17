@@ -108,13 +108,13 @@ void CSatSteppingAction::UserSteppingAction(const G4Step* theStep)
       // G4cout << "Hello World" << G4endl;
       theStep->GetTrack()->SetTrackStatus(fStopAndKill);
     }
-  
+  /*
   if (time > 1*s) {
     
     theStep->GetTrack()->SetTrackStatus(fStopAndKill); 
     
   }
-  
+  */
 
 
 

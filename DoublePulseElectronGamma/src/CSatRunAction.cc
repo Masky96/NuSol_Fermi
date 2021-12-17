@@ -83,7 +83,7 @@ CSatRunAction::CSatRunAction()
  */
  
  
- int numEvents = 10;
+ int numEvents = 1000;
  
  for(int i = 0; i < numEvents; i++)
    {

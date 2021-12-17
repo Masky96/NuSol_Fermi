@@ -1,4 +1,5 @@
-/// \file optical/CSat/src/CSatPrimaryGeneratorAction.cc
+
+     /// \file optical/CSat/src/CSatPrimaryGeneratorAction.cc
 /// \brief Implementation of the CSatPrimaryGeneratorAction class
 //
 //
@@ -60,7 +61,7 @@ CSatPrimaryGeneratorAction::CSatPrimaryGeneratorAction()
   // Default energy,position,momentum
   //fparticleGun->SetParticleEnergy(0*MeV);
   //fparticleGun->SetParticleTime(0.0*ns);
-  //fparticleGun->SetParticlePosition(G4ThreeVector(0, 0., -2.95 * cm));
+  //fparticleGun->SetParticlePosition(G4ThreeVector(0, 0., -2.70 * cm));
   //fparticleGun->SetParticleMomentumDirection(G4ThreeVector(0., 0., 1.));
   
 }
@@ -116,7 +117,7 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 
     //Additional Program Control
     //Choose between either firing the electron or firing the gamma.
-    G4int electronFire = 1;
+    G4int electronFire = 0;
     G4int gammaFire = 1;
 
 
@@ -470,6 +471,7 @@ void CSatPrimaryGeneratorAction::SetOptPhotonPolar(G4double angle)
   particleGun->SetParticlePolarization(polar);
     
 }
+
 
 
 
