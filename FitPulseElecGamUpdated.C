@@ -14,9 +14,9 @@ void FitPulseElecGamTEST() {  // file for opening
   
   //First Hist to Open
 
-  string nameFileElectron = "nu_e+40+2+Electron";
-  string nameFileGamma    = "nu_e+40+2+Gamma";
-  string name             = "nu_e+40+2";
+  string nameFileElectron = "nu_e+34+2+Electron";
+  string nameFileGamma    = "nu_e+34+2+Gamma";
+  string name             = "nu_e+34+2";
 
   
   string nameFRootElec  = nameFileElectron + ".root";
@@ -58,6 +58,7 @@ void FitPulseElecGamTEST() {  // file for opening
        << "Correctly Measured Double Pulses String"             <<  ','
        << "Double pulses that were measured as singles String " <<  ','
        << "Correctly measured single pulses String "            << ','
+       << "Non-Characterized Pulse String"                      << ','
        << "Fake Double Pulses String"                           << ','
        << "Number of Interesting Events"                        << ','
        << "Known Double Pulses"                                 <<  ','
@@ -67,6 +68,7 @@ void FitPulseElecGamTEST() {  // file for opening
        << "Correctly measured single pulses"                    << ','
        << "Fake Double Pulses OR Combined"                                  << ','
        << "Number of events that nothing happend"               << ','
+       << "Pulses that weren't Characterized"                    << ','
        << endl;
   
       
@@ -100,7 +102,7 @@ void FitPulseElecGamTEST() {  // file for opening
   Int_t numInteresting = 0;
 
   Int_t NoEvent = 0;
-
+  Int_t gamFailCount =0;
 
   
   //Looping over all of the events Data.
@@ -217,7 +219,7 @@ auto canvas = new TCanvas("canvas1","canvas1");
 
   //Using TSpectrum to search our data and find at least two peaks to estimate the position of our fits
   TSpectrum *s = new TSpectrum(npeaks);
-  Int_t nfound = s->Search(Combined,2,"",0.01);
+  Int_t nfound = s->Search(Combined,2,"",0.1);
 
 
   Double_t*xpos;
@@ -231,26 +233,52 @@ auto canvas = new TCanvas("canvas1","canvas1");
   //Making sure that we get the corresponding x value for our gamma peak which will occur after the electron peak always.
 
   //Good Criteria for the later decays, if it is the 79ns then set decay time limit to 50
-  
-  if(xpos[0] > 75)
+
+
+
+  //cout << xpos[0] << " and " << xpos[1] << endl;
+
+  Double_t firstpeak = 0;
+  Double_t secondpeak = 0;
+
+  if(xpos[0] < xpos[1])
     {
-      xposition = xpos[0];
+      firstpeak = xpos[0];
+      secondpeak = xpos[1];
+    }
+  else if(xpos[1] == 0 && xpos[0] == 25 )
+    {
+      firstpeak = xpos[0];
+      secondpeak = 400;
+    }
+  else if(xpos[1] == 25 && xpos[0] == 0)
+    {
+      firstpeak = xpos[1];
+      secondpeak = 400;
     }
   else
+    {
+      firstpeak = xpos[1];
+      secondpeak = xpos[0];
+    }
+ 
+  /*
+  if(xpos[1] > 50)
     {
       xposition = xpos[1];
       fpeak = xpos[0];
     }
-
-
-
-
+  else
+    {
+      xposition = 600;
+    }
+  */
 
 
 
   
   //Setting some upper limit to our fit based on the position of the peaks.
- unsigned int upperB =  std::max(xposition+300 , xposition * 1.25);
+ unsigned int upperB =  std::max(secondpeak+300 , secondpeak * 1.25);
  //unsigned int upperBElectron =  std::max(fpeak+400 , fpeak * 1.25);
 
  
@@ -258,8 +286,8 @@ auto canvas = new TCanvas("canvas1","canvas1");
  //Creating a separate Fit that will be used for the Electron and Gamma pulse.
  TF1* PulseFits = new TF1("Pulse Fit", " (([0])*(TMath::Landau(x,[1],[2])))", -20, upperB);
  PulseFits->SetParNames("Peak Guess","Most Probable Location","Scale Factor");
- PulseFits->SetParameters(200, fpeak, 1);
- PulseFits->FixParameter(1,fpeak);
+ PulseFits->SetParameters(200, firstpeak, 1);
+ PulseFits->FixParameter(1,firstpeak);
  PulseFits->SetLineColor(4);
  PulseFits->SetNpx(1000);
 
@@ -283,8 +311,8 @@ auto canvas = new TCanvas("canvas1","canvas1");
  //Creating a separate Fit that will be used for the Electron and Gamma pulse.
  TF1* PulseFitGam = new TF1("Pulse Fit Gam", " (([0])*(TMath::Landau(x,[1],[2])))", -20, upperB);
  PulseFitGam->SetParNames("Peak Guess","Most Probable Location","Scale Factor");
- PulseFitGam->SetParameters(200, xposition, 1);
- PulseFitGam->FixParameter(1,xposition);
+ PulseFitGam->SetParameters(200, secondpeak, 1);
+ PulseFitGam->FixParameter(1,secondpeak);
  PulseFitGam->SetLineColor(4);
  PulseFitGam->SetNpx(1000);
 
@@ -321,9 +349,9 @@ auto canvas = new TCanvas("canvas1","canvas1");
   TF1* NeuFits = new TF1("NeuFit", " (([0])*(TMath::Landau(x,[1],[2])))+ (([3])*(TMath::Landau(x,[4],[5])))", -20 ,upperB);
   NeuFits->SetParNames("Electron Peak","mpv electron","scale electron", "Gamma Peak", "mpv","scale gamma");
   
-  NeuFits->SetParameters(200, fpeak, 1 , 200, xposition,1);
-  NeuFits->FixParameter(4,xposition);
-  NeuFits->FixParameter(1,fpeak);
+  NeuFits->SetParameters(200, firstpeak, 1 , 200, secondpeak,1);
+  NeuFits->FixParameter(1,firstpeak);
+  NeuFits->FixParameter(4,secondpeak);
   NeuFits->SetLineColor(4);
   NeuFits->SetNpx(1000);
  
@@ -350,7 +378,7 @@ auto canvas = new TCanvas("canvas1","canvas1");
   
   //canvas->Draw();
   
-  //canvas->Print(nameCombined);
+  canvas->Print(nameCombined);
 
   //Calculating the overall peak of the landau functions respectively because we already have the function defined here.
   
@@ -365,7 +393,7 @@ auto canvas = new TCanvas("canvas1","canvas1");
 
   //Checking the parameters for failures and interesting events.
   //Here is our percent tolerance that we want to compare our parameters to. 
-  Double_t percent = 0.1;
+  Double_t percent = 0.5;
 
 
   //Creating intial variables for 0 being False and 1 being True
@@ -385,6 +413,15 @@ auto canvas = new TCanvas("canvas1","canvas1");
   Double_t rangeGpar1;
   Double_t rangeGpar2;
   Double_t rangeGpar3;
+
+
+
+  Int_t compPeaks = 0;
+  Double_t rangeLE;
+
+  Double_t LandauPeakE1 = (Epar[0])*(TMath::Landau(firstpeak,Epar[1],Epar[2]));
+  Double_t LandauPeakE2 = (par[0])*(TMath::Landau(firstpeak,par[1],par[2]));
+  
   
 
 
@@ -397,6 +434,9 @@ auto canvas = new TCanvas("canvas1","canvas1");
   rangeGpar2 = Gpar[1]*percent;
   rangeGpar3 = Gpar[2]*percent;
 
+
+  
+  rangeLE = LandauPeakE1*percent;
 
   
   //Using statements to check if the parameters of the doublefit are within a tolerance range of the singular fits.
@@ -441,6 +481,15 @@ auto canvas = new TCanvas("canvas1","canvas1");
     
     }
 
+  if((LandauPeakE2-(LandauPeakE1-rangeLE))*(LandauPeakE2-(LandauPeakE1+rangeLE)) <= 0)
+    {
+      compPeaks = 1;
+      //cout << "We are within range" << endl;
+    
+    }
+
+
+  
   
   string DDFit = "";
   string DDNoFit = "";
@@ -449,6 +498,8 @@ auto canvas = new TCanvas("canvas1","canvas1");
 
   string gamCheck ="";
   string intCheck = "";
+
+  string gamFailed = "";
   
   Int_t  interesting =0;
   
@@ -462,64 +513,79 @@ auto canvas = new TCanvas("canvas1","canvas1");
   */
 
   //Gpar[0] > 0  && Gpar[2] > 0 &&
-  if(((Epar[0] > 0 && Epar[2]>0) &&  Gpar[1] > 0) && ((compEpar1 == 1 && compEpar3 == 1) && (compGpar1 == 1 && compGpar3 == 1)))
+
+
+
+
+
+  /*
+  if(((Epar[0] > 0 && Epar[2]>0) &&  Gpar[1] != 400) && ((compEpar1 == 1 && compEpar3 == 1) && (compGpar1 == 1 && compGpar3 == 1)) )
     {
       DDFit = "Two Pulses were measured correctly";
       DoubleDouble++;
     }
-
-
-  
-  if(((Epar[0] > 0 && Epar[2]>0) && Gpar[1] > 0) && (compGpar1 == 0 || compGpar3 == 0 || compEpar1 == 0 || compEpar3 == 0))
+  */
+ if(((Epar[0] > 0 && Epar[2]>0) &&  Gpar[1] != 400) && ((compPeaks == 1) && (compGpar1 == 1 && compGpar3 == 1)) )
+    {
+      DDFit = "Two Pulses were measured correctly";
+      DoubleDouble++;
+    }
+  /*
+  if(((Epar[0] > 0 && Epar[2]>0) && Gpar[1] != 400) && (compGpar1 == 0 || compGpar3 == 0 || compEpar1 == 0 || compEpar3 == 0) )
     {
       DDNoFit = "Two Pulses were not measured correctly";
       DoubleSingle++;
     }
-      
-      
-
-
-  /*
-    if(((par[0] > 0 && par[2] > 0) && (par[3] < 0 && par[5] < 0)) && ((Epar[0] > 0 && Epar[2] > 0) && (Gpar[0] < 0 && Gpar[2] < 0)))
-    {
-    SSFit = "One pulse was measured correctly";
-    SingleSingle++;
-    }
   */
+if(((Epar[0] > 0 && Epar[2]>0) && Gpar[1] != 400) && (compGpar1 == 0 || compGpar3 == 0) && compPeaks ==1 && mysizeG0 >20 )
+    {
+      DDNoFit = "Two Pulses were not measured correctly";
+      DoubleSingle++;
+ 
+    }
+      /*
+if(((Epar[0] > 0 && Epar[2]>0) && Gpar[1] == 400) && ((compEpar1 == 1 && compEpar3 == 1) && (compGpar1 == 0 && par[4] == 400 && (par[3] < 0 || par[5] < 0))) )
+    {
+      SSFit = "One pulse was measured correctly";
+      SingleSingle++;
+    }
+ 
+
   
-  if(((Epar[0] > 0 && Epar[2]>0) && Gpar[1] == 0) && ((compEpar1 == 1 && compEpar3 == 1) && (compGpar1 == 0 && compGpar3 == 0 && par[4] == 0 && (par[3] < 0 || par[5] < 0))))
+  if(((Epar[0] > 0 && Epar[2] > 0) && Gpar[1] == 400) && ((compEpar1 == 1 && compEpar3 == 1) && (par[3] > 0 && par[5] >0 && par[4] != 400)) )
+    {
+      SSNoFit = "A Fake Double Pulse was measured"; 
+      SingleDouble++;
+    }
+      */
+
+ if(((Epar[0] > 0 && Epar[2]>0) && Gpar[1] == 400) && ((compPeaks == 1) && ((compGpar1 == 0 || compGpar3 == 0) && par[4] == 400 && (par[3] < 0 || par[5] < 0))) )
     {
       SSFit = "One pulse was measured correctly";
       SingleSingle++;
     }
 
-
-  /*
-  if(((par[0] < 0 || par[2] < 0) || (par[3] < 0 || par[5] <0)) && ((Epar[0] > 0 && Epar[2] > 0) && (Gpar[0] < 0 && Gpar[2] < 0)))
-    {
-      SSNoFit = "A Fake Double Pulse was measured";
-      SingleDouble++;
-      }
-  */
-
-  
-  if(((Epar[0] > 0 && Epar[2] > 0) && Gpar[1] == 0) && ((compEpar1 == 1 && compEpar3 == 1) && (par[3] > 0 && par[5] >0)))
+ 
+ if(((Epar[0] > 0 && Epar[2] > 0) && mysizeG0 < 20) && ((compPeaks == 1) && (((par[3] > 0 || par[5] >0) &&  par[4] != 400) || ((par[3] > 0 && par[5] >0) && par[4] == 400 ))))
     {
       SSNoFit = "A Fake Double Pulse was measured"; 
       SingleDouble++;
     }
 
 
-  if(mysizeE0 < 15 && mysizeG0 < 15)
+
+      
+  if(mysizeE0 < 20 && mysizeG0 < 20)
     {
       NoEvent++;
     }
 
-  if(mysizeG0 < 15)
+  if(mysizeG0 < 20)
     {
       gamCheck= "There was no gamma here";
     }
-   
+
+  cout << mysizeG0 << endl; 
 
   //Performing a logic check on each of the comparisons that were found above, and if Gpar[1] which is the most probable value for the gamma pulse was greater than 0 which means that there was a gamma pulse.
 
@@ -529,18 +595,27 @@ auto canvas = new TCanvas("canvas1","canvas1");
       interesting = 1;
     }
  
-
   
   
-  //Now what we consider Interesting is that when we have one of our interesting cases from above, but also connected with there was a gamma pulse. This means that we need to check that file to make sure it fit correctly or if something was wrong. 
-  if(interesting == 1 && gamCheck == "")
+  if(mysizeG0 >20 && DDFit == "" && DDNoFit == "" && SSFit == "" && SSNoFit == "")
+    {
+      gamFailed = "The program failed to detect or classify this gamma pulse";
+      gamFailCount++;
+    }
+  
+    //Now what we consider Interesting is that when we have one of our interesting cases from above, but also connected with there was a gamma pulse. This means that we need to check that file to make sure it fit correctly or if something was wrong. 
+  if((interesting == 1 && gamCheck == "") && gamFailed == "")
     {
       intCheck = "Check Here";
       numInteresting++;	
     }
-
-
   
+
+
+
+  cout << (Gpar[0])*(TMath::Landau(secondpeak,Gpar[1],Gpar[2])) << endl;
+  cout << (par[3])*(TMath::Landau(secondpeak,par[4],par[5])) << endl;
+
   
   //Taking the parameters and placing them into our CSV file that we can later manipulate.
   data << Epar[0]     << ','
@@ -560,7 +635,8 @@ auto canvas = new TCanvas("canvas1","canvas1");
        << DDFit       << ','
        << DDNoFit     << ','
        << SSFit       << ','
-       << SSNoFit     << ',' 
+       << SSNoFit     << ','
+       << gamFailed   << ','
        << ""          << ','
        << ""          <<  ','
        << ""          <<  ','
@@ -569,12 +645,13 @@ auto canvas = new TCanvas("canvas1","canvas1");
        << ""          << ','
        << ""          << ','
        << ""          << ','
-      
+       << ""          << ','
        
        << endl;
   
    }
   data << ""      << ','
+       << ""      << ','
        << ""      << ','
        << ""      << ','
        << ""      << ','
@@ -600,7 +677,7 @@ auto canvas = new TCanvas("canvas1","canvas1");
        << SingleSingle    << ','
        << SingleDouble    << ','
        << NoEvent         << ','
-    
+       << gamFailCount    << ','
        << endl;
   data.close();
   //cout << "This is the total number of Truely positive Double Pulses: " << numberOfEvents -(numFakePulses+ NogamNum + numGamNoFit)  << endl;
