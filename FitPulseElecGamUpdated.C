@@ -14,9 +14,9 @@ void FitPulseElecGamTEST() {  // file for opening
   
   //First Hist to Open
 
-  string nameFileElectron = "nu_e+34+2+Electron";
-  string nameFileGamma    = "nu_e+34+2+Gamma";
-  string name             = "nu_e+34+2";
+  string nameFileElectron = "nu_e+40+2+Electron";
+  string nameFileGamma    = "nu_e+40+2+Gamma";
+  string name             = "nu_e+40+2";
 
   
   string nameFRootElec  = nameFileElectron + ".root";
@@ -219,7 +219,7 @@ auto canvas = new TCanvas("canvas1","canvas1");
 
   //Using TSpectrum to search our data and find at least two peaks to estimate the position of our fits
   TSpectrum *s = new TSpectrum(npeaks);
-  Int_t nfound = s->Search(Combined,2,"",0.1);
+  Int_t nfound = s->Search(Combined,2,"",0.05);
 
 
   Double_t*xpos;
@@ -537,7 +537,7 @@ auto canvas = new TCanvas("canvas1","canvas1");
       DoubleSingle++;
     }
   */
-if(((Epar[0] > 0 && Epar[2]>0) && Gpar[1] != 400) && (compGpar1 == 0 || compGpar3 == 0) && compPeaks ==1 && mysizeG0 >20 )
+ if(((Epar[0] > 0 && Epar[2]>0) && Gpar[1] != 400) && (compGpar1 == 0 || compGpar3 == 0 || compEpar1 == 0 || compEpar3 == 0 || compPeaks == 0) && mysizeG0 > 20 )
     {
       DDNoFit = "Two Pulses were not measured correctly";
       DoubleSingle++;
@@ -559,19 +559,19 @@ if(((Epar[0] > 0 && Epar[2]>0) && Gpar[1] == 400) && ((compEpar1 == 1 && compEpa
     }
       */
 
- if(((Epar[0] > 0 && Epar[2]>0) && Gpar[1] == 400) && ((compPeaks == 1) && ((compGpar1 == 0 || compGpar3 == 0) && par[4] == 400 && (par[3] < 0 || par[5] < 0))) )
+ if(((Epar[0] > 0 && Epar[2]>0) && Gpar[1] == 400 ) && ((compPeaks == 1) && ((compGpar1 == 0 || compGpar3 == 0) && par[4] == 400 && (par[3] < 0 || par[5] < 0))))
     {
       SSFit = "One pulse was measured correctly";
       SingleSingle++;
     }
-
+ //&& mysizeG0 < 20
  
- if(((Epar[0] > 0 && Epar[2] > 0) && mysizeG0 < 20) && ((compPeaks == 1) && (((par[3] > 0 || par[5] >0) &&  par[4] != 400) || ((par[3] > 0 && par[5] >0) && par[4] == 400 ))))
+ if(((Epar[0] > 0 && Epar[2] > 0) && Gpar[1] != 400 && mysizeG0 < 20 ) && ((compPeaks == 1) && (((par[3] > 0 || par[5] >1) &&  par[4] != 400) || (par[3] > 0 && par[5] >0))) )
     {
       SSNoFit = "A Fake Double Pulse was measured"; 
       SingleDouble++;
     }
-
+ //&& par[4] == 400
 
 
       
