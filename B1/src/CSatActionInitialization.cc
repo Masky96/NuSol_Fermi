@@ -24,47 +24,47 @@
 // ********************************************************************
 //
 //
-/// \file B1ActionInitialization.cc
-/// \brief Implementation of the B1ActionInitialization class
+/// \file CSatActionInitialization.cc
+/// \brief Implementation of the CSatActionInitialization class
 
-#include "B1ActionInitialization.hh"
-#include "B1PrimaryGeneratorAction.hh"
-#include "B1RunAction.hh"
-#include "B1EventAction.hh"
-#include "B1SteppingAction.hh"
+#include "CSatActionInitialization.hh"
+#include "CSatPrimaryGeneratorAction.hh"
+#include "CSatRunAction.hh"
+#include "CSatEventAction.hh"
+#include "CSatSteppingAction.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-B1ActionInitialization::B1ActionInitialization()
+CSatActionInitialization::CSatActionInitialization()
  : G4VUserActionInitialization()
 {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-B1ActionInitialization::~B1ActionInitialization()
+CSatActionInitialization::~CSatActionInitialization()
 {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void B1ActionInitialization::BuildForMaster() const
+void CSatActionInitialization::BuildForMaster() const
 {
-  B1RunAction* runAction = new B1RunAction;
+  CSatRunAction* runAction = new CSatRunAction;
   SetUserAction(runAction);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void B1ActionInitialization::Build() const
+void CSatActionInitialization::Build() const
 {
-  SetUserAction(new B1PrimaryGeneratorAction);
+  SetUserAction(new CSatPrimaryGeneratorAction);
 
-  B1RunAction* runAction = new B1RunAction;
+  CSatRunAction* runAction = new CSatRunAction;
   SetUserAction(runAction);
   
-  B1EventAction* eventAction = new B1EventAction(runAction);
+  CSatEventAction* eventAction = new CSatEventAction(runAction);
   SetUserAction(eventAction);
   
-  SetUserAction(new B1SteppingAction(eventAction));
+  SetUserAction(new CSatSteppingAction(eventAction));
 }  
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

@@ -24,54 +24,47 @@
 // ********************************************************************
 //
 //
-/// \file CSatSteppingAction.cc
-/// \brief Implementation of the CSatSteppingAction class
+/// \file B1ActionInitialization.cc
+/// \brief Implementation of the B1ActionInitialization class
 
-#include "CSatSteppingAction.hh"
-#include "CSatEventAction.hh"
-#include "CSatDetectorConstruction.hh"
-
-#include "G4Step.hh"
-#include "G4Event.hh"
-#include "G4RunManager.hh"
-#include "G4LogicalVolume.hh"
+#include "B1ActionInitialization.hh"
+#include "B1PrimaryGeneratorAction.hh"
+#include "B1RunAction.hh"
+#include "B1EventAction.hh"
+#include "B1SteppingAction.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-CSatSteppingAction::CSatSteppingAction(CSatEventAction* eventAction)
-: G4UserSteppingAction(),
-  fEventAction(eventAction),
-  fScoringVolume(0)
+B1ActionInitialization::B1ActionInitialization()
+ : G4VUserActionInitialization()
 {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-CSatSteppingAction::~CSatSteppingAction()
+B1ActionInitialization::~B1ActionInitialization()
 {}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void CSatSteppingAction::UserSteppingAction(const G4Step* step)
+void B1ActionInitialization::BuildForMaster() const
 {
-  if (!fScoringVolume) { 
-    const CSatDetectorConstruction* detectorConstruction
-      = static_cast<const CSatDetectorConstruction*>
-        (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
-    fScoringVolume = detectorConstruction->GetScoringVolume();   
-  }
-
-  // get volume of the current step
-  G4LogicalVolume* volume 
-    = step->GetPreStepPoint()->GetTouchableHandle()
-      ->GetVolume()->GetLogicalVolume();
-      
-  // check if we are in scoring volume
-  if (volume != fScoringVolume) return;
-
-  // collect energy deposited in this step
-  G4double edepStep = step->GetTotalEnergyDeposit();
-  fEventAction->AddEdep(edepStep);  
+  B1RunAction* runAction = new B1RunAction;
+  SetUserAction(runAction);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
+void B1ActionInitialization::Build() const
+{
+  SetUserAction(new B1PrimaryGeneratorAction);
+
+  B1RunAction* runAction = new B1RunAction;
+  SetUserAction(runAction);
+  
+  B1EventAction* eventAction = new B1EventAction(runAction);
+  SetUserAction(eventAction);
+  
+  SetUserAction(new B1SteppingAction(eventAction));
+}  
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

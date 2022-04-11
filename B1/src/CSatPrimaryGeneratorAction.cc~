@@ -24,10 +24,10 @@
 // ********************************************************************
 //
 //
-/// \file CSatPrimaryGeneratorAction.cc
-/// \brief Implementation of the CSatPrimaryGeneratorAction class
+/// \file B1PrimaryGeneratorAction.cc
+/// \brief Implementation of the B1PrimaryGeneratorAction class
 
-#include "CSatPrimaryGeneratorAction.hh"
+#include "B1PrimaryGeneratorAction.hh"
 
 #include "G4LogicalVolumeStore.hh"
 #include "G4LogicalVolume.hh"
@@ -41,7 +41,7 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-CSatPrimaryGeneratorAction::CSatPrimaryGeneratorAction()
+B1PrimaryGeneratorAction::B1PrimaryGeneratorAction()
 : G4VUserPrimaryGeneratorAction(),
   fParticleGun(0), 
   fEnvelopeBox(0)
@@ -61,14 +61,14 @@ CSatPrimaryGeneratorAction::CSatPrimaryGeneratorAction()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-CSatPrimaryGeneratorAction::~CSatPrimaryGeneratorAction()
+B1PrimaryGeneratorAction::~B1PrimaryGeneratorAction()
 {
   delete fParticleGun;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
+void B1PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
   //this function is called at the begining of ecah event
   //
@@ -96,7 +96,7 @@ void CSatPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     msg << "Envelope volume of box shape not found.\n"; 
     msg << "Perhaps you have changed geometry.\n";
     msg << "The gun will be place at the center.";
-    G4Exception("CSatPrimaryGeneratorAction::GeneratePrimaries()",
+    G4Exception("B1PrimaryGeneratorAction::GeneratePrimaries()",
      "MyCode0002",JustWarning,msg);
   }
 
